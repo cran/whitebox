@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Qiusheng Wu" />
+
+<meta name="date" content="2019-02-03" />
+
+<title>whitebox examples</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">whitebox examples</h1>
+<h4 class="author"><em>Qiusheng Wu</em></h4>
+<h4 class="date"><em>2019-02-03</em></h4>
+
+
+
+<div id="about-whiteboxtools" class="section level2">
+<h2>About WhiteboxTools</h2>
+<p>Load the whitebox R package.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(whitebox)</a></code></pre></div>
+<p>Prints the whitebox-tools help…a listing of available commands.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">print</span>(<span class="kw">wbt_help</span>())</a></code></pre></div>
+<pre><code>##  [1] &quot;whitebox-tools Help&quot;                                                                                       
+##  [2] &quot;&quot;                                                                                                          
+##  [3] &quot;The following commands are recognized:&quot;                                                                    
+##  [4] &quot;--cd, --wd       Changes the working directory; used in conjunction with --run flag.&quot;                      
+##  [5] &quot;-h, --help       Prints help information.&quot;                                                                 
+##  [6] &quot;-l, --license    Prints the whitebox-tools license.&quot;                                                       
+##  [7] &quot;--listtools      Lists all available tools. Keywords may also be used, --listtools slope.&quot;                 
+##  [8] &quot;-r, --run        Runs a tool; used in conjuction with --wd flag; -r=\&quot;LidarInfo\&quot;.&quot;                        
+##  [9] &quot;--toolbox        Prints the toolbox associated with a tool; --toolbox=Slope.&quot;                              
+## [10] &quot;--toolhelp       Prints the help associated with a tool; --toolhelp=\&quot;LidarInfo\&quot;.&quot;                        
+## [11] &quot;--toolparameters Prints the parameters (in json form) for a specific tool; --toolparameters=\&quot;LidarInfo\&quot;.&quot;
+## [12] &quot;-v               Verbose mode. Without this flag, tool outputs will not be printed.&quot;                       
+## [13] &quot;--viewcode       Opens the source code of a tool in a web browser; --viewcode=\&quot;LidarInfo\&quot;.&quot;              
+## [14] &quot;--version        Prints the version information.&quot;                                                          
+## [15] &quot;&quot;                                                                                                          
+## [16] &quot;Example Usage:&quot;                                                                                            
+## [17] &quot;&gt;&gt; ./whitebox-tools -r=lidar_info --cd=\&quot;/path/to/data/\&quot; -i=input.las --vlr --geokeys&quot;                    
+## [18] &quot;&quot;</code></pre>
+<p>Prints the whitebox-tools license.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">print</span>(<span class="kw">wbt_license</span>())</a></code></pre></div>
+<pre><code>##  [1] &quot;whitebox-tools License&quot;                                                                               
+##  [2] &quot;Copyright 2017-2019 John Lindsay&quot;                                                                     
+##  [3] &quot;&quot;                                                                                                     
+##  [4] &quot;Permission is hereby granted, free of charge, to any person obtaining a copy of this software and&quot;    
+##  [5] &quot;associated documentation files (the \&quot;Software\&quot;), to deal in the Software without restriction,&quot;      
+##  [6] &quot;including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,&quot;
+##  [7] &quot;and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,&quot;
+##  [8] &quot;subject to the following conditions:&quot;                                                                 
+##  [9] &quot;&quot;                                                                                                     
+## [10] &quot;The above copyright notice and this permission notice shall be included in all copies or substantial&quot; 
+## [11] &quot;portions of the Software.&quot;                                                                            
+## [12] &quot;&quot;                                                                                                     
+## [13] &quot;THE SOFTWARE IS PROVIDED \&quot;AS IS\&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT&quot;  
+## [14] &quot;NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND&quot;               
+## [15] &quot;NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES&quot; 
+## [16] &quot;OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN&quot;  
+## [17] &quot;CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.&quot;</code></pre>
+<p>Prints the whitebox-tools version.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">print</span>(<span class="kw">wbt_version</span>())</a></code></pre></div>
+<pre><code>## [1] &quot;whitebox-tools v0.14.0 by Dr. John B. Lindsay (c) 2017-2019&quot;</code></pre>
+<p>Prints the toolbox for a specific tool.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">print</span>(<span class="kw">wbt_toolbox</span>())</a></code></pre></div>
+<p>List all available tools in whitebox-tools.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">print</span>(<span class="kw">wbt_list_tools</span>())</a></code></pre></div>
+<p>Lists tools with ‘lidar’ in tool name or description.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">print</span>(<span class="kw">wbt_list_tools</span>(<span class="st">&quot;lidar&quot;</span>))</a></code></pre></div>
+<p>Prints the help for a specific tool.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">print</span>(<span class="kw">wbt_tool_help</span>(<span class="st">&quot;lidar_info&quot;</span>))</a></code></pre></div>
+<pre><code>##  [1] &quot;LidarInfo&quot;                                                                                                                                                                              
+##  [2] &quot;Description:&quot;                                                                                                                                                                           
+##  [3] &quot;Prints information about a LiDAR (LAS) dataset, including header, point return frequency, and classification data and information about the variable length records (VLRs) and geokeys.&quot;
+##  [4] &quot;Toolbox: LiDAR Tools&quot;                                                                                                                                                                   
+##  [5] &quot;Parameters:&quot;                                                                                                                                                                            
+##  [6] &quot;Flag               Description&quot;                                                                                                                                                         
+##  [7] &quot;-----------------  -----------&quot;                                                                                                                                                         
+##  [8] &quot;-i, --input        Input LiDAR file.&quot;                                                                                                                                                   
+##  [9] &quot;-o, --output       Output HTML file for summary report.&quot;                                                                                                                                
+## [10] &quot;--vlr              Flag indicating whether or not to print the variable length records (VLRs).&quot;                                                                                         
+## [11] &quot;--geokeys          Flag indicating whether or not to print the geokeys.&quot;                                                                                                                
+## [12] &quot;Example usage:&quot;                                                                                                                                                                         
+## [13] &quot;&gt;&gt;./tmpRtmpTW2o3HRinst452361794914whiteboxWBTwhitebox_tools -r=LidarInfo -v --wd=\&quot;/path/to/data/\&quot; -i=file.las --vlr --geokeys\&quot;&quot;                                                      
+## [14] &quot;./tmpRtmpTW2o3HRinst452361794914whiteboxWBTwhitebox_tools -r=LidarInfo --wd=\&quot;/path/to/data/\&quot; -i=file.las&quot;</code></pre>
+<p>Retrieves the tool parameter descriptions for a specific tool.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">print</span>(<span class="kw">wbt_tool_parameters</span>(<span class="st">&quot;slope&quot;</span>))</a></code></pre></div>
+<pre><code>## [1] &quot;{\&quot;parameters\&quot;: [{\&quot;name\&quot;:\&quot;Input DEM File\&quot;,\&quot;flags\&quot;:[\&quot;-i\&quot;,\&quot;--dem\&quot;],\&quot;description\&quot;:\&quot;Input raster DEM file.\&quot;,\&quot;parameter_type\&quot;:{\&quot;ExistingFile\&quot;:\&quot;Raster\&quot;},\&quot;default_value\&quot;:null,\&quot;optional\&quot;:false},{\&quot;name\&quot;:\&quot;Output File\&quot;,\&quot;flags\&quot;:[\&quot;-o\&quot;,\&quot;--output\&quot;],\&quot;description\&quot;:\&quot;Output raster file.\&quot;,\&quot;parameter_type\&quot;:{\&quot;NewFile\&quot;:\&quot;Raster\&quot;},\&quot;default_value\&quot;:null,\&quot;optional\&quot;:false},{\&quot;name\&quot;:\&quot;Z Conversion Factor\&quot;,\&quot;flags\&quot;:[\&quot;--zfactor\&quot;],\&quot;description\&quot;:\&quot;Optional multiplier for when the vertical and horizontal units are not the same.\&quot;,\&quot;parameter_type\&quot;:\&quot;Float\&quot;,\&quot;default_value\&quot;:\&quot;1.0\&quot;,\&quot;optional\&quot;:true}]}&quot;</code></pre>
+<p>View the source code for a specific tool on the source code repository.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">print</span>(<span class="kw">wbt_view_code</span>(<span class="st">&quot;breach_depressions&quot;</span>))</a></code></pre></div>
+<pre><code>## [1] &quot;https://github.com/jblindsay/whitebox-tools//tree/master/src/tools/hydro_analysis/breach_depressions.rs&quot;</code></pre>
+</div>
+<div id="how-to-run-tools" class="section level2">
+<h2>How to run tools?</h2>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">library</span>(whitebox)</a>
+<a class="sourceLine" id="cb17-2" title="2"></a>
+<a class="sourceLine" id="cb17-3" title="3"><span class="co"># Set input raster DEM file</span></a>
+<a class="sourceLine" id="cb17-4" title="4">dem &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;DEM.tif&quot;</span>, <span class="dt">package=</span><span class="st">&quot;whitebox&quot;</span>)</a>
+<a class="sourceLine" id="cb17-5" title="5"></a>
+<a class="sourceLine" id="cb17-6" title="6"><span class="co"># Run tools</span></a>
+<a class="sourceLine" id="cb17-7" title="7"><span class="kw">feature_preserving_denoise</span>(dem, <span class="st">&quot;./smoothed.tif&quot;</span>, <span class="dt">filter=</span><span class="dv">9</span>, <span class="dt">verbose_mode =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb17-8" title="8"><span class="kw">breach_depressions</span>(<span class="st">&quot;./smoothed.tif&quot;</span>, <span class="st">&quot;./breached.tif&quot;</span>)</a>
+<a class="sourceLine" id="cb17-9" title="9"><span class="kw">d_inf_flow_accumulation</span>(dem, <span class="st">&quot;./flow_accum.tif&quot;</span>)</a></code></pre></div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
