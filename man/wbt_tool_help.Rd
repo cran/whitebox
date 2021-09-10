@@ -2,7 +2,7 @@
 % Please edit documentation in R/wbt.R
 \name{wbt_tool_help}
 \alias{wbt_tool_help}
-\title{Help description for a specific tool.}
+\title{Help description for a specific tool in WhiteboxTools}
 \usage{
 wbt_tool_help(tool_name = NULL)
 }
@@ -15,6 +15,11 @@ Returns the help description for a specific tool.
 \description{
 Retrieves the help description for a specific tool.
 }
+\details{
+Leaving \code{tool_name} as default \code{NULL} returns results for all tools, but does not work on Windows.
+}
 \examples{
+\dontrun{
 wbt_tool_help("lidar_info")
+}
 }

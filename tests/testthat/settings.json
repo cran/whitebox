@@ -1,0 +1,6 @@
+{
+  "verbose_mode": true,
+  "working_directory": "/home/andrew/workspace/whiteboxR/tests/testthat/",
+  "compress_rasters": true,
+  "max_procs": -1
+}

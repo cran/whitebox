@@ -4,15 +4,24 @@
 #'
 #' @param dem Input raster DEM file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-average_flowpath_slope <- function(dem, output, verbose_mode=FALSE) {
+wbt_average_flowpath_slope <- function(dem, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "average_flowpath_slope"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -23,15 +32,24 @@ average_flowpath_slope <- function(dem, output, verbose_mode=FALSE) {
 #'
 #' @param dem Input raster DEM file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-average_upslope_flowpath_length <- function(dem, output, verbose_mode=FALSE) {
+wbt_average_upslope_flowpath_length <- function(dem, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "average_upslope_flowpath_length"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -43,18 +61,27 @@ average_upslope_flowpath_length <- function(dem, output, verbose_mode=FALSE) {
 #' @param d8_pntr Input raster D8 pointer file.
 #' @param output Output raster file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-basins <- function(d8_pntr, output, esri_pntr=FALSE, verbose_mode=FALSE) {
+wbt_basins <- function(d8_pntr, output, esri_pntr=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "basins"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -67,11 +94,16 @@ basins <- function(d8_pntr, output, esri_pntr=FALSE, verbose_mode=FALSE) {
 #' @param output Output raster file.
 #' @param max_depth Optional maximum breach depth (default is Inf).
 #' @param max_length Optional maximum breach channel length (in grid cells; default is Inf).
+#' @param flat_increment Optional elevation increment applied to flat areas.
+#' @param fill_pits Optional flag indicating whether to fill single-cell pits.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-breach_depressions <- function(dem, output, max_depth=NULL, max_length=NULL, verbose_mode=FALSE) {
+wbt_breach_depressions <- function(dem, output, max_depth=NULL, max_length=NULL, flat_increment=NULL, fill_pits=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--output=", output))
@@ -81,7 +113,65 @@ breach_depressions <- function(dem, output, max_depth=NULL, max_length=NULL, ver
   if (!is.null(max_length)) {
     args <- paste(args, paste0("--max_length=", max_length))
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(flat_increment)) {
+    args <- paste(args, paste0("--flat_increment=", flat_increment))
+  }
+  if (fill_pits) {
+    args <- paste(args, "--fill_pits")
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "breach_depressions"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Breach depressions least cost
+#'
+#' Breaches the depressions in a DEM using a least-cost pathway method.
+#'
+#' @param dem Input raster DEM file.
+#' @param output Output raster file.
+#' @param dist Maximum search distance for breach paths in cells.
+#' @param max_cost Optional maximum breach cost (default is Inf).
+#' @param min_dist Optional flag indicating whether to minimize breach distances.
+#' @param flat_increment Optional elevation increment applied to flat areas.
+#' @param fill Optional flag indicating whether to fill any remaining unbreached depressions.
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_breach_depressions_least_cost <- function(dem, output, dist, max_cost=NULL, min_dist=TRUE, flat_increment=NULL, fill=TRUE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--dem=", dem))
+  args <- paste(args, paste0("--output=", output))
+  args <- paste(args, paste0("--dist=", dist))
+  if (!is.null(max_cost)) {
+    args <- paste(args, paste0("--max_cost=", max_cost))
+  }
+  if (min_dist) {
+    args <- paste(args, "--min_dist")
+  }
+  if (!is.null(flat_increment)) {
+    args <- paste(args, paste0("--flat_increment=", flat_increment))
+  }
+  if (fill) {
+    args <- paste(args, "--fill")
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "breach_depressions_least_cost"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -92,46 +182,148 @@ breach_depressions <- function(dem, output, max_depth=NULL, max_length=NULL, ver
 #'
 #' @param dem Input raster DEM file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-breach_single_cell_pits <- function(dem, output, verbose_mode=FALSE) {
+wbt_breach_single_cell_pits <- function(dem, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "breach_single_cell_pits"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Burn streams at roads
+#'
+#' Burns-in streams at the sites of road embankments.
+#'
+#' @param dem Input raster digital elevation model (DEM) file.
+#' @param streams Input vector streams file.
+#' @param roads Input vector roads file.
+#' @param output Output raster file.
+#' @param width Maximum road embankment width, in map units.
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_burn_streams_at_roads <- function(dem, streams, roads, output, width=NULL, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--dem=", dem))
+  args <- paste(args, paste0("--streams=", streams))
+  args <- paste(args, paste0("--roads=", roads))
+  args <- paste(args, paste0("--output=", output))
+  if (!is.null(width)) {
+    args <- paste(args, paste0("--width=", width))
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "burn_streams_at_roads"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Change in contributing area
+#'
+#' This tool calculates the downslope rate of change in specific contributing area (SCA).
+#'
+#' @param dem Name of the input DEM raster file; must be depressionless.
+#' @param output Name of the output raster file.
+#' @param exponent Optional exponent parameter; default is 1.0.
+#' @param threshold Optional convergence threshold parameter, in grid cells; default is infinity.
+#' @param log Log-transform the output values?.
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_change_in_contributing_area <- function(dem, output, exponent=1.0, threshold=NULL, log=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--dem=", dem))
+  args <- paste(args, paste0("--output=", output))
+  if (!is.null(exponent)) {
+    args <- paste(args, paste0("--exponent=", exponent))
+  }
+  if (!is.null(threshold)) {
+    args <- paste(args, paste0("--threshold=", threshold))
+  }
+  if (log) {
+    args <- paste(args, "--log")
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "change_in_contributing_area"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
 
 #' D8 flow accumulation
 #'
-#' Calculates a D8 flow accumulation raster from an input DEM.
+#' Calculates a D8 flow accumulation raster from an input DEM or flow pointer.
 #'
-#' @param dem Input raster DEM file.
+#' @param input Input raster DEM or D8 pointer file.
 #' @param output Output raster file.
 #' @param out_type Output type; one of 'cells' (default), 'catchment area', and 'specific contributing area'.
 #' @param log Optional flag to request the output be log-transformed.
 #' @param clip Optional flag to request clipping the display max by 1 percent.
+#' @param pntr Is the input raster a D8 flow pointer rather than a DEM?.
+#' @param esri_pntr Input D8 pointer uses the ESRI style scheme.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-d8_flow_accumulation <- function(dem, output, out_type="cells", log=FALSE, clip=FALSE, verbose_mode=FALSE) {
+wbt_d8_flow_accumulation <- function(input, output, out_type="cells", log=FALSE, clip=FALSE, pntr=FALSE, esri_pntr=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
-  args <- paste(args, paste0("--dem=", dem))
+  args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
   if (!is.null(out_type)) {
     args <- paste(args, paste0("--out_type=", out_type))
   }
-  if (!is.null(log)) {
-    args <- paste(args, paste0("--log=", log))
+  if (log) {
+    args <- paste(args, "--log")
   }
-  if (!is.null(clip)) {
-    args <- paste(args, paste0("--clip=", clip))
+  if (clip) {
+    args <- paste(args, "--clip")
   }
-  tool_name <- match.call()[[1]]
+  if (pntr) {
+    args <- paste(args, "--pntr")
+  }
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "d8_flow_accumulation"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -145,18 +337,27 @@ d8_flow_accumulation <- function(dem, output, out_type="cells", log=FALSE, clip=
 #' @param efficiency Input efficiency raster file.
 #' @param absorption Input absorption raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-d8_mass_flux <- function(dem, loading, efficiency, absorption, output, verbose_mode=FALSE) {
+wbt_d8_mass_flux <- function(dem, loading, efficiency, absorption, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--loading=", loading))
   args <- paste(args, paste0("--efficiency=", efficiency))
   args <- paste(args, paste0("--absorption=", absorption))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "d8_mass_flux"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -168,18 +369,27 @@ d8_mass_flux <- function(dem, loading, efficiency, absorption, output, verbose_m
 #' @param dem Input raster DEM file.
 #' @param output Output raster file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-d8_pointer <- function(dem, output, esri_pntr=FALSE, verbose_mode=FALSE) {
+wbt_d8_pointer <- function(dem, output, esri_pntr=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "d8_pointer"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -188,19 +398,23 @@ d8_pointer <- function(dem, output, esri_pntr=FALSE, verbose_mode=FALSE) {
 #'
 #' Calculates a D-infinity flow accumulation raster from an input DEM.
 #'
-#' @param dem Input raster DEM file.
+#' @param input Input raster DEM or D-infinity pointer file.
 #' @param output Output raster file.
 #' @param out_type Output type; one of 'cells', 'sca' (default), and 'ca'.
-#' @param threshold Optional convergence threshold parameter, in grid cells; default is inifinity.
+#' @param threshold Optional convergence threshold parameter, in grid cells; default is infinity.
 #' @param log Optional flag to request the output be log-transformed.
 #' @param clip Optional flag to request clipping the display max by 1 percent.
+#' @param pntr Is the input raster a D-infinity flow pointer rather than a DEM?.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-d_inf_flow_accumulation <- function(dem, output, out_type="Specific Contributing Area", threshold=NULL, log=FALSE, clip=FALSE, verbose_mode=FALSE) {
+wbt_d_inf_flow_accumulation <- function(input, output, out_type="Specific Contributing Area", threshold=NULL, log=FALSE, clip=FALSE, pntr=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
-  args <- paste(args, paste0("--dem=", dem))
+  args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
   if (!is.null(out_type)) {
     args <- paste(args, paste0("--out_type=", out_type))
@@ -208,13 +422,22 @@ d_inf_flow_accumulation <- function(dem, output, out_type="Specific Contributing
   if (!is.null(threshold)) {
     args <- paste(args, paste0("--threshold=", threshold))
   }
-  if (!is.null(log)) {
-    args <- paste(args, paste0("--log=", log))
+  if (log) {
+    args <- paste(args, "--log")
   }
-  if (!is.null(clip)) {
-    args <- paste(args, paste0("--clip=", clip))
+  if (clip) {
+    args <- paste(args, "--clip")
   }
-  tool_name <- match.call()[[1]]
+  if (pntr) {
+    args <- paste(args, "--pntr")
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "d_inf_flow_accumulation"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -228,18 +451,27 @@ d_inf_flow_accumulation <- function(dem, output, out_type="Specific Contributing
 #' @param efficiency Input efficiency raster file.
 #' @param absorption Input absorption raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-d_inf_mass_flux <- function(dem, loading, efficiency, absorption, output, verbose_mode=FALSE) {
+wbt_d_inf_mass_flux <- function(dem, loading, efficiency, absorption, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--loading=", loading))
   args <- paste(args, paste0("--efficiency=", efficiency))
   args <- paste(args, paste0("--absorption=", absorption))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "d_inf_mass_flux"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -250,15 +482,24 @@ d_inf_mass_flux <- function(dem, loading, efficiency, absorption, output, verbos
 #'
 #' @param dem Input raster DEM file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-d_inf_pointer <- function(dem, output, verbose_mode=FALSE) {
+wbt_d_inf_pointer <- function(dem, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "d_inf_pointer"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -270,18 +511,27 @@ d_inf_pointer <- function(dem, output, verbose_mode=FALSE) {
 #' @param dem Input raster DEM file.
 #' @param output Output raster file.
 #' @param zero_background Flag indicating whether the background value of zero should be used.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-depth_in_sink <- function(dem, output, zero_background=FALSE, verbose_mode=FALSE) {
+wbt_depth_in_sink <- function(dem, output, zero_background=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(zero_background)) {
-    args <- paste(args, paste0("--zero_background=", zero_background))
+  if (zero_background) {
+    args <- paste(args, "--zero_background")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "depth_in_sink"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -293,16 +543,29 @@ depth_in_sink <- function(dem, output, zero_background=FALSE, verbose_mode=FALSE
 #' @param dem Input raster DEM file.
 #' @param streams Input raster streams file.
 #' @param output Output raster file.
+#' @param dinf Use the D-infinity flow algorithm instead of D8?.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-downslope_distance_to_stream <- function(dem, streams, output, verbose_mode=FALSE) {
+wbt_downslope_distance_to_stream <- function(dem, streams, output, dinf=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--streams=", streams))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (dinf) {
+    args <- paste(args, "--dinf")
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "downslope_distance_to_stream"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -316,11 +579,14 @@ downslope_distance_to_stream <- function(dem, streams, output, verbose_mode=FALS
 #' @param weights Optional input weights raster file.
 #' @param output Output raster file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-downslope_flowpath_length <- function(d8_pntr, output, watersheds=NULL, weights=NULL, esri_pntr=FALSE, verbose_mode=FALSE) {
+wbt_downslope_flowpath_length <- function(d8_pntr, output, watersheds=NULL, weights=NULL, esri_pntr=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--output=", output))
@@ -330,10 +596,52 @@ downslope_flowpath_length <- function(d8_pntr, output, watersheds=NULL, weights=
   if (!is.null(weights)) {
     args <- paste(args, paste0("--weights=", weights))
   }
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "downslope_flowpath_length"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Edge contamination
+#'
+#' This tool identifies grid cells within an input DEM that may be impacted by edge contamination for hydrological applications.
+#'
+#' @param dem Name of the input DEM raster file; must be depressionless.
+#' @param output Name of the output raster file.
+#' @param flow_type Flow algorithm type, one of 'd8', 'mfd', or 'dinf'.
+#' @param zfactor Optional multiplier for when the vertical and horizontal units are not the same.
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_edge_contamination <- function(dem, output, flow_type="mfd", zfactor="", wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--dem=", dem))
+  args <- paste(args, paste0("--output=", output))
+  if (!is.null(flow_type)) {
+    args <- paste(args, paste0("--flow_type=", flow_type))
+  }
+  if (!is.null(zfactor)) {
+    args <- paste(args, paste0("--zfactor=", zfactor))
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "edge_contamination"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -345,16 +653,25 @@ downslope_flowpath_length <- function(d8_pntr, output, watersheds=NULL, weights=
 #' @param dem Input raster DEM file.
 #' @param streams Input raster streams file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-elevation_above_stream <- function(dem, streams, output, verbose_mode=FALSE) {
+wbt_elevation_above_stream <- function(dem, streams, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--streams=", streams))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "elevation_above_stream"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -366,16 +683,25 @@ elevation_above_stream <- function(dem, streams, output, verbose_mode=FALSE) {
 #' @param dem Input raster DEM file.
 #' @param streams Input raster streams file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-elevation_above_stream_euclidean <- function(dem, streams, output, verbose_mode=FALSE) {
+wbt_elevation_above_stream_euclidean <- function(dem, streams, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--streams=", streams))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "elevation_above_stream_euclidean"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -388,14 +714,17 @@ elevation_above_stream_euclidean <- function(dem, streams, output, verbose_mode=
 #' @param output Output raster file.
 #' @param out_type Output type; one of 'cells', 'specific contributing area' (default), and 'catchment area'.
 #' @param exponent Optional exponent parameter; default is 1.1.
-#' @param threshold Optional convergence threshold parameter, in grid cells; default is inifinity.
+#' @param threshold Optional convergence threshold parameter, in grid cells; default is infinity.
 #' @param log Optional flag to request the output be log-transformed.
 #' @param clip Optional flag to request clipping the display max by 1 percent.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-fd8_flow_accumulation <- function(dem, output, out_type="specific contributing area", exponent=1.1, threshold=NULL, log=FALSE, clip=FALSE, verbose_mode=FALSE) {
+wbt_fd8_flow_accumulation <- function(dem, output, out_type="specific contributing area", exponent=1.1, threshold=NULL, log=FALSE, clip=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--output=", output))
@@ -408,13 +737,19 @@ fd8_flow_accumulation <- function(dem, output, out_type="specific contributing a
   if (!is.null(threshold)) {
     args <- paste(args, paste0("--threshold=", threshold))
   }
-  if (!is.null(log)) {
-    args <- paste(args, paste0("--log=", log))
+  if (log) {
+    args <- paste(args, "--log")
   }
-  if (!is.null(clip)) {
-    args <- paste(args, paste0("--clip=", clip))
+  if (clip) {
+    args <- paste(args, "--clip")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "fd8_flow_accumulation"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -425,15 +760,24 @@ fd8_flow_accumulation <- function(dem, output, out_type="specific contributing a
 #'
 #' @param dem Input raster DEM file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-fd8_pointer <- function(dem, output, verbose_mode=FALSE) {
+wbt_fd8_pointer <- function(dem, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "fd8_pointer"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -445,16 +789,25 @@ fd8_pointer <- function(dem, output, verbose_mode=FALSE) {
 #' @param dem Input raster DEM file.
 #' @param streams Input vector streams file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-fill_burn <- function(dem, streams, output, verbose_mode=FALSE) {
+wbt_fill_burn <- function(dem, streams, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--streams=", streams))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "fill_burn"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -466,18 +819,107 @@ fill_burn <- function(dem, streams, output, verbose_mode=FALSE) {
 #' @param dem Input raster DEM file.
 #' @param output Output raster file.
 #' @param fix_flats Optional flag indicating whether flat areas should have a small gradient applied.
+#' @param flat_increment Optional elevation increment applied to flat areas.
+#' @param max_depth Optional maximum depression depth to fill.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-fill_depressions <- function(dem, output, fix_flats=TRUE, verbose_mode=FALSE) {
+wbt_fill_depressions <- function(dem, output, fix_flats=TRUE, flat_increment=NULL, max_depth=NULL, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(fix_flats)) {
-    args <- paste(args, paste0("--fix_flats=", fix_flats))
+  if (fix_flats) {
+    args <- paste(args, "--fix_flats")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(flat_increment)) {
+    args <- paste(args, paste0("--flat_increment=", flat_increment))
+  }
+  if (!is.null(max_depth)) {
+    args <- paste(args, paste0("--max_depth=", max_depth))
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "fill_depressions"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Fill depressions planchon and darboux
+#'
+#' Fills all of the depressions in a DEM using the Planchon and Darboux (2002) method.
+#'
+#' @param dem Input raster DEM file.
+#' @param output Output raster file.
+#' @param fix_flats Optional flag indicating whether flat areas should have a small gradient applied.
+#' @param flat_increment Optional elevation increment applied to flat areas.
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_fill_depressions_planchon_and_darboux <- function(dem, output, fix_flats=TRUE, flat_increment=NULL, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--dem=", dem))
+  args <- paste(args, paste0("--output=", output))
+  if (fix_flats) {
+    args <- paste(args, "--fix_flats")
+  }
+  if (!is.null(flat_increment)) {
+    args <- paste(args, paste0("--flat_increment=", flat_increment))
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "fill_depressions_planchon_and_darboux"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Fill depressions wang and liu
+#'
+#' Fills all of the depressions in a DEM using the Wang and Liu (2006) method. Depression breaching should be preferred in most cases.
+#'
+#' @param dem Input raster DEM file.
+#' @param output Output raster file.
+#' @param fix_flats Optional flag indicating whether flat areas should have a small gradient applied.
+#' @param flat_increment Optional elevation increment applied to flat areas.
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_fill_depressions_wang_and_liu <- function(dem, output, fix_flats=TRUE, flat_increment=NULL, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--dem=", dem))
+  args <- paste(args, paste0("--output=", output))
+  if (fix_flats) {
+    args <- paste(args, "--fix_flats")
+  }
+  if (!is.null(flat_increment)) {
+    args <- paste(args, paste0("--flat_increment=", flat_increment))
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "fill_depressions_wang_and_liu"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -488,15 +930,24 @@ fill_depressions <- function(dem, output, fix_flats=TRUE, verbose_mode=FALSE) {
 #'
 #' @param dem Input raster DEM file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-fill_single_cell_pits <- function(dem, output, verbose_mode=FALSE) {
+wbt_fill_single_cell_pits <- function(dem, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "fill_single_cell_pits"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -507,15 +958,24 @@ fill_single_cell_pits <- function(dem, output, verbose_mode=FALSE) {
 #'
 #' @param dem Input raster DEM file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-find_no_flow_cells <- function(dem, output, verbose_mode=FALSE) {
+wbt_find_no_flow_cells <- function(dem, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "find_no_flow_cells"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -527,16 +987,25 @@ find_no_flow_cells <- function(dem, output, verbose_mode=FALSE) {
 #' @param d8_pntr Input D8 pointer raster file.
 #' @param streams Input raster streams file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-find_parallel_flow <- function(d8_pntr, streams, output, verbose_mode=FALSE) {
+wbt_find_parallel_flow <- function(d8_pntr, streams, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--streams=", streams))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "find_parallel_flow"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -548,16 +1017,25 @@ find_parallel_flow <- function(d8_pntr, streams, output, verbose_mode=FALSE) {
 #' @param dem Input raster DEM file.
 #' @param lakes Input lakes vector polygons file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-flatten_lakes <- function(dem, lakes, output, verbose_mode=FALSE) {
+wbt_flatten_lakes <- function(dem, lakes, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--lakes=", lakes))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "flatten_lakes"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -568,15 +1046,24 @@ flatten_lakes <- function(dem, lakes, output, verbose_mode=FALSE) {
 #'
 #' @param dem Input raster DEM file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-flood_order <- function(dem, output, verbose_mode=FALSE) {
+wbt_flood_order <- function(dem, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "flood_order"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -593,11 +1080,14 @@ flood_order <- function(dem, output, verbose_mode=FALSE) {
 #' @param log Optional flag to request the output be log-transformed.
 #' @param clip Optional flag to request clipping the display max by 1 percent.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-flow_accumulation_full_workflow <- function(dem, out_dem, out_pntr, out_accum, out_type="Specific Contributing Area", log=FALSE, clip=FALSE, esri_pntr=FALSE, verbose_mode=FALSE) {
+wbt_flow_accumulation_full_workflow <- function(dem, out_dem, out_pntr, out_accum, out_type="Specific Contributing Area", log=FALSE, clip=FALSE, esri_pntr=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--out_dem=", out_dem))
@@ -606,16 +1096,22 @@ flow_accumulation_full_workflow <- function(dem, out_dem, out_pntr, out_accum, o
   if (!is.null(out_type)) {
     args <- paste(args, paste0("--out_type=", out_type))
   }
-  if (!is.null(log)) {
-    args <- paste(args, paste0("--log=", log))
+  if (log) {
+    args <- paste(args, "--log")
   }
-  if (!is.null(clip)) {
-    args <- paste(args, paste0("--clip=", clip))
+  if (clip) {
+    args <- paste(args, "--clip")
   }
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "flow_accumulation_full_workflow"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -627,18 +1123,27 @@ flow_accumulation_full_workflow <- function(dem, out_dem, out_pntr, out_accum, o
 #' @param d8_pntr Input D8 pointer raster file.
 #' @param output Output raster file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-flow_length_diff <- function(d8_pntr, output, esri_pntr=FALSE, verbose_mode=FALSE) {
+wbt_flow_length_diff <- function(d8_pntr, output, esri_pntr=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "flow_length_diff"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -651,44 +1156,146 @@ flow_length_diff <- function(d8_pntr, output, esri_pntr=FALSE, verbose_mode=FALS
 #' @param streams Input raster streams file.
 #' @param output Output raster file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-hillslopes <- function(d8_pntr, streams, output, esri_pntr=FALSE, verbose_mode=FALSE) {
+wbt_hillslopes <- function(d8_pntr, streams, output, esri_pntr=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--streams=", streams))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "hillslopes"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
 
-#' Impoundment index
+#' Hydrologic connectivity
+#'
+#' This tool evaluates hydrologic connectivity within a DEM.
+#'
+#' @param dem Name of the input DEM raster file; must be depressionless.
+#' @param output1 Name of the output downslope unsaturated length (DUL) file.
+#' @param output2 Name of the output upslope disconnected saturated area (UDSA) file.
+#' @param exponent Optional exponent parameter; default is 1.0.
+#' @param threshold Optional convergence threshold parameter, in grid cells; default is infinity.
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_hydrologic_connectivity <- function(dem, output1, output2, exponent=1.0, threshold=NULL, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--dem=", dem))
+  args <- paste(args, paste0("--output1=", output1))
+  args <- paste(args, paste0("--output2=", output2))
+  if (!is.null(exponent)) {
+    args <- paste(args, paste0("--exponent=", exponent))
+  }
+  if (!is.null(threshold)) {
+    args <- paste(args, paste0("--threshold=", threshold))
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "hydrologic_connectivity"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Impoundment size index
 #'
 #' Calculates the impoundment size resulting from damming a DEM.
 #'
 #' @param dem Input raster DEM file.
-#' @param output Output file.
-#' @param out_type Output type; one of 'depth' (default), 'volume', and 'area'.
-#' @param damlength Maximum length of thr dam.
+#' @param out_mean Output mean flooded depth file.
+#' @param out_max Output maximum flooded depth file.
+#' @param out_volume Output flooded volume file.
+#' @param out_area Output flooded area file.
+#' @param out_dam_height Output dam height file.
+#' @param damlength Maximum length of the dam.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-impoundment_index <- function(dem, output, damlength, out_type="depth", verbose_mode=FALSE) {
+wbt_impoundment_size_index <- function(dem, damlength, out_mean=NULL, out_max=NULL, out_volume=NULL, out_area=NULL, out_dam_height=NULL, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
+  args <- paste(args, paste0("--damlength=", damlength))
+  if (!is.null(out_mean)) {
+    args <- paste(args, paste0("--out_mean=", out_mean))
+  }
+  if (!is.null(out_max)) {
+    args <- paste(args, paste0("--out_max=", out_max))
+  }
+  if (!is.null(out_volume)) {
+    args <- paste(args, paste0("--out_volume=", out_volume))
+  }
+  if (!is.null(out_area)) {
+    args <- paste(args, paste0("--out_area=", out_area))
+  }
+  if (!is.null(out_dam_height)) {
+    args <- paste(args, paste0("--out_dam_height=", out_dam_height))
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "impoundment_size_index"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Insert dams
+#'
+#' Calculates the impoundment size resulting from damming a DEM.
+#'
+#' @param dem Input raster DEM file.
+#' @param dam_pts Input vector dam points file.
+#' @param output Output file.
+#' @param damlength Maximum length of the dam.
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_insert_dams <- function(dem, dam_pts, output, damlength, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--dem=", dem))
+  args <- paste(args, paste0("--dam_pts=", dam_pts))
   args <- paste(args, paste0("--output=", output))
   args <- paste(args, paste0("--damlength=", damlength))
-  if (!is.null(out_type)) {
-    args <- paste(args, paste0("--out_type=", out_type))
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
   }
-  tool_name <- match.call()[[1]]
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "insert_dams"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -700,16 +1307,29 @@ impoundment_index <- function(dem, output, damlength, out_type="depth", verbose_
 #' @param dem Input raster DEM file.
 #' @param output Output raster file.
 #' @param size Target basin size, in grid cells.
+#' @param connections Output upstream-downstream flow connections among basins?.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-isobasins <- function(dem, output, size, verbose_mode=FALSE) {
+wbt_isobasins <- function(dem, output, size, connections=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--output=", output))
   args <- paste(args, paste0("--size=", size))
-  tool_name <- match.call()[[1]]
+  if (connections) {
+    args <- paste(args, "--connections")
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "isobasins"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -722,17 +1342,26 @@ isobasins <- function(dem, output, size, verbose_mode=FALSE) {
 #' @param streams Input raster streams file.
 #' @param output Output vector file.
 #' @param snap_dist Maximum snap distance in map units.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-jenson_snap_pour_points <- function(pour_pts, streams, output, snap_dist, verbose_mode=FALSE) {
+wbt_jenson_snap_pour_points <- function(pour_pts, streams, output, snap_dist, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--pour_pts=", pour_pts))
   args <- paste(args, paste0("--streams=", streams))
   args <- paste(args, paste0("--output=", output))
   args <- paste(args, paste0("--snap_dist=", snap_dist))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "jenson_snap_pour_points"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -744,16 +1373,55 @@ jenson_snap_pour_points <- function(pour_pts, streams, output, snap_dist, verbos
 #' @param dem Input raster DEM file.
 #' @param basins Input raster basins file.
 #' @param output Output vector file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-longest_flowpath <- function(dem, basins, output, verbose_mode=FALSE) {
+wbt_longest_flowpath <- function(dem, basins, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--basins=", basins))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "longest_flowpath"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Low points on headwater divides
+#'
+#' This tool locates saddle points along ridges within a digital elevation model (DEM).
+#'
+#' @param dem Name of the input DEM raster file.
+#' @param streams Name of the input stream channel raster file.
+#' @param output Name of the output vector file.
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_low_points_on_headwater_divides <- function(dem, streams, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--dem=", dem))
+  args <- paste(args, paste0("--streams=", streams))
+  args <- paste(args, paste0("--output=", output))
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "low_points_on_headwater_divides"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -764,15 +1432,72 @@ longest_flowpath <- function(dem, basins, output, verbose_mode=FALSE) {
 #'
 #' @param dem Input raster DEM file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-max_upslope_flowpath_length <- function(dem, output, verbose_mode=FALSE) {
+wbt_max_upslope_flowpath_length <- function(dem, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "max_upslope_flowpath_length"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Md inf flow accumulation
+#'
+#' Calculates an FD8 flow accumulation raster from an input DEM.
+#'
+#' @param dem Input raster DEM file.
+#' @param output Output raster file.
+#' @param out_type Output type; one of 'cells', 'specific contributing area' (default), and 'catchment area'.
+#' @param exponent Optional exponent parameter; default is 1.1.
+#' @param threshold Optional convergence threshold parameter, in grid cells; default is infinity.
+#' @param log Optional flag to request the output be log-transformed.
+#' @param clip Optional flag to request clipping the display max by 1 percent.
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_md_inf_flow_accumulation <- function(dem, output, out_type="specific contributing area", exponent=1.1, threshold=NULL, log=FALSE, clip=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--dem=", dem))
+  args <- paste(args, paste0("--output=", output))
+  if (!is.null(out_type)) {
+    args <- paste(args, paste0("--out_type=", out_type))
+  }
+  if (!is.null(exponent)) {
+    args <- paste(args, paste0("--exponent=", exponent))
+  }
+  if (!is.null(threshold)) {
+    args <- paste(args, paste0("--threshold=", threshold))
+  }
+  if (log) {
+    args <- paste(args, "--log")
+  }
+  if (clip) {
+    args <- paste(args, "--clip")
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "md_inf_flow_accumulation"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -783,15 +1508,124 @@ max_upslope_flowpath_length <- function(dem, output, verbose_mode=FALSE) {
 #'
 #' @param dem Input raster DEM file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-num_inflowing_neighbours <- function(dem, output, verbose_mode=FALSE) {
+wbt_num_inflowing_neighbours <- function(dem, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "num_inflowing_neighbours"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Qin flow accumulation
+#'
+#' This tool calculates Qin et al. (2007) flow accumulation.
+#'
+#' @param dem Name of the input DEM raster file; must be depressionless.
+#' @param output Name of the output upslope saturated area file.
+#' @param out_type Output type; one of 'cells', 'specific contributing area' (default), and 'catchment area'.
+#' @param exponent Optional upper-bound exponent parameter; default is 10.0.
+#' @param max_slope Optional upper-bound slope parameter, in degrees (0-90); default is 45.0.
+#' @param threshold Optional convergence threshold parameter, in grid cells; default is infinity.
+#' @param log Log-transform the output values?.
+#' @param clip Optional flag to request clipping the display max by 1 percent.
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_qin_flow_accumulation <- function(dem, output, out_type="specific contributing area", exponent=10.0, max_slope=45.0, threshold=NULL, log=FALSE, clip=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--dem=", dem))
+  args <- paste(args, paste0("--output=", output))
+  if (!is.null(out_type)) {
+    args <- paste(args, paste0("--out_type=", out_type))
+  }
+  if (!is.null(exponent)) {
+    args <- paste(args, paste0("--exponent=", exponent))
+  }
+  if (!is.null(max_slope)) {
+    args <- paste(args, paste0("--max_slope=", max_slope))
+  }
+  if (!is.null(threshold)) {
+    args <- paste(args, paste0("--threshold=", threshold))
+  }
+  if (log) {
+    args <- paste(args, "--log")
+  }
+  if (clip) {
+    args <- paste(args, "--clip")
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "qin_flow_accumulation"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Quinn flow accumulation
+#'
+#' This tool calculates Quinn et al. (1995) flow accumulation.
+#'
+#' @param dem Name of the input DEM raster file; must be depressionless.
+#' @param output Name of the output raster file.
+#' @param out_type Output type; one of 'cells', 'specific contributing area' (default), and 'catchment area'.
+#' @param exponent Optional exponent parameter; default is 1.0.
+#' @param threshold Optional convergence threshold parameter, in grid cells; default is infinity.
+#' @param log Log-transform the output values?.
+#' @param clip Optional flag to request clipping the display max by 1 percent.
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_quinn_flow_accumulation <- function(dem, output, out_type="specific contributing area", exponent=1.0, threshold=NULL, log=FALSE, clip=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--dem=", dem))
+  args <- paste(args, paste0("--output=", output))
+  if (!is.null(out_type)) {
+    args <- paste(args, paste0("--out_type=", out_type))
+  }
+  if (!is.null(exponent)) {
+    args <- paste(args, paste0("--exponent=", exponent))
+  }
+  if (!is.null(threshold)) {
+    args <- paste(args, paste0("--threshold=", threshold))
+  }
+  if (log) {
+    args <- paste(args, "--log")
+  }
+  if (clip) {
+    args <- paste(args, "--clip")
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "quinn_flow_accumulation"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -805,11 +1639,14 @@ num_inflowing_neighbours <- function(dem, output, verbose_mode=FALSE) {
 #' @param dem Input raster DEM file.
 #' @param output Output raster file.
 #' @param height Wall height.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-raise_walls <- function(input, dem, output, breach=NULL, height=100.0, verbose_mode=FALSE) {
+wbt_raise_walls <- function(input, dem, output, breach=NULL, height=100.0, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--dem=", dem))
@@ -820,7 +1657,61 @@ raise_walls <- function(input, dem, output, breach=NULL, height=100.0, verbose_m
   if (!is.null(height)) {
     args <- paste(args, paste0("--height=", height))
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "raise_walls"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Rho8 flow accumulation
+#'
+#' This tool calculates Fairfield and Leymarie (1991) flow accumulation.
+#'
+#' @param input Input DEM or Rho8 pointer file; if a DEM is used, it must be depressionless.
+#' @param output Name of the output raster file.
+#' @param out_type Output type; one of 'cells', 'specific contributing area' (default), and 'catchment area'.
+#' @param log Log-transform the output values?.
+#' @param clip Optional flag to request clipping the display max by 1 percent.
+#' @param pntr Is the input raster a Rho8 flow pointer rather than a DEM?.
+#' @param esri_pntr Does the input Rho8 pointer use the ESRI style scheme?.
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_rho8_flow_accumulation <- function(input, output, out_type="specific contributing area", log=FALSE, clip=FALSE, pntr=FALSE, esri_pntr=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--input=", input))
+  args <- paste(args, paste0("--output=", output))
+  if (!is.null(out_type)) {
+    args <- paste(args, paste0("--out_type=", out_type))
+  }
+  if (log) {
+    args <- paste(args, "--log")
+  }
+  if (clip) {
+    args <- paste(args, "--clip")
+  }
+  if (pntr) {
+    args <- paste(args, "--pntr")
+  }
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "rho8_flow_accumulation"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -832,18 +1723,27 @@ raise_walls <- function(input, dem, output, breach=NULL, height=100.0, verbose_m
 #' @param dem Input raster DEM file.
 #' @param output Output raster file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-rho8_pointer <- function(dem, output, esri_pntr=FALSE, verbose_mode=FALSE) {
+wbt_rho8_pointer <- function(dem, output, esri_pntr=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "rho8_pointer"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -852,21 +1752,30 @@ rho8_pointer <- function(dem, output, esri_pntr=FALSE, verbose_mode=FALSE) {
 #'
 #' Identifies the depressions in a DEM, giving each feature a unique identifier.
 #'
-#' @param dem Input raster DEM file.
+#' @param input Input raster DEM file.
 #' @param output Output raster file.
 #' @param zero_background Flag indicating whether a background value of zero should be used.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-sink <- function(dem, output, zero_background=FALSE, verbose_mode=FALSE) {
+wbt_sink <- function(input, output, zero_background=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
-  args <- paste(args, paste0("--dem=", dem))
+  args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(zero_background)) {
-    args <- paste(args, paste0("--zero_background=", zero_background))
+  if (zero_background) {
+    args <- paste(args, "--zero_background")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "sink"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -879,35 +1788,47 @@ sink <- function(dem, output, zero_background=FALSE, verbose_mode=FALSE) {
 #' @param flow_accum Input raster D8 flow accumulation file.
 #' @param output Output vector file.
 #' @param snap_dist Maximum snap distance in map units.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-snap_pour_points <- function(pour_pts, flow_accum, output, snap_dist, verbose_mode=FALSE) {
+wbt_snap_pour_points <- function(pour_pts, flow_accum, output, snap_dist, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--pour_pts=", pour_pts))
   args <- paste(args, paste0("--flow_accum=", flow_accum))
   args <- paste(args, paste0("--output=", output))
   args <- paste(args, paste0("--snap_dist=", snap_dist))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "snap_pour_points"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
 
 #' Stochastic depression analysis
 #'
-#' Preforms a stochastic analysis of depressions within a DEM.
+#' Performs a stochastic analysis of depressions within a DEM.
 #'
 #' @param dem Input raster DEM file.
 #' @param output Output file.
 #' @param rmse The DEM's root-mean-square-error (RMSE), in z units. This determines error magnitude.
 #' @param range The error field's correlation length, in xy-units.
 #' @param iterations The number of iterations.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-stochastic_depression_analysis <- function(dem, output, rmse, range, iterations=1000, verbose_mode=FALSE) {
+wbt_stochastic_depression_analysis <- function(dem, output, rmse, range, iterations=100, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--output=", output))
@@ -916,7 +1837,13 @@ stochastic_depression_analysis <- function(dem, output, rmse, range, iterations=
   if (!is.null(iterations)) {
     args <- paste(args, paste0("--iterations=", iterations))
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "stochastic_depression_analysis"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -929,19 +1856,28 @@ stochastic_depression_analysis <- function(dem, output, rmse, range, iterations=
 #' @param streams Input raster streams file.
 #' @param output Output raster file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-strahler_order_basins <- function(d8_pntr, streams, output, esri_pntr=FALSE, verbose_mode=FALSE) {
+wbt_strahler_order_basins <- function(d8_pntr, streams, output, esri_pntr=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--streams=", streams))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "strahler_order_basins"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -954,19 +1890,28 @@ strahler_order_basins <- function(d8_pntr, streams, output, esri_pntr=FALSE, ver
 #' @param streams Input raster streams file.
 #' @param output Output raster file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-subbasins <- function(d8_pntr, streams, output, esri_pntr=FALSE, verbose_mode=FALSE) {
+wbt_subbasins <- function(d8_pntr, streams, output, esri_pntr=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--streams=", streams))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "subbasins"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -980,22 +1925,31 @@ subbasins <- function(d8_pntr, streams, output, esri_pntr=FALSE, verbose_mode=FA
 #' @param output Output raster file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
 #' @param zero_background Flag indicating whether a background value of zero should be used.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-trace_downslope_flowpaths <- function(seed_pts, d8_pntr, output, esri_pntr=FALSE, zero_background=FALSE, verbose_mode=FALSE) {
+wbt_trace_downslope_flowpaths <- function(seed_pts, d8_pntr, output, esri_pntr=FALSE, zero_background=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--seed_pts=", seed_pts))
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  if (!is.null(zero_background)) {
-    args <- paste(args, paste0("--zero_background=", zero_background))
+  if (zero_background) {
+    args <- paste(args, "--zero_background")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "trace_downslope_flowpaths"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1008,19 +1962,56 @@ trace_downslope_flowpaths <- function(seed_pts, d8_pntr, output, esri_pntr=FALSE
 #' @param pour_pts Input vector pour points (outlet) file.
 #' @param output Output raster file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-unnest_basins <- function(d8_pntr, pour_pts, output, esri_pntr=FALSE, verbose_mode=FALSE) {
+wbt_unnest_basins <- function(d8_pntr, pour_pts, output, esri_pntr=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--pour_pts=", pour_pts))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "unnest_basins"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Upslope depression storage
+#'
+#' Estimates the average upslope depression storage depth.
+#'
+#' @param dem Input raster DEM file.
+#' @param output Output raster file.
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_upslope_depression_storage <- function(dem, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--dem=", dem))
+  args <- paste(args, paste0("--output=", output))
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "upslope_depression_storage"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1030,22 +2021,31 @@ unnest_basins <- function(d8_pntr, pour_pts, output, esri_pntr=FALSE, verbose_mo
 #' Identifies the watershed, or drainage basin, draining to a set of target cells.
 #'
 #' @param d8_pntr Input D8 pointer raster file.
-#' @param pour_pts Input vector pour points (outlet) file.
+#' @param pour_pts Input pour points (outlet) file.
 #' @param output Output raster file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-watershed <- function(d8_pntr, pour_pts, output, esri_pntr=FALSE, verbose_mode=FALSE) {
+wbt_watershed <- function(d8_pntr, pour_pts, output, esri_pntr=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--pour_pts=", pour_pts))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "watershed"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 

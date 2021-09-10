@@ -7,22 +7,31 @@
 #' @param output Output raster file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
 #' @param zero_background Flag indicating whether a background value of zero should be used.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-distance_to_outlet <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_background=FALSE, verbose_mode=FALSE) {
+wbt_distance_to_outlet <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_background=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--streams=", streams))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  if (!is.null(zero_background)) {
-    args <- paste(args, paste0("--zero_background=", zero_background))
+  if (zero_background) {
+    args <- paste(args, "--zero_background")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "distance_to_outlet"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -35,19 +44,28 @@ distance_to_outlet <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_b
 #' @param output Output raster file.
 #' @param threshold Threshold in flow accumulation values for channelization.
 #' @param zero_background Flag indicating whether a background value of zero should be used.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-extract_streams <- function(flow_accum, output, threshold, zero_background=FALSE, verbose_mode=FALSE) {
+wbt_extract_streams <- function(flow_accum, output, threshold, zero_background=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--flow_accum=", flow_accum))
   args <- paste(args, paste0("--output=", output))
   args <- paste(args, paste0("--threshold=", threshold))
-  if (!is.null(zero_background)) {
-    args <- paste(args, paste0("--zero_background=", zero_background))
+  if (zero_background) {
+    args <- paste(args, "--zero_background")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "extract_streams"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -58,27 +76,36 @@ extract_streams <- function(flow_accum, output, threshold, zero_background=FALSE
 #'
 #' @param dem Input raster DEM file.
 #' @param output Output raster file.
-#' @param variant Options include 'lq' (lower quartile), 'JandR' (Johnston and Rosenfeld), and 'PandD' (Peucker and Douglas); default is 'lq'.
+#' @param variant Options include 'LQ' (lower quartile), 'JandR' (Johnston and Rosenfeld), and 'PandD' (Peucker and Douglas); default is 'LQ'.
 #' @param line_thin Optional flag indicating whether post-processing line-thinning should be performed.
 #' @param filter Optional argument (only used when variant='lq') providing the filter size, in grid cells, used for lq-filtering (default is 5).
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-extract_valleys <- function(dem, output, variant="Lower Quartile", line_thin=TRUE, filter=5, verbose_mode=FALSE) {
+wbt_extract_valleys <- function(dem, output, variant="LQ", line_thin=TRUE, filter=5, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--output=", output))
   if (!is.null(variant)) {
     args <- paste(args, paste0("--variant=", variant))
   }
-  if (!is.null(line_thin)) {
-    args <- paste(args, paste0("--line_thin=", line_thin))
+  if (line_thin) {
+    args <- paste(args, "--line_thin")
   }
   if (!is.null(filter)) {
     args <- paste(args, paste0("--filter=", filter))
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "extract_valleys"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -92,22 +119,31 @@ extract_valleys <- function(dem, output, variant="Lower Quartile", line_thin=TRU
 #' @param output Output raster file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
 #' @param zero_background Flag indicating whether a background value of zero should be used.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-farthest_channel_head <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_background=FALSE, verbose_mode=FALSE) {
+wbt_farthest_channel_head <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_background=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--streams=", streams))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  if (!is.null(zero_background)) {
-    args <- paste(args, paste0("--zero_background=", zero_background))
+  if (zero_background) {
+    args <- paste(args, "--zero_background")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "farthest_channel_head"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -121,22 +157,31 @@ farthest_channel_head <- function(d8_pntr, streams, output, esri_pntr=FALSE, zer
 #' @param output Output raster file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
 #' @param zero_background Flag indicating whether a background value of zero should be used.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-find_main_stem <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_background=FALSE, verbose_mode=FALSE) {
+wbt_find_main_stem <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_background=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--streams=", streams))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  if (!is.null(zero_background)) {
-    args <- paste(args, paste0("--zero_background=", zero_background))
+  if (zero_background) {
+    args <- paste(args, "--zero_background")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "find_main_stem"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -150,22 +195,31 @@ find_main_stem <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_backg
 #' @param output Output raster file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
 #' @param zero_background Flag indicating whether a background value of zero should be used.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-hack_stream_order <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_background=FALSE, verbose_mode=FALSE) {
+wbt_hack_stream_order <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_background=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--streams=", streams))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  if (!is.null(zero_background)) {
-    args <- paste(args, paste0("--zero_background=", zero_background))
+  if (zero_background) {
+    args <- paste(args, "--zero_background")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "hack_stream_order"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -179,22 +233,31 @@ hack_stream_order <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_ba
 #' @param output Output raster file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
 #' @param zero_background Flag indicating whether a background value of zero should be used.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-horton_stream_order <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_background=FALSE, verbose_mode=FALSE) {
+wbt_horton_stream_order <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_background=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--streams=", streams))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  if (!is.null(zero_background)) {
-    args <- paste(args, paste0("--zero_background=", zero_background))
+  if (zero_background) {
+    args <- paste(args, "--zero_background")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "horton_stream_order"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -208,22 +271,31 @@ horton_stream_order <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_
 #' @param output Output raster file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
 #' @param zero_background Flag indicating whether a background value of zero should be used.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-length_of_upstream_channels <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_background=FALSE, verbose_mode=FALSE) {
+wbt_length_of_upstream_channels <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_background=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--streams=", streams))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  if (!is.null(zero_background)) {
-    args <- paste(args, paste0("--zero_background=", zero_background))
+  if (zero_background) {
+    args <- paste(args, "--zero_background")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "length_of_upstream_channels"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -237,20 +309,29 @@ length_of_upstream_channels <- function(d8_pntr, streams, output, esri_pntr=FALS
 #' @param dem Input raster DEM file.
 #' @param output Output HTML file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-long_profile <- function(d8_pntr, streams, dem, output, esri_pntr=FALSE, verbose_mode=FALSE) {
+wbt_long_profile <- function(d8_pntr, streams, dem, output, esri_pntr=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--streams=", streams))
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "long_profile"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -264,20 +345,29 @@ long_profile <- function(d8_pntr, streams, dem, output, esri_pntr=FALSE, verbose
 #' @param dem Input raster DEM file.
 #' @param output Output HTML file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-long_profile_from_points <- function(d8_pntr, points, dem, output, esri_pntr=FALSE, verbose_mode=FALSE) {
+wbt_long_profile_from_points <- function(d8_pntr, points, dem, output, esri_pntr=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--points=", points))
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "long_profile_from_points"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -290,19 +380,28 @@ long_profile_from_points <- function(d8_pntr, points, dem, output, esri_pntr=FAL
 #' @param d8_pntr Input raster D8 pointer file.
 #' @param output Output vector file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-raster_streams_to_vector <- function(streams, d8_pntr, output, esri_pntr=FALSE, verbose_mode=FALSE) {
+wbt_raster_streams_to_vector <- function(streams, d8_pntr, output, esri_pntr=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--streams=", streams))
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "raster_streams_to_vector"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -316,22 +415,31 @@ raster_streams_to_vector <- function(streams, d8_pntr, output, esri_pntr=FALSE, 
 #' @param output Output raster file.
 #' @param nodata Use NoData value for background?.
 #' @param feature_id Use feature number as output value?.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-rasterize_streams <- function(streams, base, output, nodata=TRUE, feature_id=FALSE, verbose_mode=FALSE) {
+wbt_rasterize_streams <- function(streams, base, output, nodata=TRUE, feature_id=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--streams=", streams))
   args <- paste(args, paste0("--base=", base))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(nodata)) {
-    args <- paste(args, paste0("--nodata=", nodata))
+  if (nodata) {
+    args <- paste(args, "--nodata")
   }
-  if (!is.null(feature_id)) {
-    args <- paste(args, paste0("--feature_id=", feature_id))
+  if (feature_id) {
+    args <- paste(args, "--feature_id")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "rasterize_streams"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -343,22 +451,63 @@ rasterize_streams <- function(streams, base, output, nodata=TRUE, feature_id=FAL
 #' @param d8_pntr Input raster D8 pointer file.
 #' @param streams Input raster streams file.
 #' @param output Output raster file.
-#' @param min_length Minimum tributary length (in map units) used for network prunning.
+#' @param min_length Minimum tributary length (in map units) used for network pruning.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-remove_short_streams <- function(d8_pntr, streams, output, min_length, esri_pntr=FALSE, verbose_mode=FALSE) {
+wbt_remove_short_streams <- function(d8_pntr, streams, output, min_length, esri_pntr=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--streams=", streams))
   args <- paste(args, paste0("--output=", output))
   args <- paste(args, paste0("--min_length=", min_length))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "remove_short_streams"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Repair stream vector topology
+#'
+#' This tool resolve topological errors and inconsistencies associated with digitized vector streams.
+#'
+#' @param input Name of the input lines vector file.
+#' @param output Name of the output lines vector file.
+#' @param dist Snap distance, in xy units (metres).
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_repair_stream_vector_topology <- function(input, output, dist="", wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--input=", input))
+  args <- paste(args, paste0("--output=", output))
+  if (!is.null(dist)) {
+    args <- paste(args, paste0("--dist=", dist))
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "repair_stream_vector_topology"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -372,22 +521,31 @@ remove_short_streams <- function(d8_pntr, streams, output, min_length, esri_pntr
 #' @param output Output raster file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
 #' @param zero_background Flag indicating whether a background value of zero should be used.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-shreve_stream_magnitude <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_background=FALSE, verbose_mode=FALSE) {
+wbt_shreve_stream_magnitude <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_background=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--streams=", streams))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  if (!is.null(zero_background)) {
-    args <- paste(args, paste0("--zero_background=", zero_background))
+  if (zero_background) {
+    args <- paste(args, "--zero_background")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "shreve_stream_magnitude"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -401,22 +559,31 @@ shreve_stream_magnitude <- function(d8_pntr, streams, output, esri_pntr=FALSE, z
 #' @param output Output raster file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
 #' @param zero_background Flag indicating whether a background value of zero should be used.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-strahler_stream_order <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_background=FALSE, verbose_mode=FALSE) {
+wbt_strahler_stream_order <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_background=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--streams=", streams))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  if (!is.null(zero_background)) {
-    args <- paste(args, paste0("--zero_background=", zero_background))
+  if (zero_background) {
+    args <- paste(args, "--zero_background")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "strahler_stream_order"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -430,22 +597,31 @@ strahler_stream_order <- function(d8_pntr, streams, output, esri_pntr=FALSE, zer
 #' @param output Output raster file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
 #' @param zero_background Flag indicating whether a background value of zero should be used.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-stream_link_class <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_background=FALSE, verbose_mode=FALSE) {
+wbt_stream_link_class <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_background=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--streams=", streams))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  if (!is.null(zero_background)) {
-    args <- paste(args, paste0("--zero_background=", zero_background))
+  if (zero_background) {
+    args <- paste(args, "--zero_background")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "stream_link_class"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -459,22 +635,31 @@ stream_link_class <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_ba
 #' @param output Output raster file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
 #' @param zero_background Flag indicating whether a background value of zero should be used.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-stream_link_identifier <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_background=FALSE, verbose_mode=FALSE) {
+wbt_stream_link_identifier <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_background=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--streams=", streams))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  if (!is.null(zero_background)) {
-    args <- paste(args, paste0("--zero_background=", zero_background))
+  if (zero_background) {
+    args <- paste(args, "--zero_background")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "stream_link_identifier"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -488,22 +673,31 @@ stream_link_identifier <- function(d8_pntr, streams, output, esri_pntr=FALSE, ze
 #' @param output Output raster file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
 #' @param zero_background Flag indicating whether a background value of zero should be used.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-stream_link_length <- function(d8_pntr, linkid, output, esri_pntr=FALSE, zero_background=FALSE, verbose_mode=FALSE) {
+wbt_stream_link_length <- function(d8_pntr, linkid, output, esri_pntr=FALSE, zero_background=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--linkid=", linkid))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  if (!is.null(zero_background)) {
-    args <- paste(args, paste0("--zero_background=", zero_background))
+  if (zero_background) {
+    args <- paste(args, "--zero_background")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "stream_link_length"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -518,23 +712,32 @@ stream_link_length <- function(d8_pntr, linkid, output, esri_pntr=FALSE, zero_ba
 #' @param output Output raster file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
 #' @param zero_background Flag indicating whether a background value of zero should be used.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-stream_link_slope <- function(d8_pntr, linkid, dem, output, esri_pntr=FALSE, zero_background=FALSE, verbose_mode=FALSE) {
+wbt_stream_link_slope <- function(d8_pntr, linkid, dem, output, esri_pntr=FALSE, zero_background=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--linkid=", linkid))
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  if (!is.null(zero_background)) {
-    args <- paste(args, paste0("--zero_background=", zero_background))
+  if (zero_background) {
+    args <- paste(args, "--zero_background")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "stream_link_slope"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -549,23 +752,32 @@ stream_link_slope <- function(d8_pntr, linkid, dem, output, esri_pntr=FALSE, zer
 #' @param output Output raster file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
 #' @param zero_background Flag indicating whether a background value of zero should be used.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-stream_slope_continuous <- function(d8_pntr, streams, dem, output, esri_pntr=FALSE, zero_background=FALSE, verbose_mode=FALSE) {
+wbt_stream_slope_continuous <- function(d8_pntr, streams, dem, output, esri_pntr=FALSE, zero_background=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--streams=", streams))
   args <- paste(args, paste0("--dem=", dem))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  if (!is.null(zero_background)) {
-    args <- paste(args, paste0("--zero_background=", zero_background))
+  if (zero_background) {
+    args <- paste(args, "--zero_background")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "stream_slope_continuous"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -579,22 +791,31 @@ stream_slope_continuous <- function(d8_pntr, streams, dem, output, esri_pntr=FAL
 #' @param output Output raster file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
 #' @param zero_background Flag indicating whether a background value of zero should be used.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-topological_stream_order <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_background=FALSE, verbose_mode=FALSE) {
+wbt_topological_stream_order <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_background=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--streams=", streams))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  if (!is.null(zero_background)) {
-    args <- paste(args, paste0("--zero_background=", zero_background))
+  if (zero_background) {
+    args <- paste(args, "--zero_background")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "topological_stream_order"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -608,22 +829,69 @@ topological_stream_order <- function(d8_pntr, streams, output, esri_pntr=FALSE, 
 #' @param output Output raster file.
 #' @param esri_pntr D8 pointer uses the ESRI style scheme.
 #' @param zero_background Flag indicating whether a background value of zero should be used.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-tributary_identifier <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_background=FALSE, verbose_mode=FALSE) {
+wbt_tributary_identifier <- function(d8_pntr, streams, output, esri_pntr=FALSE, zero_background=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--d8_pntr=", d8_pntr))
   args <- paste(args, paste0("--streams=", streams))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(esri_pntr)) {
-    args <- paste(args, paste0("--esri_pntr=", esri_pntr))
+  if (esri_pntr) {
+    args <- paste(args, "--esri_pntr")
   }
-  if (!is.null(zero_background)) {
-    args <- paste(args, paste0("--zero_background=", zero_background))
+  if (zero_background) {
+    args <- paste(args, "--zero_background")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "tributary_identifier"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Vector stream network analysis
+#'
+#' This tool performs common stream network analysis operations on an input vector stream file.
+#'
+#' @param streams Name of the input routes vector file.
+#' @param dem Name of the input DEM raster file.
+#' @param output Name of the output lines shapefile.
+#' @param cutting_height Maximum ridge-cutting height (z units).
+#' @param snap Snap distance, in xy units (metres).
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_vector_stream_network_analysis <- function(streams, dem, output, cutting_height=10.0, snap=0.1, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--streams=", streams))
+  args <- paste(args, paste0("--dem=", dem))
+  args <- paste(args, paste0("--output=", output))
+  if (!is.null(cutting_height)) {
+    args <- paste(args, paste0("--cutting_height=", cutting_height))
+  }
+  if (!is.null(snap)) {
+    args <- paste(args, paste0("--snap=", snap))
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "vector_stream_network_analysis"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 

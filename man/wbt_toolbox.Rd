@@ -2,7 +2,7 @@
 % Please edit documentation in R/wbt.R
 \name{wbt_toolbox}
 \alias{wbt_toolbox}
-\title{The toolbox for a specific tool.}
+\title{The toolbox for a specific tool in WhiteboxTools}
 \usage{
 wbt_toolbox(tool_name = NULL)
 }
@@ -15,6 +15,11 @@ Returns the toolbox for a specific tool.
 \description{
 Retrieve the toolbox for a specific tool.
 }
+\details{
+Leaving \code{tool_name} as default \code{NULL} returns results for all tools, but does not work on Windows.
+}
 \examples{
+\dontrun{
 wbt_toolbox("breach_depressions")
+}
 }

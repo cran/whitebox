@@ -1,37 +1,42 @@
-.onAttach <- function(libname, pkgname) {
-  os <- Sys.info()["sysname"]
-  if (os == "Linux") {
-    url <- "http://www.uoguelph.ca/~hydrogeo/WhiteboxTools/WhiteboxTools_linux_amd64.tar.xz"
-  } else if (os == "Windows") {
-    url <- "http://www.uoguelph.ca/~hydrogeo/WhiteboxTools/WhiteboxTools_win_amd64.zip"
-  } else if (os == "Darwin") {
-    url <- "http://www.uoguelph.ca/~hydrogeo/WhiteboxTools/WhiteboxTools_darwin_amd64.zip"
-  } else {
-    packageStartupMessage("Unsupported operating system")
-    url <- "http://www.uoguelph.ca/~hydrogeo/WhiteboxTools/WhiteboxTools_linux_amd64.tar.xz"
+.onLoad <- function(libname, pkgname) {
+  # check_whitebox_binary() is called "loudly" only on package load either:
+  #   1. interactively, or 
+  #   2. environment var R_WHITEBOX_VERBOSE=TRUE or package option whitebox.verbose=TRUE
+  check_whitebox_binary(silent = !wbt_verbose())
+}
+
+#' Check for WhiteboxTools executable path
+#'
+#' @param silent logical. Print help on installation/setting path. Default `TRUE`.
+#' @seealso [wbt_exe_path()]
+#' @return logical if WhiteboxTools executable file exists.
+#' @export
+check_whitebox_binary <- function(silent = TRUE) {
+
+  # look in standard locations
+  exe_path <- wbt_exe_path(shell_quote = FALSE)
+  res <- file.exists(exe_path)
+
+  if (!res && !silent) {
+    msg <- paste0(
+      "\n",
+      "------------------------------------------------------------------------\n",
+      "Could not find WhiteboxTools!\n",
+      "------------------------------------------------------------------------\n",
+      "\n",
+      "Your next step is to download and install the WhiteboxTools binary:\n",
+      "    > whitebox::install_whitebox()\n",
+      "\n",
+      "If you have WhiteboxTools installed already run `wbt_init(exe_path=...)`': \n",
+      "    > wbt_init(exe_path='/home/user/path/to/whitebox_tools')\n",
+      "\n",
+      "For whitebox package documentation, ask for help:\n",
+      "    > ??whitebox\n",
+      "\n",
+      "For more information visit https://giswqs.github.io/whiteboxR/\n",
+      "\n",
+      "------------------------------------------------------------------------\n")
+    message(msg)
   }
-
-  pkg_dir <- find.package("whitebox")
-  filename <- basename(url)
-  packageStartupMessage("Downloading WhiteboxTools executable ...")
-  exe_zip <- file.path(pkg_dir, filename)
-
-  if (!file.exists(exe_zip)) {
-    utils::download.file(url = url, destfile = exe_zip)
-  }
-
-  packageStartupMessage(paste("Decompressing", filename, "..."))
-  if (file.exists(exe_zip) & os == "Windows") {
-    utils::unzip(exe_zip, exdir = pkg_dir)
-  } else {
-    utils::untar(exe_zip, exdir = pkg_dir)
-  }
-
-  if (os != "Windows") {
-    exe_path <- file.path(pkg_dir, "WBT", "whitebox_tools")
-    system(paste("chmod 755", exe_path))
-  }
-
-  packageStartupMessage(paste("WhiteboxTools executable is located at:", file.path(pkg_dir, "WBT")))
-  packageStartupMessage("Installation completed!")
+  res
 }

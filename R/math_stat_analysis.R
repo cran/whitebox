@@ -5,16 +5,25 @@
 #' @param input1 Input raster file.
 #' @param input2 Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-and <- function(input1, input2, output, verbose_mode=FALSE) {
+wbt_and <- function(input1, input2, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input1=", input1))
   args <- paste(args, paste0("--input2=", input2))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "and"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -26,16 +35,25 @@ and <- function(input1, input2, output, verbose_mode=FALSE) {
 #' @param input1 Input raster file.
 #' @param input2 Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-not <- function(input1, input2, output, verbose_mode=FALSE) {
+wbt_not <- function(input1, input2, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input1=", input1))
   args <- paste(args, paste0("--input2=", input2))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "not"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -47,16 +65,25 @@ not <- function(input1, input2, output, verbose_mode=FALSE) {
 #' @param input1 Input raster file.
 #' @param input2 Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-or <- function(input1, input2, output, verbose_mode=FALSE) {
+wbt_or <- function(input1, input2, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input1=", input1))
   args <- paste(args, paste0("--input2=", input2))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "or"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -67,19 +94,24 @@ or <- function(input1, input2, output, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' absolute_value(input = dem, output = 'output.tif')
-absolute_value <- function(input, output, verbose_mode=FALSE) {
+wbt_absolute_value <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "absolute_value"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -91,16 +123,25 @@ absolute_value <- function(input, output, verbose_mode=FALSE) {
 #' @param input1 Input raster file or constant value.
 #' @param input2 Input raster file or constant value.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-add <- function(input1, input2, output, verbose_mode=FALSE) {
+wbt_add <- function(input1, input2, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input1=", input1))
   args <- paste(args, paste0("--input2=", input2))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "add"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -112,16 +153,25 @@ add <- function(input1, input2, output, verbose_mode=FALSE) {
 #' @param input Input raster file.
 #' @param features Feature definition (or class) raster.
 #' @param output Output HTML file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-anova <- function(input, features, output, verbose_mode=FALSE) {
+wbt_anova <- function(input, features, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--features=", features))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "anova"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -132,19 +182,24 @@ anova <- function(input, features, output, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' arc_cos(input = dem, output = 'output.tif')
-arc_cos <- function(input, output, verbose_mode=FALSE) {
+wbt_arc_cos <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "arc_cos"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -155,19 +210,24 @@ arc_cos <- function(input, output, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' arc_sin(input = dem, output = 'output.tif')
-arc_sin <- function(input, output, verbose_mode=FALSE) {
+wbt_arc_sin <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "arc_sin"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -178,19 +238,108 @@ arc_sin <- function(input, output, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' arc_tan(input = dem, output = 'output.tif')
-arc_tan <- function(input, output, verbose_mode=FALSE) {
+wbt_arc_tan <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "arc_tan"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Arcosh
+#'
+#' Returns the inverse hyperbolic cosine (arcosh) of each values in a raster.
+#'
+#' @param input Input raster file.
+#' @param output Output raster file.
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_arcosh <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--input=", input))
+  args <- paste(args, paste0("--output=", output))
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "arcosh"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Arsinh
+#'
+#' Returns the inverse hyperbolic sine (arsinh) of each values in a raster.
+#'
+#' @param input Input raster file.
+#' @param output Output raster file.
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_arsinh <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--input=", input))
+  args <- paste(args, paste0("--output=", output))
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "arsinh"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Artanh
+#'
+#' Returns the inverse hyperbolic tangent (arctanh) of each values in a raster.
+#'
+#' @param input Input raster file.
+#' @param output Output raster file.
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_artanh <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--input=", input))
+  args <- paste(args, paste0("--output=", output))
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "artanh"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -202,16 +351,25 @@ arc_tan <- function(input, output, verbose_mode=FALSE) {
 #' @param input_y Input y raster file or constant value (rise).
 #' @param input_x Input x raster file or constant value (run).
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-atan2 <- function(input_y, input_x, output, verbose_mode=FALSE) {
+wbt_atan2 <- function(input_y, input_x, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input_y=", input_y))
   args <- paste(args, paste0("--input_x=", input_x))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "atan2"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -220,19 +378,70 @@ atan2 <- function(input_y, input_x, output, verbose_mode=FALSE) {
 #'
 #' Performs a correlation analysis on attribute fields from a vector database.
 #'
-#' @param input Input raster file.
+#' @param input Input vector file.
 #' @param output Output HTML file (default name will be based on input file if unspecified).
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-attribute_correlation <- function(input, output=NULL, verbose_mode=FALSE) {
+wbt_attribute_correlation <- function(input, output=NULL, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   if (!is.null(output)) {
     args <- paste(args, paste0("--output=", output))
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "attribute_correlation"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Attribute correlation neighbourhood analysis
+#'
+#' Performs a correlation on two input vector attributes within a neighbourhood search windows.
+#'
+#' @param input Input vector file.
+#' @param field1 First input field name (dependent variable) in attribute table.
+#' @param field2 Second input field name (independent variable) in attribute table.
+#' @param radius Search Radius (in map units).
+#' @param min_points Minimum number of points.
+#' @param stat Correlation type; one of 'pearson' (default) and 'spearman'.
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_attribute_correlation_neighbourhood_analysis <- function(input, field1, field2, radius=NULL, min_points=NULL, stat="pearson", wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--input=", input))
+  args <- paste(args, paste0("--field1=", field1))
+  args <- paste(args, paste0("--field2=", field2))
+  if (!is.null(radius)) {
+    args <- paste(args, paste0("--radius=", radius))
+  }
+  if (!is.null(min_points)) {
+    args <- paste(args, paste0("--min_points=", min_points))
+  }
+  if (!is.null(stat)) {
+    args <- paste(args, paste0("--stat=", stat))
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "attribute_correlation_neighbourhood_analysis"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -244,16 +453,25 @@ attribute_correlation <- function(input, output=NULL, verbose_mode=FALSE) {
 #' @param input Input raster file.
 #' @param field Input field name in attribute table.
 #' @param output Output HTML file (default name will be based on input file if unspecified).
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-attribute_histogram <- function(input, field, output, verbose_mode=FALSE) {
+wbt_attribute_histogram <- function(input, field, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--field=", field))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "attribute_histogram"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -267,20 +485,29 @@ attribute_histogram <- function(input, field, output, verbose_mode=FALSE) {
 #' @param fieldy Input field name in attribute table for the y-axis.
 #' @param output Output HTML file (default name will be based on input file if unspecified).
 #' @param trendline Draw the trendline.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-attribute_scattergram <- function(input, fieldx, fieldy, output, trendline=FALSE, verbose_mode=FALSE) {
+wbt_attribute_scattergram <- function(input, fieldx, fieldy, output, trendline=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--fieldx=", fieldx))
   args <- paste(args, paste0("--fieldy=", fieldy))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(trendline)) {
-    args <- paste(args, paste0("--trendline=", trendline))
+  if (trendline) {
+    args <- paste(args, "--trendline")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "attribute_scattergram"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -291,19 +518,64 @@ attribute_scattergram <- function(input, fieldx, fieldy, output, trendline=FALSE
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' ceil(input = dem, output = 'output.tif')
-ceil <- function(input, output, verbose_mode=FALSE) {
+wbt_ceil <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "ceil"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Conditional evaluation
+#'
+#' This tool performs a conditional evaluation (if-then-else) operation on a raster.
+#'
+#' @param input Name of the input DEM raster file; must be depressionless.
+#' @param statement Conditional statement e.g. value > 35.0. This statement must be a valid Rust statement.
+#' @param true Value  where TRUE (input raster or constant value).
+#' @param false Value  where FALSE (input raster or constant value).
+#' @param output Name of the output raster file.
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_conditional_evaluation <- function(input, output, statement="", true=NULL, false=NULL, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--input=", input))
+  args <- paste(args, paste0("--output=", output))
+  if (!is.null(statement)) {
+    args <- paste(args, paste0("--statement=", statement))
+  }
+  if (!is.null(true)) {
+    args <- paste(args, paste0("--true=", true))
+  }
+  if (!is.null(false)) {
+    args <- paste(args, paste0("--false=", false))
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "conditional_evaluation"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -314,19 +586,24 @@ ceil <- function(input, output, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' cos(input = dem, output = 'output.tif')
-cos <- function(input, output, verbose_mode=FALSE) {
+wbt_cos <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "cos"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -337,19 +614,24 @@ cos <- function(input, output, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' cosh(input = dem, output = 'output.tif')
-cosh <- function(input, output, verbose_mode=FALSE) {
+wbt_cosh <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "cosh"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -360,17 +642,26 @@ cosh <- function(input, output, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Optional output html file (default name will be based on input file if unspecified).
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-crispness_index <- function(input, output=NULL, verbose_mode=FALSE) {
+wbt_crispness_index <- function(input, output=NULL, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   if (!is.null(output)) {
     args <- paste(args, paste0("--output=", output))
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "crispness_index"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -382,16 +673,25 @@ crispness_index <- function(input, output=NULL, verbose_mode=FALSE) {
 #' @param input1 Input raster file 1.
 #' @param input2 Input raster file 1.
 #' @param output Output HTML file (default name will be based on input file if unspecified).
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-cross_tabulation <- function(input1, input2, output, verbose_mode=FALSE) {
+wbt_cross_tabulation <- function(input1, input2, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input1=", input1))
   args <- paste(args, paste0("--input2=", input2))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "cross_tabulation"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -402,19 +702,24 @@ cross_tabulation <- function(input1, input2, output, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' cumulative_distribution(input = dem, output = 'output.tif')
-cumulative_distribution <- function(input, output, verbose_mode=FALSE) {
+wbt_cumulative_distribution <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "cumulative_distribution"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -425,19 +730,24 @@ cumulative_distribution <- function(input, output, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' decrement(input = dem, output = 'output.tif')
-decrement <- function(input, output, verbose_mode=FALSE) {
+wbt_decrement <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "decrement"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -449,16 +759,25 @@ decrement <- function(input, output, verbose_mode=FALSE) {
 #' @param input1 Input raster file or constant value.
 #' @param input2 Input raster file or constant value.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-divide <- function(input1, input2, output, verbose_mode=FALSE) {
+wbt_divide <- function(input1, input2, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input1=", input1))
   args <- paste(args, paste0("--input2=", input2))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "divide"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -470,16 +789,25 @@ divide <- function(input1, input2, output, verbose_mode=FALSE) {
 #' @param input1 Input raster file or constant value.
 #' @param input2 Input raster file or constant value.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-equal_to <- function(input1, input2, output, verbose_mode=FALSE) {
+wbt_equal_to <- function(input1, input2, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input1=", input1))
   args <- paste(args, paste0("--input2=", input2))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "equal_to"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -490,19 +818,24 @@ equal_to <- function(input1, input2, output, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' exp(input = dem, output = 'output.tif')
-exp <- function(input, output, verbose_mode=FALSE) {
+wbt_exp <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "exp"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -513,50 +846,24 @@ exp <- function(input, output, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' exp2(input = dem, output = 'output.tif')
-exp2 <- function(input, output, verbose_mode=FALSE) {
+wbt_exp2 <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
-  wbt_run_tool(tool_name, args, verbose_mode)
-}
-
-
-#' Extract raster statistics
-#'
-#' Extracts descriptive statistics for a group of patches in a raster.
-#'
-#' @param input Input data raster file.
-#' @param features Input feature definition raster file.
-#' @param output Output raster file.
-#' @param stat Statistic to extract.
-#' @param out_table Output HTML Table file.
-#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
-#'
-#' @return Returns the tool text outputs.
-#' @export
-extract_raster_statistics <- function(input, features, output=NULL, stat="average", out_table=NULL, verbose_mode=FALSE) {
-  args <- ""
-  args <- paste(args, paste0("--input=", input))
-  args <- paste(args, paste0("--features=", features))
-  if (!is.null(output)) {
-    args <- paste(args, paste0("--output=", output))
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
   }
-  if (!is.null(stat)) {
-    args <- paste(args, paste0("--stat=", stat))
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
   }
-  if (!is.null(out_table)) {
-    args <- paste(args, paste0("--out_table=", out_table))
-  }
-  tool_name <- match.call()[[1]]
+  tool_name <- "exp2"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -567,19 +874,24 @@ extract_raster_statistics <- function(input, features, output=NULL, stat="averag
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' floor(input = dem, output = 'output.tif')
-floor <- function(input, output, verbose_mode=FALSE) {
+wbt_floor <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "floor"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -592,19 +904,28 @@ floor <- function(input, output, verbose_mode=FALSE) {
 #' @param input2 Input raster file or constant value.
 #' @param output Output raster file.
 #' @param incl_equals Perform a greater-than-or-equal-to operation.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-greater_than <- function(input1, input2, output, incl_equals=FALSE, verbose_mode=FALSE) {
+wbt_greater_than <- function(input1, input2, output, incl_equals=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input1=", input1))
   args <- paste(args, paste0("--input2=", input2))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(incl_equals)) {
-    args <- paste(args, paste0("--incl_equals=", incl_equals))
+  if (incl_equals) {
+    args <- paste(args, "--incl_equals")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "greater_than"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -616,18 +937,27 @@ greater_than <- function(input1, input2, output, incl_equals=FALSE, verbose_mode
 #' @param inputs Input raster files.
 #' @param contiguity Contiguity type.
 #' @param output Output HTML file (default name will be based on input file if unspecified).
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-image_autocorrelation <- function(inputs, output, contiguity="Rook", verbose_mode=FALSE) {
+wbt_image_autocorrelation <- function(inputs, output, contiguity="Rook", wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--inputs=", inputs))
   args <- paste(args, paste0("--output=", output))
   if (!is.null(contiguity)) {
     args <- paste(args, paste0("--contiguity=", contiguity))
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "image_autocorrelation"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -638,17 +968,66 @@ image_autocorrelation <- function(inputs, output, contiguity="Rook", verbose_mod
 #'
 #' @param inputs Input raster files.
 #' @param output Output HTML file (default name will be based on input file if unspecified).
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-image_correlation <- function(inputs, output=NULL, verbose_mode=FALSE) {
+wbt_image_correlation <- function(inputs, output=NULL, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--inputs=", inputs))
   if (!is.null(output)) {
     args <- paste(args, paste0("--output=", output))
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "image_correlation"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Image correlation neighbourhood analysis
+#'
+#' Performs image correlation on two input images neighbourhood search windows.
+#'
+#' @param input1 Input raster file.
+#' @param input2 Input raster file.
+#' @param output1 Output correlation (r-value or rho) raster file.
+#' @param output2 Output significance (p-value) raster file.
+#' @param filter Size of the filter kernel.
+#' @param stat Correlation type; one of 'pearson' (default) and 'spearman'.
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_image_correlation_neighbourhood_analysis <- function(input1, input2, output1, output2, filter=11, stat="pearson", wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--input1=", input1))
+  args <- paste(args, paste0("--input2=", input2))
+  args <- paste(args, paste0("--output1=", output1))
+  args <- paste(args, paste0("--output2=", output2))
+  if (!is.null(filter)) {
+    args <- paste(args, paste0("--filter=", filter))
+  }
+  if (!is.null(stat)) {
+    args <- paste(args, paste0("--stat=", stat))
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "image_correlation_neighbourhood_analysis"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -660,13 +1039,18 @@ image_correlation <- function(inputs, output=NULL, verbose_mode=FALSE) {
 #' @param input1 Input raster file (independent variable, X).
 #' @param input2 Input raster file (dependent variable, Y).
 #' @param output Output HTML file for regression summary report.
-#' @param out_residuals Output raster regression resdidual file.
+#' @param out_residuals Output raster regression residual file.
 #' @param standardize Optional flag indicating whether to standardize the residuals map.
+#' @param scattergram Optional flag indicating whether to output a scattergram.
+#' @param num_samples Number of samples used to create scattergram.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-image_regression <- function(input1, input2, output, out_residuals=NULL, standardize=FALSE, verbose_mode=FALSE) {
+wbt_image_regression <- function(input1, input2, output, out_residuals=NULL, standardize=FALSE, scattergram=FALSE, num_samples=1000, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input1=", input1))
   args <- paste(args, paste0("--input2=", input2))
@@ -674,10 +1058,22 @@ image_regression <- function(input1, input2, output, out_residuals=NULL, standar
   if (!is.null(out_residuals)) {
     args <- paste(args, paste0("--out_residuals=", out_residuals))
   }
-  if (!is.null(standardize)) {
-    args <- paste(args, paste0("--standardize=", standardize))
+  if (standardize) {
+    args <- paste(args, "--standardize")
   }
-  tool_name <- match.call()[[1]]
+  if (scattergram) {
+    args <- paste(args, "--scattergram")
+  }
+  if (!is.null(num_samples)) {
+    args <- paste(args, paste0("--num_samples=", num_samples))
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "image_regression"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -688,15 +1084,24 @@ image_regression <- function(input1, input2, output, out_residuals=NULL, standar
 #'
 #' @param input1 Input raster file.
 #' @param input2 Input raster file or constant value.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-in_place_add <- function(input1, input2, verbose_mode=FALSE) {
+wbt_in_place_add <- function(input1, input2, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input1=", input1))
   args <- paste(args, paste0("--input2=", input2))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "in_place_add"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -707,15 +1112,24 @@ in_place_add <- function(input1, input2, verbose_mode=FALSE) {
 #'
 #' @param input1 Input raster file.
 #' @param input2 Input raster file or constant value.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-in_place_divide <- function(input1, input2, verbose_mode=FALSE) {
+wbt_in_place_divide <- function(input1, input2, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input1=", input1))
   args <- paste(args, paste0("--input2=", input2))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "in_place_divide"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -726,15 +1140,24 @@ in_place_divide <- function(input1, input2, verbose_mode=FALSE) {
 #'
 #' @param input1 Input raster file.
 #' @param input2 Input raster file or constant value.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-in_place_multiply <- function(input1, input2, verbose_mode=FALSE) {
+wbt_in_place_multiply <- function(input1, input2, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input1=", input1))
   args <- paste(args, paste0("--input2=", input2))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "in_place_multiply"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -745,15 +1168,24 @@ in_place_multiply <- function(input1, input2, verbose_mode=FALSE) {
 #'
 #' @param input1 Input raster file.
 #' @param input2 Input raster file or constant value.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-in_place_subtract <- function(input1, input2, verbose_mode=FALSE) {
+wbt_in_place_subtract <- function(input1, input2, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input1=", input1))
   args <- paste(args, paste0("--input2=", input2))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "in_place_subtract"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -764,19 +1196,24 @@ in_place_subtract <- function(input1, input2, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' increment(input = dem, output = 'output.tif')
-increment <- function(input, output, verbose_mode=FALSE) {
+wbt_increment <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "increment"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -788,16 +1225,53 @@ increment <- function(input, output, verbose_mode=FALSE) {
 #' @param input1 Input raster file or constant value.
 #' @param input2 Input raster file or constant value.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-integer_division <- function(input1, input2, output, verbose_mode=FALSE) {
+wbt_integer_division <- function(input1, input2, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input1=", input1))
   args <- paste(args, paste0("--input2=", input2))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "integer_division"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Inverse principal component analysis
+#'
+#' This tool performs an inverse principal component analysis on a series of input component images.
+#'
+#' @param inputs Name of the input PCA component images.
+#' @param report Name of the PCA report file (*.html).
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_inverse_principal_component_analysis <- function(inputs, report, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--inputs=", inputs))
+  args <- paste(args, paste0("--report=", report))
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "inverse_principal_component_analysis"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -808,19 +1282,24 @@ integer_division <- function(input1, input2, output, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' is_no_data(input = dem, output = 'output.tif')
-is_no_data <- function(input, output, verbose_mode=FALSE) {
+wbt_is_no_data <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "is_no_data"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -832,16 +1311,25 @@ is_no_data <- function(input, output, verbose_mode=FALSE) {
 #' @param input1 Input classification raster file.
 #' @param input2 Input reference raster file.
 #' @param output Output HTML file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-kappa_index <- function(input1, input2, output, verbose_mode=FALSE) {
+wbt_kappa_index <- function(input1, input2, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input1=", input1))
   args <- paste(args, paste0("--input2=", input2))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "kappa_index"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -853,18 +1341,27 @@ kappa_index <- function(input1, input2, output, verbose_mode=FALSE) {
 #' @param input Input raster file.
 #' @param output Output HTML file.
 #' @param num_samples Number of samples. Leave blank to use whole image.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-ks_test_for_normality <- function(input, output, num_samples=NULL, verbose_mode=FALSE) {
+wbt_ks_test_for_normality <- function(input, output, num_samples=NULL, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
   if (!is.null(num_samples)) {
     args <- paste(args, paste0("--num_samples=", num_samples))
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "ks_test_for_normality"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -877,40 +1374,58 @@ ks_test_for_normality <- function(input, output, num_samples=NULL, verbose_mode=
 #' @param input2 Input raster file or constant value.
 #' @param output Output raster file.
 #' @param incl_equals Perform a less-than-or-equal-to operation.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-less_than <- function(input1, input2, output, incl_equals=FALSE, verbose_mode=FALSE) {
+wbt_less_than <- function(input1, input2, output, incl_equals=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input1=", input1))
   args <- paste(args, paste0("--input2=", input2))
   args <- paste(args, paste0("--output=", output))
-  if (!is.null(incl_equals)) {
-    args <- paste(args, paste0("--incl_equals=", incl_equals))
+  if (incl_equals) {
+    args <- paste(args, "--incl_equals")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "less_than"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
 
 #' List unique values
 #'
-#' Lists the unique values contained in a field witin a vector's attribute table.
+#' Lists the unique values contained in a field within a vector's attribute table.
 #'
 #' @param input Input raster file.
 #' @param field Input field name in attribute table.
 #' @param output Output HTML file (default name will be based on input file if unspecified).
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-list_unique_values <- function(input, field, output, verbose_mode=FALSE) {
+wbt_list_unique_values <- function(input, field, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--field=", field))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "list_unique_values"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -921,19 +1436,24 @@ list_unique_values <- function(input, field, output, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' ln(input = dem, output = 'output.tif')
-ln <- function(input, output, verbose_mode=FALSE) {
+wbt_ln <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "ln"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -944,19 +1464,24 @@ ln <- function(input, output, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' log10(input = dem, output = 'output.tif')
-log10 <- function(input, output, verbose_mode=FALSE) {
+wbt_log10 <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "log10"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -967,19 +1492,24 @@ log10 <- function(input, output, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' log2(input = dem, output = 'output.tif')
-log2 <- function(input, output, verbose_mode=FALSE) {
+wbt_log2 <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "log2"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -991,16 +1521,25 @@ log2 <- function(input, output, verbose_mode=FALSE) {
 #' @param input1 Input raster file or constant value.
 #' @param input2 Input raster file or constant value.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-max <- function(input1, input2, output, verbose_mode=FALSE) {
+wbt_max <- function(input1, input2, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input1=", input1))
   args <- paste(args, paste0("--input2=", input2))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "max"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1012,16 +1551,25 @@ max <- function(input1, input2, output, verbose_mode=FALSE) {
 #' @param input1 Input raster file or constant value.
 #' @param input2 Input raster file or constant value.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-min <- function(input1, input2, output, verbose_mode=FALSE) {
+wbt_min <- function(input1, input2, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input1=", input1))
   args <- paste(args, paste0("--input2=", input2))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "min"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1033,16 +1581,25 @@ min <- function(input1, input2, output, verbose_mode=FALSE) {
 #' @param input1 Input raster file or constant value.
 #' @param input2 Input raster file or constant value.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-modulo <- function(input1, input2, output, verbose_mode=FALSE) {
+wbt_modulo <- function(input1, input2, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input1=", input1))
   args <- paste(args, paste0("--input2=", input2))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "modulo"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1054,16 +1611,25 @@ modulo <- function(input1, input2, output, verbose_mode=FALSE) {
 #' @param input1 Input raster file or constant value.
 #' @param input2 Input raster file or constant value.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-multiply <- function(input1, input2, output, verbose_mode=FALSE) {
+wbt_multiply <- function(input1, input2, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input1=", input1))
   args <- paste(args, paste0("--input2=", input2))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "multiply"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1074,19 +1640,24 @@ multiply <- function(input1, input2, output, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' negate(input = dem, output = 'output.tif')
-negate <- function(input, output, verbose_mode=FALSE) {
+wbt_negate <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "negate"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1098,16 +1669,89 @@ negate <- function(input, output, verbose_mode=FALSE) {
 #' @param input1 Input raster file or constant value.
 #' @param input2 Input raster file or constant value.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-not_equal_to <- function(input1, input2, output, verbose_mode=FALSE) {
+wbt_not_equal_to <- function(input1, input2, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input1=", input1))
   args <- paste(args, paste0("--input2=", input2))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "not_equal_to"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Paired sample t test
+#'
+#' Performs a 2-sample K-S test for significant differences on two input rasters.
+#'
+#' @param input1 First input raster file.
+#' @param input2 Second input raster file.
+#' @param output Output HTML file.
+#' @param num_samples Number of samples. Leave blank to use whole image.
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_paired_sample_t_test <- function(input1, input2, output, num_samples=NULL, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--input1=", input1))
+  args <- paste(args, paste0("--input2=", input2))
+  args <- paste(args, paste0("--output=", output))
+  if (!is.null(num_samples)) {
+    args <- paste(args, paste0("--num_samples=", num_samples))
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "paired_sample_t_test"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Phi coefficient
+#'
+#' This tool performs a binary classification accuracy assessment.
+#'
+#' @param input1 Name of the first input raster image file.
+#' @param input2 Name of the second input raster image file.
+#' @param output Name of the output HTML file.
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_phi_coefficient <- function(input1, input2, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--input1=", input1))
+  args <- paste(args, paste0("--input2=", input2))
+  args <- paste(args, paste0("--output=", output))
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "phi_coefficient"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1119,16 +1763,25 @@ not_equal_to <- function(input1, input2, output, verbose_mode=FALSE) {
 #' @param input1 Input raster file or constant value.
 #' @param input2 Input raster file or constant value.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-power <- function(input1, input2, output, verbose_mode=FALSE) {
+wbt_power <- function(input1, input2, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input1=", input1))
   args <- paste(args, paste0("--input2=", input2))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "power"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1138,24 +1791,33 @@ power <- function(input1, input2, output, verbose_mode=FALSE) {
 #' Performs a principal component analysis (PCA) on a multi-spectral dataset.
 #'
 #' @param inputs Input raster files.
-#' @param out_html Output HTML report file.
+#' @param output Output HTML report file.
 #' @param num_comp Number of component images to output; <= to num. input images.
 #' @param standardized Perform standardized PCA?.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-principal_component_analysis <- function(inputs, out_html, num_comp=NULL, standardized=FALSE, verbose_mode=FALSE) {
+wbt_principal_component_analysis <- function(inputs, output, num_comp=NULL, standardized=FALSE, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--inputs=", inputs))
-  args <- paste(args, paste0("--out_html=", out_html))
+  args <- paste(args, paste0("--output=", output))
   if (!is.null(num_comp)) {
     args <- paste(args, paste0("--num_comp=", num_comp))
   }
-  if (!is.null(standardized)) {
-    args <- paste(args, paste0("--standardized=", standardized))
+  if (standardized) {
+    args <- paste(args, "--standardized")
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "principal_component_analysis"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1167,18 +1829,27 @@ principal_component_analysis <- function(inputs, out_html, num_comp=NULL, standa
 #' @param input Input raster file.
 #' @param output Output raster file.
 #' @param num_quantiles Number of quantiles.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-quantiles <- function(input, output, num_quantiles=5, verbose_mode=FALSE) {
+wbt_quantiles <- function(input, output, num_quantiles=5, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
   if (!is.null(num_quantiles)) {
     args <- paste(args, paste0("--num_quantiles=", num_quantiles))
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "quantiles"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1189,15 +1860,24 @@ quantiles <- function(input, output, num_quantiles=5, verbose_mode=FALSE) {
 #'
 #' @param base Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-random_field <- function(base, output, verbose_mode=FALSE) {
+wbt_random_field <- function(base, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--base=", base))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "random_field"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1209,18 +1889,57 @@ random_field <- function(base, output, verbose_mode=FALSE) {
 #' @param base Input raster file.
 #' @param output Output raster file.
 #' @param num_samples Number of samples.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-random_sample <- function(base, output, num_samples=1000, verbose_mode=FALSE) {
+wbt_random_sample <- function(base, output, num_samples=1000, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--base=", base))
   args <- paste(args, paste0("--output=", output))
   if (!is.null(num_samples)) {
     args <- paste(args, paste0("--num_samples=", num_samples))
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "random_sample"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Raster calculator
+#'
+#' This tool performs a conditional evaluation (if-then-else) operation on a raster.
+#'
+#' @param statement Statement e.g. cos("raster1") * 35.0 + "raster2". This statement must be a valid Rust statement.
+#' @param output Name of the output raster file.
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_raster_calculator <- function(output, statement="", wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--output=", output))
+  if (!is.null(statement)) {
+    args <- paste(args, paste0("--statement=", statement))
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "raster_calculator"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1231,32 +1950,50 @@ random_sample <- function(base, output, num_samples=1000, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output HTML file (default name will be based on input file if unspecified).
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-raster_histogram <- function(input, output, verbose_mode=FALSE) {
+wbt_raster_histogram <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "raster_histogram"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
 
 #' Raster summary stats
 #'
-#' Measures a rasters average, standard deviation, num. non-nodata cells, and total.
+#' Measures a rasters min, max, average, standard deviation, num. non-nodata cells, and total.
 #'
 #' @param input Input raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-raster_summary_stats <- function(input, verbose_mode=FALSE) {
+wbt_raster_summary_stats <- function(input, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "raster_summary_stats"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1267,19 +2004,24 @@ raster_summary_stats <- function(input, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' reciprocal(input = dem, output = 'output.tif')
-reciprocal <- function(input, output, verbose_mode=FALSE) {
+wbt_reciprocal <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "reciprocal"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1294,11 +2036,14 @@ reciprocal <- function(input, output, verbose_mode=FALSE) {
 #' @param out_max_val New maximum value in output image.
 #' @param clip_min Optional lower tail clip value.
 #' @param clip_max Optional upper tail clip value.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-rescale_value_range <- function(input, output, out_min_val, out_max_val, clip_min=NULL, clip_max=NULL, verbose_mode=FALSE) {
+wbt_rescale_value_range <- function(input, output, out_min_val, out_max_val, clip_min=NULL, clip_max=NULL, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
@@ -1310,7 +2055,13 @@ rescale_value_range <- function(input, output, out_min_val, out_max_val, clip_mi
   if (!is.null(clip_max)) {
     args <- paste(args, paste0("--clip_max=", clip_max))
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "rescale_value_range"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1321,15 +2072,24 @@ rescale_value_range <- function(input, output, out_min_val, out_max_val, clip_mi
 #'
 #' @param input Input raster file.
 #' @param base Input base raster file used for comparison.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-root_mean_square_error <- function(input, base, verbose_mode=FALSE) {
+wbt_root_mean_square_error <- function(input, base, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--base=", base))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "root_mean_square_error"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1340,19 +2100,24 @@ root_mean_square_error <- function(input, base, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' round(input = dem, output = 'output.tif')
-round <- function(input, output, verbose_mode=FALSE) {
+wbt_round <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "round"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1363,19 +2128,24 @@ round <- function(input, output, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' sin(input = dem, output = 'output.tif')
-sin <- function(input, output, verbose_mode=FALSE) {
+wbt_sin <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "sin"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1386,19 +2156,24 @@ sin <- function(input, output, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' sinh(input = dem, output = 'output.tif')
-sinh <- function(input, output, verbose_mode=FALSE) {
+wbt_sinh <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "sinh"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1409,19 +2184,24 @@ sinh <- function(input, output, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' square(input = dem, output = 'output.tif')
-square <- function(input, output, verbose_mode=FALSE) {
+wbt_square <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "square"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1432,19 +2212,24 @@ square <- function(input, output, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' square_root(input = dem, output = 'output.tif')
-square_root <- function(input, output, verbose_mode=FALSE) {
+wbt_square_root <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "square_root"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1456,16 +2241,25 @@ square_root <- function(input, output, verbose_mode=FALSE) {
 #' @param input1 Input raster file or constant value.
 #' @param input2 Input raster file or constant value.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-subtract <- function(input1, input2, output, verbose_mode=FALSE) {
+wbt_subtract <- function(input1, input2, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input1=", input1))
   args <- paste(args, paste0("--input2=", input2))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "subtract"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1476,19 +2270,24 @@ subtract <- function(input1, input2, output, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' tan(input = dem, output = 'output.tif')
-tan <- function(input, output, verbose_mode=FALSE) {
+wbt_tan <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "tan"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1499,19 +2298,24 @@ tan <- function(input, output, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' tanh(input = dem, output = 'output.tif')
-tanh <- function(input, output, verbose_mode=FALSE) {
+wbt_tanh <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "tanh"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1522,19 +2326,24 @@ tanh <- function(input, output, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' to_degrees(input = dem, output = 'output.tif')
-to_degrees <- function(input, output, verbose_mode=FALSE) {
+wbt_to_degrees <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "to_degrees"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1545,19 +2354,24 @@ to_degrees <- function(input, output, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' to_radians(input = dem, output = 'output.tif')
-to_radians <- function(input, output, verbose_mode=FALSE) {
+wbt_to_radians <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "to_radians"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1569,18 +2383,27 @@ to_radians <- function(input, output, verbose_mode=FALSE) {
 #' @param input Input raster file.
 #' @param output Output raster file.
 #' @param order Polynomial order (1 to 10).
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-trend_surface <- function(input, output, order=1, verbose_mode=FALSE) {
+wbt_trend_surface <- function(input, output, order=1, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
   if (!is.null(order)) {
     args <- paste(args, paste0("--order=", order))
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "trend_surface"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1594,11 +2417,14 @@ trend_surface <- function(input, output, order=1, verbose_mode=FALSE) {
 #' @param output Output raster file.
 #' @param order Polynomial order (1 to 10).
 #' @param cell_size Optionally specified cell size of output raster. Not used when base raster is specified.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-trend_surface_vector_points <- function(input, field, output, cell_size, order=1, verbose_mode=FALSE) {
+wbt_trend_surface_vector_points <- function(input, field, output, cell_size, order=1, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--field=", field))
@@ -1607,7 +2433,13 @@ trend_surface_vector_points <- function(input, field, output, cell_size, order=1
   if (!is.null(order)) {
     args <- paste(args, paste0("--order=", order))
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "trend_surface_vector_points"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1619,18 +2451,27 @@ trend_surface_vector_points <- function(input, field, output, cell_size, order=1
 #' @param input Input raster file.
 #' @param output Output raster file.
 #' @param num_decimals Number of decimals left after truncation (default is zero).
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-truncate <- function(input, output, num_decimals=NULL, verbose_mode=FALSE) {
+wbt_truncate <- function(input, output, num_decimals=NULL, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
   if (!is.null(num_decimals)) {
     args <- paste(args, paste0("--num_decimals=", num_decimals))
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "truncate"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1643,11 +2484,14 @@ truncate <- function(input, output, num_decimals=NULL, verbose_mode=FALSE) {
 #' @param output Output file.
 #' @param range The field's range, in xy-units, related to the extent of spatial autocorrelation.
 #' @param iterations The number of iterations.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-turning_bands_simulation <- function(base, output, range, iterations=1000, verbose_mode=FALSE) {
+wbt_turning_bands_simulation <- function(base, output, range, iterations=1000, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--base=", base))
   args <- paste(args, paste0("--output=", output))
@@ -1655,7 +2499,81 @@ turning_bands_simulation <- function(base, output, range, iterations=1000, verbo
   if (!is.null(iterations)) {
     args <- paste(args, paste0("--iterations=", iterations))
   }
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "turning_bands_simulation"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Two sample ks test
+#'
+#' Performs a 2-sample K-S test for significant differences on two input rasters.
+#'
+#' @param input1 First input raster file.
+#' @param input2 Second input raster file.
+#' @param output Output HTML file.
+#' @param num_samples Number of samples. Leave blank to use whole image.
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_two_sample_ks_test <- function(input1, input2, output, num_samples=NULL, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--input1=", input1))
+  args <- paste(args, paste0("--input2=", input2))
+  args <- paste(args, paste0("--output=", output))
+  if (!is.null(num_samples)) {
+    args <- paste(args, paste0("--num_samples=", num_samples))
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "two_sample_ks_test"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Wilcoxon signed rank test
+#'
+#' Performs a 2-sample K-S test for significant differences on two input rasters.
+#'
+#' @param input1 First input raster file.
+#' @param input2 Second input raster file.
+#' @param output Output HTML file.
+#' @param num_samples Number of samples. Leave blank to use whole image.
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_wilcoxon_signed_rank_test <- function(input1, input2, output, num_samples=NULL, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--input1=", input1))
+  args <- paste(args, paste0("--input2=", input2))
+  args <- paste(args, paste0("--output=", output))
+  if (!is.null(num_samples)) {
+    args <- paste(args, paste0("--num_samples=", num_samples))
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "wilcoxon_signed_rank_test"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1667,16 +2585,25 @@ turning_bands_simulation <- function(base, output, range, iterations=1000, verbo
 #' @param input1 Input raster file.
 #' @param input2 Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-xor <- function(input1, input2, output, verbose_mode=FALSE) {
+wbt_xor <- function(input1, input2, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input1=", input1))
   args <- paste(args, paste0("--input2=", input2))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "xor"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
@@ -1687,19 +2614,64 @@ xor <- function(input1, input2, output, verbose_mode=FALSE) {
 #'
 #' @param input Input raster file.
 #' @param output Output raster file.
+#' @param wd Changes the working directory.
 #' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
 #'
 #' @return Returns the tool text outputs.
 #' @export
-#'
-#' @examples
-#' dem <- system.file("extdata", "DEM.tif", package="whitebox")
-#' z_scores(input = dem, output = 'output.tif')
-z_scores <- function(input, output, verbose_mode=FALSE) {
+wbt_z_scores <- function(input, output, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
   args <- ""
   args <- paste(args, paste0("--input=", input))
   args <- paste(args, paste0("--output=", output))
-  tool_name <- match.call()[[1]]
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "z_scores"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
+#' Zonal statistics
+#'
+#' Extracts descriptive statistics for a group of patches in a raster.
+#'
+#' @param input Input data raster file.
+#' @param features Input feature definition raster file.
+#' @param output Output raster file.
+#' @param stat Statistic to extract, including 'mean', 'median', 'minimum', 'maximum', 'range', 'standard deviation', and 'total'.
+#' @param out_table Output HTML Table file.
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_zonal_statistics <- function(input, features, output=NULL, stat="mean", out_table=NULL, wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--input=", input))
+  args <- paste(args, paste0("--features=", features))
+  if (!is.null(output)) {
+    args <- paste(args, paste0("--output=", output))
+  }
+  if (!is.null(stat)) {
+    args <- paste(args, paste0("--stat=", stat))
+  }
+  if (!is.null(out_table)) {
+    args <- paste(args, paste0("--out_table=", out_table))
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "zonal_statistics"
   wbt_run_tool(tool_name, args, verbose_mode)
 }
 
