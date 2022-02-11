@@ -33,7 +33,7 @@ head(wbttoolparameters)
 str(wbttoolparameters, max.level = 1)
 
 ## -----------------------------------------------------------------------------
-subset(wbttoolparameters, grepl("OptionList", parameter_class) & grepl("variant", argument_name))
+head(subset(wbttoolparameters, grepl("ExistingFile", parameter_class) & grepl("Raster", parameter_detail)))
 
 ## ---- echo=FALSE, results='asis'----------------------------------------------
 # hide this, we add the parentheses for the docs
@@ -48,6 +48,7 @@ if (requireNamespace("knitr")) {
     print(knitr::kable(
       wbttoolssplt[[nm]],
       caption = paste("Toolbox:", nm),
+      col.names = c("Function Name",  "Description"),
       row.names = FALSE
     ))
   })

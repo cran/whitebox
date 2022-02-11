@@ -50,15 +50,21 @@ data("wbttools", package = "whitebox")
 str(wbttools)
 ```
 
-The `wbttools` data set is a data.frame with `r nrow(wbttools)` tools and 4 variables
+The `wbttools` data set is a data.frame with `r nrow(wbttools)` tools and 7 variables
 
  - `"tool_name"` - WhiteboxTools tool name
+ 
+ - `"function_name"` - R function tool name
 
  - `"toolbox_name"` - WhiteboxTools toolbox name
 
+ - `"label"` - WhiteboxTools tool label
+
  - `"description"` - Brief description
 
- - `"function_name"` - R function name
+ - `"github"` - GitHub link
+ 
+ - `"book"` - Reference manual link
  
 ```{r}
 head(wbttools)
@@ -84,9 +90,11 @@ data("wbttoolparameters", package = "whitebox")
 
 The `wbttoolparameters` data set is a _data.frame_ with `r nrow(wbttoolparameters)` parameters and `r ncol(wbttoolparameters)` variables:
 
+ - `"tool_name"` - WhiteboxTools tool name
+ 
  - `"function_name"` - R function name
  
- - `"tool_name"` - WhiteboxTools tool name
+ - `"toolbox_name"` - WhiteboxTools toolbox name
  
  - `"name"` - WhiteboxTools tool parameter name
  
@@ -94,20 +102,19 @@ The `wbttoolparameters` data set is a _data.frame_ with `r nrow(wbttoolparameter
  
  - `"description"` - parameter description
  
- - `"parameter_class"` - parameter type
- 
- - `"parameter_detail"` - parameter details; character: data type followed by colon and more specifics, For OptionList possible values, comma-separated (if defined)
-
  - `"default_value"` - parameter default value, if any
  
  - `"optional"` - parameter "optional" flag; note that some combination of optional parameters may be required for certain conditions
  
- - `"argument_name"` - labels for selected subset of `"flags"` **used as R function argument names** for `wbt_` functions
+ - `"parameter_class"` - parameter type
+ 
+ - `"parameter_detail"` - parameter details; character: data type followed by colon and more specifics, For OptionList possible values, comma-separated (if defined)
 
  - `"is_input"` - logical. Classification of 'input' parameters
  
  - `"is_output"` - logical. Classification of 'output' parameters
  
+ - `"argument_name"` - labels for selected subset of `"flags"` **used as R function argument names** for `wbt_` functions
 
 ```{r}
 head(wbttoolparameters)
@@ -129,17 +136,18 @@ The variable `argument_name` is processed to be the subset of `flags` that corre
 
 ### Example: Finding Tools by Parameter Type
 
-To find the tools that have an "OptionList" argument with parameter label "variant" (flag: `--variant=`) we can use `subset()`
+To find the tools that have an "ExistingFile" argument with file type "Raster" we can use `subset()`.
 
 ```{r}
-subset(wbttoolparameters, grepl("OptionList", parameter_class) & grepl("variant", argument_name))
+head(subset(wbttoolparameters, grepl("ExistingFile", parameter_class) & grepl("Raster", parameter_detail)))
 ```
 
-Check out the code that builds the data in `/data-raw/` on [GitHub](https://github.com/giswqs/whiteboxR/tree/master/data-raw) to see how these objects can be generated for any version of WhiteboxTools that supports JSON output for parameter metadata.
+<!-- Check out the code that builds the data in `/data-raw/` on [GitHub](https://github.com/giswqs/whiteboxR/tree/master/data-raw) to see how these objects can be generated for any version of WhiteboxTools that supports JSON output for parameter metadata. -->
+<!-- Check out the code that builds the data in `/data-raw/` on [GitHub](https://github.com/giswqs/whiteboxR/tree/master/data-raw) to see how these objects can be generated for any version of WhiteboxTools that supports JSON output for parameter metadata. -->
 
 ## Appendix: Tables of Function Names by Toolbox
 
-The remainder of this vignette are tables of R function names and tool descriptions from `wbttoolparameters`, organized by WhiteboxTools toolbox name.
+The remainder of this vignette is tables of R function names and tool descriptions from `wbttoolparameters`, organized by WhiteboxTools toolbox/extension name.
 
 ```{r, echo=FALSE, results='asis'}
 # hide this, we add the parentheses for the docs
@@ -154,6 +162,7 @@ if (requireNamespace("knitr")) {
     print(knitr::kable(
       wbttoolssplt[[nm]],
       caption = paste("Toolbox:", nm),
+      col.names = c("Function Name",  "Description"),
       row.names = FALSE
     ))
   })

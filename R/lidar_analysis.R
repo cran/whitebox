@@ -1694,6 +1694,46 @@ wbt_lidar_segmentation_based_filter <- function(input, output, radius=5.0, norm_
 }
 
 
+#' Lidar shift
+#'
+#' Shifts the x,y,z coordinates of a LiDAR file.
+#'
+#' @param input Name of the input LiDAR points.
+#' @param output Name of the output LiDAR points.
+#' @param x_shift x-shift value, blank for none.
+#' @param y_shift y-shift value, blank for none.
+#' @param z_shift z-shift value, blank for none.
+#' @param wd Changes the working directory.
+#' @param verbose_mode Sets verbose mode. If verbose mode is False, tools will not print output messages.
+#' @param compress_rasters Sets the flag used by WhiteboxTools to determine whether to use compression for output rasters.
+#'
+#' @return Returns the tool text outputs.
+#' @export
+wbt_lidar_shift <- function(input, output, x_shift="", y_shift="", z_shift="", wd=NULL, verbose_mode=FALSE, compress_rasters=FALSE) {
+  wbt_init()
+  args <- ""
+  args <- paste(args, paste0("--input=", input))
+  args <- paste(args, paste0("--output=", output))
+  if (!is.null(x_shift)) {
+    args <- paste(args, paste0("--x_shift=", x_shift))
+  }
+  if (!is.null(y_shift)) {
+    args <- paste(args, paste0("--y_shift=", y_shift))
+  }
+  if (!is.null(z_shift)) {
+    args <- paste(args, paste0("--z_shift=", z_shift))
+  }
+  if (!is.null(wd)) {
+    args <- paste(args, paste0("--wd=", wd))
+  }
+  if (compress_rasters) {
+    args <- paste(args, "--compress_rasters")
+  }
+  tool_name <- "lidar_shift"
+  wbt_run_tool(tool_name, args, verbose_mode)
+}
+
+
 #' Lidar sibson interpolation
 #'
 #' This tool interpolates one or more LiDAR tiles using Sibson's natural neighbour method.
