@@ -10,8 +10,7 @@ knitr::opts_chunk$set(
 knitr::opts_chunk$set(echo = TRUE)
 library(whitebox)
 
-# sample code to check and install whitebox to a custom path
-
+# # sample code to check and install whitebox to a custom path
 # if (!whitebox::check_whitebox_binary()) {
 #   wd <- tempdir()
 #   whitebox::install_whitebox(wd)
@@ -36,7 +35,7 @@ library(whitebox)
 # Typically the input/output paths are stored as variables
 
 # sample DEM input GeoTIFF
-input <- system.file("extdata", "DEM.tif", package = "whitebox")
+input <- sample_dem_data()
 
 # output file (to be created)
 output <- file.path(tempdir(), "slope.tif")
@@ -90,7 +89,7 @@ wbt_verbose(TRUE)
 
 ## -----------------------------------------------------------------------------
 # sample DEM file path in package extdata folder
-input <- system.file("extdata", "DEM.tif", package="whitebox")
+input <- sample_dem_data()
 
 # output file name
 output <- file.path(tempdir(), "output.tif")
@@ -100,7 +99,7 @@ wbt_breach_depressions(dem = input, output = output)
 
 ## -----------------------------------------------------------------------------
 # sample DEM file path in package extdata folder
-input <- system.file("extdata", "DEM.tif", package="whitebox")
+input <- sample_dem_data()
 
 # output file name
 output <- file.path(tempdir(), "output.tif")
@@ -112,7 +111,7 @@ wbt_run_tool(tool_name = "BreachDepressions", args = paste0("--dem=", input, " -
 library(raster)
 
 # sample DEM file path in package extdata folder
-input <- system.file("extdata", "DEM.tif", package="whitebox")
+input <- sample_dem_data()
 
 # output file name
 output <- file.path(tempdir(), "output.tif")
@@ -144,8 +143,8 @@ if (file.exists(output)) {
 library(whitebox)
 library(raster)
 
-## Import toy_dem from whitebox package
-toy_file <- system.file("extdata", "DEM.tif", package = "whitebox")
+## Sample DEM from whitebox package
+toy_file <- sample_dem_data()
 toy_dem <- raster(x = toy_file, values = TRUE)
 crs(toy_dem) <- "EPSG:26918"
 

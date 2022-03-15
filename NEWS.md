@@ -1,3 +1,19 @@
+# whitebox 2.1.1
+
+ * File path arguments to tools now automatically perform path expansion (converting `~` to your home directory with `path.expand()`). This also works on arguments that contain comma or semicolon delimited lists. (https://github.com/giswqs/whiteboxR/issues/62)
+ 
+ * Corrections to `wbttoolparameters` dataset (updated classification of input/output parameters) 
+ 
+ * Fix for `wbt_lidar_tin_gridding()` `exclude_cls` argument
+ 
+ * Add `wbt_compress_rasters()` to set package option `whitebox.compress_rasters`
+ 
+   * Updated how `--compress_rasters` parameter is passed via command line. Now the flag is added to all commands regardless of whether the value is `TRUE` or `FALSE`. This allows update of settings.json accordingly when `--compress_rasters=FALSE`. RE: https://github.com/jblindsay/whitebox-tools/issues/233#issuecomment-1065955783
+   
+ * Add `wbt_max_procs()` to set package option `whitebox.max_procs`
+ 
+ * All `wbt_*()` tool functions now take a `command_only` argument that is passed to `wbt_run_tool()`. When `TRUE`, the function returns the command that would be run by `system()` instead of running the tool.
+
 # whitebox 2.1.0
 
  * Update for WhiteboxTools v2.1.0  
