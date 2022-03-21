@@ -1,7 +1,7 @@
-c565afa8a2f54532fd64d607cb00752c *DESCRIPTION
+e3dddf4a98692020475fa9746c1cb43d *DESCRIPTION
 6c28a08db6622b0a83856aa5fc16bdc9 *LICENSE
 0563c1b415ba9ba00cef178d5fa3f1f5 *NAMESPACE
-515ae9b4adb97eb2ab6b2d8b917068e7 *NEWS.md
+0eef51e5ec2eecb7fe00b1640c1e5c3c *NEWS.md
 afd59acca98e6e8f730ba67145cc6a20 *R/data_tools.R
 97fe4f1ac38e7de27d5b34783805b0f5 *R/gis_analysis.R
 18fd613e180f60320e00354c8a34b911 *R/hydro_analysis.R
@@ -12,7 +12,7 @@ dba36340f71f2b16af1cee72e0f23b6c *R/machine_learning.R
 3d63a8b441eec6e4ffe0256846e3209b *R/precision_agriculture.R
 ee7d3bcc5af16ea1fcd8c9d9b863ffc3 *R/stream_network_analysis.R
 8e94896707fc8f3f93e81938e3e44c55 *R/terrain_analysis.R
-987c2eba53acdfa6d185e13be05219c3 *R/wbt.R
+5fa7ca6ac087d7426d6956ab1627a936 *R/wbt.R
 0113271d0dd206412637e3308b39fdd5 *R/whitebox-package.R
 aaae3ff93f3af1686346038e7098838a *R/zzz.R
 5e3df5faed094d03cbbcee316d3d9987 *README.md
@@ -24,9 +24,9 @@ c5771a3145ed13b1e3080e1791ac895e *inst/WORDLIST
 17bfffe413453f251787c818af3ad9cb *inst/doc/datasets.R
 230f0241699d70c55d5805696045ae68 *inst/doc/datasets.Rmd
 370a9331ba3dc958c646317ecc5d3a86 *inst/doc/datasets.html
-3e861b611372582970610c07cd9abc74 *inst/doc/demo.R
-0d2499db2f45e6d9bedb6b14291d6061 *inst/doc/demo.Rmd
-443e08375502f090f3e3277ecc7e47eb *inst/doc/demo.html
+4b85cbe1c2200072f2af85f640e30836 *inst/doc/demo.R
+a386ce45c573b760d671edf943e62639 *inst/doc/demo.Rmd
+8e667f98ed3c35e9f162866dac3bca6e *inst/doc/demo.html
 eae912b99ab78990ad06fd83b9e26839 *inst/extdata/DEM.dep
 bffde3c9fe5578a11e459a0c093e763d *man/check_whitebox_binary.Rd
 e1d83fbeb4d9d0fc38fb55dcd8fbedc0 *man/figures/README-unnamed-chunk-5-1.png
@@ -235,7 +235,7 @@ ea420361a352b7e5f2a237bc8a4e535a *man/wbt_in_place_divide.Rd
 8c2606b6b79d4a8297bcf70e74abb35e *man/wbt_in_place_multiply.Rd
 876ac4c530ba32af9baf9a6bbee0d06e *man/wbt_in_place_subtract.Rd
 c38c49d82995d83dd233787107152ffb *man/wbt_increment.Rd
-c9505fc656a1e4b2ee5bc64d94964ebc *man/wbt_init.Rd
+5e04a7c4f0f1f1c20333fc7d9fc60f3f *man/wbt_init.Rd
 8d67db5d478132ddb550f7a6a7c84792 *man/wbt_insert_dams.Rd
 fddf3934ca0ccfbf89da25ed0ce7e6eb *man/wbt_integer_division.Rd
 e4c1190271ca8499917c19f89ddaecb7 *man/wbt_integral_image.Rd
@@ -565,7 +565,7 @@ e445399278ff6343d3bdc9cfbc306842 *man/wbttoolparameters.Rd
 ffafac22f5de104ce89cef60fc0ad903 *man/wbttools.Rd
 86cc8b221b82287112c25d6cdefe9c72 *man/whitebox-package.Rd
 79698842b8dc0e752c05ca4b6bcffeb4 *tests/testthat.R
-61af7f8a373068dbafad1aa80b042363 *tests/testthat/test-wbt.R
+f32a07182d95545c2bce9815f85398b2 *tests/testthat/test-wbt.R
 378b091fe9d15347398f6dea039cf3e7 *tests/testthat/test-wbt_absolute_value.R
 196d3e3da84ac979d9e15a3b86dc430c *tests/testthat/test-wbt_arc_cos.R
 1e81ae5dc553ac96cf3875da7618cd77 *tests/testthat/test-wbt_arc_sin.R
@@ -602,4 +602,4 @@ df9e1149aabcfd903f5954635bcaef0b *tests/testthat/test-wbt_truncate.R
 4c09d74d2aba12f8aa9bad6b11af5b1d *tests/testthat/test-wbt_z_scores.R
 04de304ffc28ad8536fcb4400d0bd955 *tests/testthat/test-whitebox-package.R
 230f0241699d70c55d5805696045ae68 *vignettes/datasets.Rmd
-0d2499db2f45e6d9bedb6b14291d6061 *vignettes/demo.Rmd
+a386ce45c573b760d671edf943e62639 *vignettes/demo.Rmd

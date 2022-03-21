@@ -83,7 +83,7 @@ Returns the file path of WhiteboxTools executable.
 
 \code{wbt_compress_rasters()}: Check raster compression option for WhiteboxTools. Default: \code{FALSE}
 
-\code{wbt_max_procs()}: Check maximum number of processes for tools that run in parallel or partially parallelize. Default: \code{-1} uses all of the available cores.
+\code{wbt_max_procs()}: Check maximum number of processes for  for tools that run in parallel or partially parallelize. Default: \code{-1} uses all of the available cores.
 }
 \details{
 \code{wbt_exe_path()}: Checks system environment variable \code{R_WHITEBOX_EXE_PATH} and package option \code{whitebox.exe_path}. Set your desired path with either \code{Sys.setenv(R_WHITEBOX_EXE_PATH = "C:/path/to/whitebox_tools.exe")} or \code{options(whitebox.exe_path = "C:/path/to/whitebox_tools.exe")}. The default, backwards-compatible path is returned by \code{wbt_default_path()}

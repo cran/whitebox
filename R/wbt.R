@@ -363,7 +363,7 @@ wbt_compress_rasters <- function(compress_rasters = NULL) {
   invisible(res)
 }
 
-#' @description `wbt_max_procs()`: Check maximum number of processes for tools that run in parallel or partially parallelize. Default: `-1` uses all of the available cores.
+#' @description `wbt_max_procs()`: Check maximum number of processes for  for tools that run in parallel or partially parallelize. Default: `-1` uses all of the available cores.
 #' 
 #' @param max_procs Default: `NULL`; if integer, set the package option `whitebox.max_procs` to specified value
 #' 

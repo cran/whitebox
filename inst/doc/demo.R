@@ -1,15 +1,19 @@
 ## ---- include = FALSE---------------------------------------------------------
 knitr::opts_chunk$set(
+  eval = whitebox::check_whitebox_binary(),
+  echo = TRUE,
   collapse = TRUE,
   comment = "#>",
   fig.width = 6,
   fig.height = 6 
 )
 
-## ----setup, include=FALSE-----------------------------------------------------
-knitr::opts_chunk$set(echo = TRUE)
+## ---- include=FALSE, echo=FALSE, eval=TRUE------------------------------------
+# setup so inline stats on version/tools show up
 library(whitebox)
+data("wbttoolparameters", package="whitebox")
 
+## ----setup, include=FALSE-----------------------------------------------------
 # # sample code to check and install whitebox to a custom path
 # if (!whitebox::check_whitebox_binary()) {
 #   wd <- tempdir()
@@ -230,9 +234,6 @@ wbt_license()
 ## -----------------------------------------------------------------------------
 wbt_version()
 
-## ----include=FALSE------------------------------------------------------------
-data("wbttoolparameters", package="whitebox")
-
 ## ---- eval=FALSE--------------------------------------------------------------
 #  wbt_list_tools()
 
@@ -245,8 +246,8 @@ wbt_tool_help("tributaryidentifier")
 ## -----------------------------------------------------------------------------
 wbt_toolbox(tool_name = "aspect")
 
-## ---- eval=FALSE--------------------------------------------------------------
-#  wbt_toolbox()
+## -----------------------------------------------------------------------------
+wbt_toolbox()
 
 ## -----------------------------------------------------------------------------
 wbt_tool_parameters("slope")
