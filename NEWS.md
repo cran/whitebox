@@ -1,3 +1,32 @@
+# whitebox 2.1.4
+
+ * Suggest {terra} instead of {raster} and update demo vignette accordingly; drops {rgdal} suggest
+
+ * Add support for path expansion in `wd` arguments passed directly to tool functions; this was already supported for other methods of setting the working directory
+ 
+ * Updates to `wbttools` and `wbttoolparameters` datasets
+ 
+    * Fix for `argument_name='k'`
+    
+    * Remove several one and two character flag aliases from `argument_name` and replace with full name
+    
+ * Add support for showing warning messages in regular interactive/verbose mode, thanks to @alenahav for reporting an issue (https://github.com/giswqs/whiteboxR/issues/75) with `wbt_fd8_flow_accumulation()`
+ 
+ * Functions that take multiple files are auto-quoted by default; thanks to François-Nicolas Robinne for reporting issue (@FNRobinne; https://github.com/giswqs/whiteboxR/issues/55) with `wbt_mosaic()`
+ 
+ * Error output is now more verbose, ensuring relevant tool output is displayed to user on error regardless of verbosity, platform, etc. Thanks to Jeffrey W. Rozelle for reporting issue (@jwilliamrozelle; https://github.com/giswqs/whiteboxR/issues/80) with getting error messages about unsupported raster types
+ 
+
+# whitebox 2.1.3
+
+ * Generated `whitebox_tools` commands no longer include flags for default arguments that are stored in settings.json unless specified by the user.
+ 
+   * Updates to fix issues with permissions to write _settings.json_; thanks to Henrik (@hewag1975) for reporting problems on Shiny Server (https://github.com/giswqs/whiteboxR/issues/67)
+ 
+ * `wbt_install()` / `install_whitebox()` now removes the downloaded zip file on exit thanks to Christoph Stepper (@cstepper; https://github.com/giswqs/whiteboxR/issues/72)
+ 
+ * New default arguments for `wbt_list_tools()`, `wbt_time_in_daylight()`, `wbt_shadow_image()` thanks to Jens Wiesehahn (@wiesehahn; https://github.com/giswqs/whiteboxR/issues/70, https://github.com/giswqs/whiteboxR/issues/73)
+ 
 # whitebox 2.1.2
 
  * Fixes regression in checking "Demo" vignette on CRAN
