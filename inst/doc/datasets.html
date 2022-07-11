@@ -420,16 +420,14 @@ description.</p>
 <span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6                   https://www.whiteboxgeo.com/manual/wbt_book/available_tools/gis_analysis.html#AggregateRaster</span></span></code></pre></div>
 <p>The R function naming style differs from the tool names in
 WhiteboxTools, but the core words are the same.</p>
-<p>There are two steps to converting WhiteboxTools to R (if not using
-<code>wbttools</code>!)</p>
-<ol style="list-style-type: decimal">
-<li><p><code>CamelCase</code> tool names change to
-<code>snake_case</code> R function names</p></li>
-<li><p>All R function names have the prefix <code>wbt_</code> and add
-<code>()</code></p></li>
+<p>There are two steps to converting WhiteboxTools tool names to R
+function names 1. <code>CamelCase</code> tool names change to
+<code>snake_case</code></p>
+<ol start="2" style="list-style-type: decimal">
+<li>All R function names have the prefix <code>wbt_</code></li>
 </ol>
 <p>So, <code>StreamSlopeContinuous</code> becomes
-<code>wbt_stream_slope_continuous()</code> in R, for instance.</p>
+<code>wbt_stream_slope_continuous()</code> in R.</p>
 </div>
 <div id="whiteboxtools-tool-and-parameter-names" class="section level2">
 <h2>WhiteboxTools Tool and Parameter Names</h2>
