@@ -54,7 +54,7 @@ if (file.exists(output)) {
 }
 
 ## -----------------------------------------------------------------------------
-if (file.exists(output)) {
+if (file.exists(input) && file.exists(output) && !is.null(outputras)) {
   # par(mfrow = c(2, 1), mar = c(1, 1, 1, 1))
   
   # inspect the output graphically
@@ -66,7 +66,7 @@ if (file.exists(output)) {
   
   # calculate equivalent using raster::terrain() on input
   plot(
-    terra::terrain(set.crs(terra::rast(input), "EPSG:26918")),
+    terra::terrain(terra::rast(input)),
     main = "terra::terrain() [radians]",
     axes = FALSE
   )
@@ -148,7 +148,7 @@ library(terra)
 
 ## Sample DEM from whitebox package
 toy_file <- sample_dem_data()
-toy_dem <- set.crs(rast(x = toy_file), "EPSG:26918")
+toy_dem <- rast(x = toy_file)
 
 ## Generate wd as a temporary directory. 
 ## Replace with your own path, or "." for current directory
