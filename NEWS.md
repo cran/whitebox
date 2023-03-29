@@ -1,4 +1,24 @@
-# whitebox 2.1.5.9000 (development)
+# whitebox 2.3.0
+
+ * Updates for WhiteboxTools v2.3.0 (https://github.com/jblindsay/whitebox-tools/releases/tag/v2.3.0)
+ 
+ * Add `wbt()`, `wbt_source()`, and related methods; new functionality for calling tools by name with various R object types as input. 
+ 
+   * See the `wbt()` method vignette for details.
+ 
+# whitebox 2.2.1
+
+ * Adds `wbt_data_dir()` for managing where WhiteboxTools "WBT" directory is installed.
+ 
+  * The new default path is a preferred location generated with `tools::R_user_dir(package="whitebox")` on R 4.0+
+  
+ * If `"whitebox_tools"` is found on your PATH, you no longer need any custom setup of `whitebox.exe_path`. The path and options will be detected automatically via `Sys.which("whitebox_tools")`.
+ 
+  * Custom options set within the session or environment take precedence over PATH.
+
+# whitebox 2.2.0
+
+ * Updates for WhiteboxTools v2.2.0
 
  * `wbt_rust_backtrace()`, a helper method for debugging Rust-related failures of the command-line tool, is now exported
 

@@ -203,23 +203,17 @@ wbt_tributary_identifier(
 
 ## -----------------------------------------------------------------------------
 if (file.exists(file.path(wd, "toy_dem_streams.tif"))) {
-  # par(mfrow = c(2, 1), mar = c(3, 1, 2, 1))
+  par(mfrow = c(2, 1), mar = c(3, 1, 2, 1))
   
   plot(
     rast(file.path(wd, "toy_dem_streams.tif")),
     main = "Streams",
-    col = "black",
-    axes = FALSE,
-    horizontal = TRUE,
-    box = FALSE
+    col = "black"
   )
   
   plot(
     rast(file.path(wd, "toy_dem_tributaries.tif")),
-    main = "TributaryIdentifier",
-    axes = FALSE,
-    horizontal = TRUE,
-    box = FALSE
+    main = "TributaryIdentifier"
   )
 }
 
