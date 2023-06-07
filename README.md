@@ -6,14 +6,12 @@
 [![CRAN download
 count](https://cranlogs.r-pkg.org/badges/grand-total/whitebox)](https://cranlogs.r-pkg.org/badges/grand-total/whitebox)
 [![whitebox
-Manual](https://img.shields.io/badge/docs-HTML-informational)](https://giswqs.github.io/whiteboxR/reference/index.html)
+Manual](https://img.shields.io/badge/docs-HTML-informational)](https://whiteboxR.gishub.org/reference/index.html)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/MIT/)
-[![R-CMD-check](https://github.com/giswqs/whiteboxR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/giswqs/whiteboxR/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/giswqs/whiteboxR/branch/master/graph/badge.svg)](https://app.codecov.io/gh/giswqs/whiteboxR)
+[![R-CMD-check](https://github.com/opengeos/whiteboxR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/opengeos/whiteboxR/actions/workflows/R-CMD-check.yaml)
+[![codecov](https://codecov.io/gh/opengeos/whiteboxR/branch/master/graph/badge.svg)](https://app.codecov.io/gh/opengeos/whiteboxR)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/brownag/whitebox-r-binder/master?urlpath=rstudio)
-[![Twitter
-Follow](https://img.shields.io/twitter/follow/giswqs?style=social)](https://twitter.com/giswqs)
 [![Donate](https://img.shields.io/badge/Donate-Buy%20me%20a%20coffee-yellowgreen.svg)](https://www.buymeacoffee.com/giswqs)
 <!-- badges: end -->
 
@@ -24,13 +22,12 @@ analysis, which is an R frontend of a stand-alone executable
 command-line program called
 **[WhiteboxTools](https://github.com/jblindsay/whitebox-tools)**.
 
--   Authors: Dr. John Lindsay
+-   Authors: John Lindsay
     (<https://jblindsay.github.io/ghrg/index.html>)
 -   Contributors:
-    -   Dr. Qiusheng Wu (<https://wetlands.io> |
-        <https://blog.gishub.org>)
+    -   Qiusheng Wu (<https://wetlands.io>)
     -   Andrew G. Brown (<https://humus.rocks>)
--   GitHub repo: <https://github.com/giswqs/whiteboxR>
+-   GitHub repo: <https://github.com/opengeos/whiteboxR>
 -   CRAN link: <https://cran.r-project.org/package=whitebox>
 -   WhiteboxTools: <https://github.com/jblindsay/whitebox-tools>
 -   User Manual: <https://jblindsay.github.io/wbt_book/>
@@ -38,13 +35,20 @@ command-line program called
 
 **Contents**
 
-1.  [Description](#description)
-2.  [Installation](#installation)
-3.  [Usage](#usage)
-4.  [Available Tools](#available-tools)
-5.  [Contributing](#contributing)
-6.  [License](#license)
-7.  [Reporting Bugs](#reporting-bugs)
+- [whitebox](#whitebox)
+  - [Description](#description)
+  - [Installation](#installation)
+    - [1. CRAN](#1-cran)
+    - [2. GitHub](#2-github)
+    - [3. Docker](#3-docker)
+  - [Usage](#usage)
+  - [Documentation](#documentation)
+  - [Installing ‘WhiteboxTools’](#installing-whiteboxtools)
+  - [whitebox](#whitebox-1)
+  - [Available Tools](#available-tools)
+  - [Contributing](#contributing)
+  - [License](#license)
+  - [Reporting Bugs](#reporting-bugs)
 
 ## Description
 
@@ -90,10 +94,20 @@ it with:
 ### 2. GitHub
 
 You can alternatively install the development version of **whitebox**
-from [GitHub](https://github.com/giswqs/whiteboxR) as follows:
+from [GitHub](https://github.com/opengeos/whiteboxR) as follows:
 
     if (!require("remotes")) install.packages('remotes')
-    remotes::install_github("giswqs/whiteboxR", build = FALSE)
+    remotes::install_github("opengeos/whiteboxR", build = FALSE)
+
+### 3. Docker
+
+whiteboxR is also available on [Docker Hub](https://hub.docker.com/r/giswqs/whiteboxr). Run the following command to start a Docker container with whiteboxR installed.
+
+```bash
+docker run -d -p 8787:8787 -e PASSWORD=mypassword -v ~/Documents:/home/rstudio/ giswqs/whiteboxr
+```
+
+Then open your web browser and navigate to `http://localhost:8787`. The default username is `rstudio` and the default password is `mypassword`.
 
 ## Usage
 
@@ -129,20 +143,22 @@ For list of functions, try the `wbt_` prefix in your search:
     ??wbt_
 
 A complete list of functions available in the **whitebox** R package can
-be found
-[HERE](https://giswqs.github.io/whiteboxR/reference/index.html).
+be found [HERE](https://whiteboxR.gishub.org/reference/index.html).
 
-Check out this
-[demo](https://giswqs.github.io/whiteboxR/articles/demo.html) for
-examples.
+Check out this [demo](https://whiteboxR.gishub.org/articles/demo.html)
+for examples.
 
 ## Installing ‘WhiteboxTools’
 
 The quickest way to get started if you are on 64-bit Windows, Linux or
 MacOS architectures is to download and install the ‘WhiteboxTools’
-binary. A method `install_whitebox()` is provided to download a version
-of the binaries that corresponds to the wrapper functions available in
-the package.
+binary. Linux binaries compiled with ‘musl’ instead of ‘glibc’ on Ubuntu
+22.04 are available with `platform="linux_musl"`. On MacOS, Intel and
+Apple ‘M’ series processors (‘arm64’) are supported.
+
+A method `install_whitebox()` is provided to download a version of the
+binaries that corresponds to the wrapper functions available in the
+package.
 
     whitebox::install_whitebox()
 
@@ -199,12 +215,12 @@ size of the filter kernel.
     ## 3. DInfFlowAccumulation
     wbt_d_inf_flow_accumulation(input = dem, output = "./flow_accum.tif")
 
-    if (requireNamespace('raster')) {
-      raster::plot(raster::raster("./flow_accum.tif"))
+    if (requireNamespace('terra')) {
+      terra::plot(terra::rast("./flow_accum.tif"))
     }
-    #> Loading required namespace: raster
+    #> Loading required namespace: terra
 
-<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
+<img src="man/figures/README-terra-plot-facc-1.jpeg" width="100%" />
 
 **About ‘WhiteboxTools’**
 
@@ -269,7 +285,7 @@ size of the filter kernel.
 
     # Lists tools with 'lidar' in tool name or description.
     wbt_list_tools("lidar")
-    #> All 50 Tools containing keywords:
+    #> All 63 Tools containing keywords:
     #> AsciiToLas: Converts one or more ASCII files containing LiDAR points into LAS files.
     #> ClassifyBuildingsInLidar: Reclassifies a LiDAR points that lie within vector building footprints.
     #> ClassifyOverlapPoints: Classifies or filters LAS points in regions of overlapping flight lines.
@@ -318,8 +334,21 @@ size of the filter kernel.
     #> SelectTilesByPolygon: Copies LiDAR tiles overlapping with a polygon into an output directory.
     #> ZlidarToLas: Converts one or more zlidar files into the LAS data format.
     #> NormalizeLidar: Normalizes a LiDAR point cloud.
-    #> IndividualTreeDetection: Identifies points in a LiDAR point cloud that are associated with the tops of individual trees.
     #> LidarShift: Shifts the x,y,z coordinates of a LiDAR file.
+    #> SmoothVegetationResidual: This tool can smooth the residual roughness due to vegetation cover in LiDAR DEMs.
+    #> LidarPointReturnAnalysis: This tool performs a quality control check on the return values of points in a LiDAR file.
+    #> FilterLidar: Filters points within a LiDAR point cloud based on point properties.
+    #> ColourizeBasedOnClass: Sets the RGB values of a LiDAR point cloud based on the point classification values.
+    #> SortLidar: Sorts LiDAR points based on their properties.
+    #> ColourizeBasedOnPointReturns: Sets the RGB values of a LiDAR point cloud based on the point returns.
+    #> LidarSibsonInterpolation: This tool interpolates one or more LiDAR tiles using Sibson's natural neighbour method.
+    #> ClassifyLidar: Classify points within a LiDAR point cloud based on point properties.
+    #> ModifyLidar: Modify points within a LiDAR point cloud based on point properties.
+    #> IndividualTreeDetection: Identifies points in a LiDAR point cloud that are associated with the tops of individual trees.
+    #> LidarEigenvalueFeatures: Calculate eigenvalue-based metrics from a LiDAR point cloud.
+    #> SplitLidar: Splits LiDAR points up into a series of new files based on their properties.
+    #> LidarContour: This tool creates a vector contour coverage from an input LiDAR point file.
+    #> RecoverFlightlineInfo: Associates LiDAR points by their flightlines.
 
     # Prints the help for a specific tool.
     wbt_tool_help("lidar_info")
@@ -372,7 +401,7 @@ If you would like to contribute to the project as a developer, follow
 these instructions to get started:
 
 1.  Fork the whiteboxR repository
-    (<https://github.com/giswqs/whiteboxR>)
+    (<https://github.com/opengeos/whiteboxR>)
 2.  Create your feature branch (git checkout -b my-new-feature)
 3.  Commit your changes (git commit -am ‘Add some feature’)
 4.  Push to the branch (git push origin my-new-feature)
@@ -395,6 +424,6 @@ whitebox is distributed as is and without warranty of suitability for
 application. If you encounter flaws with the software (i.e. bugs) please
 report the issue. Providing a detailed description of the conditions
 under which the bug occurred will help to identify the bug. *Use the
-[Issues tracker](https://github.com/giswqs/whiteboxR/issues) on GitHub
+[Issues tracker](https://github.com/opengeos/whiteboxR/issues) on GitHub
 to report issues with the software and to request feature
 enchancements.* Please do not email Dr. Lindsay directly with bugs.

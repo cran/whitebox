@@ -363,19 +363,19 @@ be usable.</p>
 <p>The first data set describes tool names in WhiteboxTools and the
 corresponding exported function in the R package, along with the
 WhiteboxTools Toolbox name and a brief description.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;wbttools&quot;</span>, <span class="at">package =</span> <span class="st">&quot;whitebox&quot;</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(wbttools)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;data.frame&#39;:    545 obs. of  8 variables:</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ tool_name    : chr  &quot;AbsoluteValue&quot; &quot;AccumulationCurvature&quot; &quot;AdaptiveFilter&quot; &quot;Add&quot; ...</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ function_name: chr  &quot;wbt_absolute_value&quot; &quot;wbt_accumulation_curvature&quot; &quot;wbt_adaptive_filter&quot; &quot;wbt_add&quot; ...</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ toolbox_name : chr  &quot;Math and Stats Tools&quot; &quot;Geomorphometric Analysis&quot; &quot;Image Processing Tools&quot; &quot;Math and Stats Tools&quot; ...</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ label        : chr  &quot;Absolute Value&quot; &quot;Accumulation Curvature&quot; &quot;Adaptive Filter&quot; &quot;Add&quot; ...</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ description  : chr  &quot;Calculates the absolute value of every cell in a raster.&quot; &quot;This tool calculates accumulation curvature from an input DEM.&quot; &quot;Performs an adaptive filter on an image.&quot; &quot;Performs an addition operation on two rasters or a raster and a constant value.&quot; ...</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ github       : chr  &quot;https://github.com/jblindsay/whitebox-tools/blob/master/whitebox-tools-app/src/tools/math_stat_analysis/abs.rs&quot; &quot;Source code is unavailable due to proprietary license.&quot; &quot;https://github.com/jblindsay/whitebox-tools/blob/master/whitebox-tools-app/src/tools/image_analysis/adaptive_filter.rs&quot; &quot;https://github.com/jblindsay/whitebox-tools/blob/master/whitebox-tools-app/src/tools/math_stat_analysis/add.rs&quot; ...</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ book         : chr  &quot;https://www.whiteboxgeo.com/manual/wbt_book/available_tools/mathand_stats_tools.html#AbsoluteValue&quot; &quot;https://www.whiteboxgeo.com/manual/wbt_book/available_tools/geomorphometric_analysis.html#AccumulationCurvature&quot; &quot;https://www.whiteboxgeo.com/manual/wbt_book/available_tools/image_processing_tools.html#AdaptiveFilter&quot; &quot;https://www.whiteboxgeo.com/manual/wbt_book/available_tools/mathand_stats_tools.html#Add&quot; ...</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ is_extension : logi  FALSE TRUE FALSE FALSE FALSE FALSE ...</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  - attr(*, &quot;version&quot;)= chr &quot;2.3.0&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;wbttools&quot;</span>, <span class="at">package =</span> <span class="st">&quot;whitebox&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">str</span>(wbttools)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co">#&gt; &#39;data.frame&#39;:    545 obs. of  8 variables:</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co">#&gt;  $ tool_name    : chr  &quot;AbsoluteValue&quot; &quot;AccumulationCurvature&quot; &quot;AdaptiveFilter&quot; &quot;Add&quot; ...</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="co">#&gt;  $ function_name: chr  &quot;wbt_absolute_value&quot; &quot;wbt_accumulation_curvature&quot; &quot;wbt_adaptive_filter&quot; &quot;wbt_add&quot; ...</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="co">#&gt;  $ toolbox_name : chr  &quot;Math and Stats Tools&quot; &quot;Geomorphometric Analysis&quot; &quot;Image Processing Tools&quot; &quot;Math and Stats Tools&quot; ...</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="co">#&gt;  $ label        : chr  &quot;Absolute Value&quot; &quot;Accumulation Curvature&quot; &quot;Adaptive Filter&quot; &quot;Add&quot; ...</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="co">#&gt;  $ description  : chr  &quot;Calculates the absolute value of every cell in a raster.&quot; &quot;This tool calculates accumulation curvature from an input DEM.&quot; &quot;Performs an adaptive filter on an image.&quot; &quot;Performs an addition operation on two rasters or a raster and a constant value.&quot; ...</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="co">#&gt;  $ github       : chr  &quot;https://github.com/jblindsay/whitebox-tools/blob/master/whitebox-tools-app/src/tools/math_stat_analysis/abs.rs&quot; &quot;Source code is unavailable due to proprietary license.&quot; &quot;https://github.com/jblindsay/whitebox-tools/blob/master/whitebox-tools-app/src/tools/image_analysis/adaptive_filter.rs&quot; &quot;https://github.com/jblindsay/whitebox-tools/blob/master/whitebox-tools-app/src/tools/math_stat_analysis/add.rs&quot; ...</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="co">#&gt;  $ book         : chr  &quot;https://www.whiteboxgeo.com/manual/wbt_book/available_tools/mathand_stats_tools.html#AbsoluteValue&quot; &quot;https://www.whiteboxgeo.com/manual/wbt_book/available_tools/geomorphometric_analysis.html#AccumulationCurvature&quot; &quot;https://www.whiteboxgeo.com/manual/wbt_book/available_tools/image_processing_tools.html#AdaptiveFilter&quot; &quot;https://www.whiteboxgeo.com/manual/wbt_book/available_tools/mathand_stats_tools.html#Add&quot; ...</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="co">#&gt;  $ is_extension : logi  FALSE TRUE FALSE FALSE FALSE FALSE ...</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="co">#&gt;  - attr(*, &quot;version&quot;)= chr &quot;2.3.0&quot;</span></span></code></pre></div>
 <p>The <code>wbttools</code> data set is a data.frame with 545 tools and
 7 variables</p>
 <ul>
@@ -389,49 +389,49 @@ WhiteboxTools Toolbox name and a brief description.</p>
 <li><p><code>&quot;is_extension&quot;</code> - Tool is part of General Toolset
 Extension (GTE), as opposed to the “open core”</p></li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(wbttools)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    tool_name                      function_name</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1              AbsoluteValue                 wbt_absolute_value</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2      AccumulationCurvature         wbt_accumulation_curvature</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3             AdaptiveFilter                wbt_adaptive_filter</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4                        Add                            wbt_add</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 AddPointCoordinatesToTable wbt_add_point_coordinates_to_table</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6            AggregateRaster               wbt_aggregate_raster</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               toolbox_name                          label</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1     Math and Stats Tools                 Absolute Value</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 Geomorphometric Analysis         Accumulation Curvature</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3   Image Processing Tools                Adaptive Filter</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4     Math and Stats Tools                            Add</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5               Data Tools Add Point Coordinates To Table</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6             GIS Analysis               Aggregate Raster</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                                                                                    description</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1                                                     Calculates the absolute value of every cell in a raster.</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2                                               This tool calculates accumulation curvature from an input DEM.</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3                                                                     Performs an adaptive filter on an image.</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4                              Performs an addition operation on two rasters or a raster and a constant value.</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 Modifies the attribute table of a point vector by adding fields containing each point&#39;s X and Y coordinates.</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6                                                                   Aggregates a raster to a lower resolution.</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                                                                                                              github</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1                    https://github.com/jblindsay/whitebox-tools/blob/master/whitebox-tools-app/src/tools/math_stat_analysis/abs.rs</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2                                                                            Source code is unavailable due to proprietary license.</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3            https://github.com/jblindsay/whitebox-tools/blob/master/whitebox-tools-app/src/tools/image_analysis/adaptive_filter.rs</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4                    https://github.com/jblindsay/whitebox-tools/blob/master/whitebox-tools-app/src/tools/math_stat_analysis/add.rs</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 https://github.com/jblindsay/whitebox-tools/blob/master/whitebox-tools-app/src/tools/data_tools/add_point_coordinates_to_table.rs</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6             https://github.com/jblindsay/whitebox-tools/blob/master/whitebox-tools-app/src/tools/gis_analysis/aggregate_raster.rs</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                                                                                              book</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1              https://www.whiteboxgeo.com/manual/wbt_book/available_tools/mathand_stats_tools.html#AbsoluteValue</span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 https://www.whiteboxgeo.com/manual/wbt_book/available_tools/geomorphometric_analysis.html#AccumulationCurvature</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3          https://www.whiteboxgeo.com/manual/wbt_book/available_tools/image_processing_tools.html#AdaptiveFilter</span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4                        https://www.whiteboxgeo.com/manual/wbt_book/available_tools/mathand_stats_tools.html#Add</span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5          https://www.whiteboxgeo.com/manual/wbt_book/available_tools/data_tools.html#AddPointCoordinatesToTable</span></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6                   https://www.whiteboxgeo.com/manual/wbt_book/available_tools/gis_analysis.html#AggregateRaster</span></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   is_extension</span></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1        FALSE</span></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2         TRUE</span></span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3        FALSE</span></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4        FALSE</span></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5        FALSE</span></span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6        FALSE</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">head</span>(wbttools)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co">#&gt;                    tool_name                      function_name</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#&gt; 1              AbsoluteValue                 wbt_absolute_value</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt; 2      AccumulationCurvature         wbt_accumulation_curvature</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt; 3             AdaptiveFilter                wbt_adaptive_filter</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt; 4                        Add                            wbt_add</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; 5 AddPointCoordinatesToTable wbt_add_point_coordinates_to_table</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt; 6            AggregateRaster               wbt_aggregate_raster</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt;               toolbox_name                          label</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt; 1     Math and Stats Tools                 Absolute Value</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co">#&gt; 2 Geomorphometric Analysis         Accumulation Curvature</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co">#&gt; 3   Image Processing Tools                Adaptive Filter</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co">#&gt; 4     Math and Stats Tools                            Add</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="co">#&gt; 5               Data Tools Add Point Coordinates To Table</span></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="co">#&gt; 6             GIS Analysis               Aggregate Raster</span></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="co">#&gt;                                                                                                    description</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="co">#&gt; 1                                                     Calculates the absolute value of every cell in a raster.</span></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="co">#&gt; 2                                               This tool calculates accumulation curvature from an input DEM.</span></span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="co">#&gt; 3                                                                     Performs an adaptive filter on an image.</span></span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="co">#&gt; 4                              Performs an addition operation on two rasters or a raster and a constant value.</span></span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a><span class="co">#&gt; 5 Modifies the attribute table of a point vector by adding fields containing each point&#39;s X and Y coordinates.</span></span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a><span class="co">#&gt; 6                                                                   Aggregates a raster to a lower resolution.</span></span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a><span class="co">#&gt;                                                                                                                              github</span></span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a><span class="co">#&gt; 1                    https://github.com/jblindsay/whitebox-tools/blob/master/whitebox-tools-app/src/tools/math_stat_analysis/abs.rs</span></span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a><span class="co">#&gt; 2                                                                            Source code is unavailable due to proprietary license.</span></span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a><span class="co">#&gt; 3            https://github.com/jblindsay/whitebox-tools/blob/master/whitebox-tools-app/src/tools/image_analysis/adaptive_filter.rs</span></span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a><span class="co">#&gt; 4                    https://github.com/jblindsay/whitebox-tools/blob/master/whitebox-tools-app/src/tools/math_stat_analysis/add.rs</span></span>
+<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a><span class="co">#&gt; 5 https://github.com/jblindsay/whitebox-tools/blob/master/whitebox-tools-app/src/tools/data_tools/add_point_coordinates_to_table.rs</span></span>
+<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a><span class="co">#&gt; 6             https://github.com/jblindsay/whitebox-tools/blob/master/whitebox-tools-app/src/tools/gis_analysis/aggregate_raster.rs</span></span>
+<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a><span class="co">#&gt;                                                                                                              book</span></span>
+<span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a><span class="co">#&gt; 1              https://www.whiteboxgeo.com/manual/wbt_book/available_tools/mathand_stats_tools.html#AbsoluteValue</span></span>
+<span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a><span class="co">#&gt; 2 https://www.whiteboxgeo.com/manual/wbt_book/available_tools/geomorphometric_analysis.html#AccumulationCurvature</span></span>
+<span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a><span class="co">#&gt; 3          https://www.whiteboxgeo.com/manual/wbt_book/available_tools/image_processing_tools.html#AdaptiveFilter</span></span>
+<span id="cb2-34"><a href="#cb2-34" tabindex="-1"></a><span class="co">#&gt; 4                        https://www.whiteboxgeo.com/manual/wbt_book/available_tools/mathand_stats_tools.html#Add</span></span>
+<span id="cb2-35"><a href="#cb2-35" tabindex="-1"></a><span class="co">#&gt; 5          https://www.whiteboxgeo.com/manual/wbt_book/available_tools/data_tools.html#AddPointCoordinatesToTable</span></span>
+<span id="cb2-36"><a href="#cb2-36" tabindex="-1"></a><span class="co">#&gt; 6                   https://www.whiteboxgeo.com/manual/wbt_book/available_tools/gis_analysis.html#AggregateRaster</span></span>
+<span id="cb2-37"><a href="#cb2-37" tabindex="-1"></a><span class="co">#&gt;   is_extension</span></span>
+<span id="cb2-38"><a href="#cb2-38" tabindex="-1"></a><span class="co">#&gt; 1        FALSE</span></span>
+<span id="cb2-39"><a href="#cb2-39" tabindex="-1"></a><span class="co">#&gt; 2         TRUE</span></span>
+<span id="cb2-40"><a href="#cb2-40" tabindex="-1"></a><span class="co">#&gt; 3        FALSE</span></span>
+<span id="cb2-41"><a href="#cb2-41" tabindex="-1"></a><span class="co">#&gt; 4        FALSE</span></span>
+<span id="cb2-42"><a href="#cb2-42" tabindex="-1"></a><span class="co">#&gt; 5        FALSE</span></span>
+<span id="cb2-43"><a href="#cb2-43" tabindex="-1"></a><span class="co">#&gt; 6        FALSE</span></span></code></pre></div>
 <p>The R function naming style differs from the tool names in
 WhiteboxTools, but the core words are the same.</p>
 <p>R function names are derived from the WhiteboxTools name as
@@ -448,7 +448,7 @@ becomes <code>wbt_stream_slope_continuous()</code> in R.</p>
 <h2>WhiteboxTools Tool and Parameter Names</h2>
 <p>The second data set provides details about the available function
 arguments by tool name.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;wbttoolparameters&quot;</span>, <span class="at">package =</span> <span class="st">&quot;whitebox&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;wbttoolparameters&quot;</span>, <span class="at">package =</span> <span class="st">&quot;whitebox&quot;</span>)</span></code></pre></div>
 <p>The <code>wbttoolparameters</code> data set is a <em>data.frame</em>
 with 2220 parameters and 13 variables:</p>
 <ul>
@@ -476,35 +476,35 @@ parameters</p></li>
 <code>&quot;flags&quot;</code> <strong>used as R function argument names</strong>
 for <code>wbt_</code> functions</p></li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(wbttoolparameters)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               tool_name              function_name             toolbox_name</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1         AbsoluteValue         wbt_absolute_value     Math and Stats Tools</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2         AbsoluteValue         wbt_absolute_value     Math and Stats Tools</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 AccumulationCurvature wbt_accumulation_curvature Geomorphometric Analysis</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 AccumulationCurvature wbt_accumulation_curvature Geomorphometric Analysis</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 AccumulationCurvature wbt_accumulation_curvature Geomorphometric Analysis</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 AccumulationCurvature wbt_accumulation_curvature Geomorphometric Analysis</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                        name       flags</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1                Input File  -i,--input</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2               Output File -o,--output</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3          Input Raster DEM    -i,--dem</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4       Output Raster Image -o,--output</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 Log-transform the output?       --log</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6                  Z-factor   --zfactor</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                description default_value optional</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1                       Input raster file.          &lt;NA&gt;    FALSE</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2                      Output raster file.          &lt;NA&gt;    FALSE</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3       Name of the input raster DEM file.          &lt;NA&gt;    FALSE</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4    Name of the output raster image file.          &lt;NA&gt;    FALSE</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 Display output values using a log-scale.         false     TRUE</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6                     Z conversion factor.           1.0     TRUE</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   parameter_class parameter_detail is_input is_output argument_name</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    ExistingFile           Raster     TRUE     FALSE         input</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2         NewFile           Raster    FALSE      TRUE        output</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    ExistingFile           Raster     TRUE     FALSE           dem</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4         NewFile           Raster    FALSE      TRUE        output</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5         Boolean          Boolean    FALSE     FALSE           log</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6           Float            Float    FALSE     FALSE       zfactor</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">head</span>(wbttoolparameters)</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co">#&gt;               tool_name              function_name             toolbox_name</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt; 1         AbsoluteValue         wbt_absolute_value     Math and Stats Tools</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt; 2         AbsoluteValue         wbt_absolute_value     Math and Stats Tools</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt; 3 AccumulationCurvature wbt_accumulation_curvature Geomorphometric Analysis</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; 4 AccumulationCurvature wbt_accumulation_curvature Geomorphometric Analysis</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; 5 AccumulationCurvature wbt_accumulation_curvature Geomorphometric Analysis</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; 6 AccumulationCurvature wbt_accumulation_curvature Geomorphometric Analysis</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt;                        name       flags</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt; 1                Input File  -i,--input</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt; 2               Output File -o,--output</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt; 3          Input Raster DEM    -i,--dem</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt; 4       Output Raster Image -o,--output</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co">#&gt; 5 Log-transform the output?       --log</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#&gt; 6                  Z-factor   --zfactor</span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co">#&gt;                                description default_value optional</span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co">#&gt; 1                       Input raster file.          &lt;NA&gt;    FALSE</span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="co">#&gt; 2                      Output raster file.          &lt;NA&gt;    FALSE</span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="co">#&gt; 3       Name of the input raster DEM file.          &lt;NA&gt;    FALSE</span></span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="co">#&gt; 4    Name of the output raster image file.          &lt;NA&gt;    FALSE</span></span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="co">#&gt; 5 Display output values using a log-scale.         false     TRUE</span></span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a><span class="co">#&gt; 6                     Z conversion factor.           1.0     TRUE</span></span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a><span class="co">#&gt;   parameter_class parameter_detail is_input is_output argument_name</span></span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a><span class="co">#&gt; 1    ExistingFile           Raster     TRUE     FALSE         input</span></span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="co">#&gt; 2         NewFile           Raster    FALSE      TRUE        output</span></span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a><span class="co">#&gt; 3    ExistingFile           Raster     TRUE     FALSE           dem</span></span>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a><span class="co">#&gt; 4         NewFile           Raster    FALSE      TRUE        output</span></span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a><span class="co">#&gt; 5         Boolean          Boolean    FALSE     FALSE           log</span></span>
+<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a><span class="co">#&gt; 6           Float            Float    FALSE     FALSE       zfactor</span></span></code></pre></div>
 <p>Several fields in this table such as <code>flags</code> and
 <code>parameter_type</code> are “flattened” relative to the nested
 <code>wbt_tool_parameters()</code> output.</p>
@@ -514,22 +514,22 @@ replaced with two variables in the data set:
 <p>This parameter <em>data.frame</em> is useful to construct your own
 functions with <code>wbt_run_tool()</code> or for inspecting the types
 of tools that can be run on particular data types.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(wbttoolparameters, <span class="at">max.level =</span> <span class="dv">1</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;data.frame&#39;:    2220 obs. of  13 variables:</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ tool_name       : chr  &quot;AbsoluteValue&quot; &quot;AbsoluteValue&quot; &quot;AccumulationCurvature&quot; &quot;AccumulationCurvature&quot; ...</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ function_name   : chr  &quot;wbt_absolute_value&quot; &quot;wbt_absolute_value&quot; &quot;wbt_accumulation_curvature&quot; &quot;wbt_accumulation_curvature&quot; ...</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ toolbox_name    : chr  &quot;Math and Stats Tools&quot; &quot;Math and Stats Tools&quot; &quot;Geomorphometric Analysis&quot; &quot;Geomorphometric Analysis&quot; ...</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ name            : chr  &quot;Input File&quot; &quot;Output File&quot; &quot;Input Raster DEM&quot; &quot;Output Raster Image&quot; ...</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ flags           : chr  &quot;-i,--input&quot; &quot;-o,--output&quot; &quot;-i,--dem&quot; &quot;-o,--output&quot; ...</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ description     : chr  &quot;Input raster file.&quot; &quot;Output raster file.&quot; &quot;Name of the input raster DEM file.&quot; &quot;Name of the output raster image file.&quot; ...</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ default_value   : chr  NA NA NA NA ...</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ optional        : logi  FALSE FALSE FALSE FALSE TRUE TRUE ...</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ parameter_class : chr  &quot;ExistingFile&quot; &quot;NewFile&quot; &quot;ExistingFile&quot; &quot;NewFile&quot; ...</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ parameter_detail: chr  &quot;Raster&quot; &quot;Raster&quot; &quot;Raster&quot; &quot;Raster&quot; ...</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ is_input        : logi  TRUE FALSE TRUE FALSE FALSE FALSE ...</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ is_output       : logi  FALSE TRUE FALSE TRUE FALSE FALSE ...</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ argument_name   : chr  &quot;input&quot; &quot;output&quot; &quot;dem&quot; &quot;output&quot; ...</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  - attr(*, &quot;version&quot;)= chr &quot;2.3.0&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">str</span>(wbttoolparameters, <span class="at">max.level =</span> <span class="dv">1</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">#&gt; &#39;data.frame&#39;:    2220 obs. of  13 variables:</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt;  $ tool_name       : chr  &quot;AbsoluteValue&quot; &quot;AbsoluteValue&quot; &quot;AccumulationCurvature&quot; &quot;AccumulationCurvature&quot; ...</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt;  $ function_name   : chr  &quot;wbt_absolute_value&quot; &quot;wbt_absolute_value&quot; &quot;wbt_accumulation_curvature&quot; &quot;wbt_accumulation_curvature&quot; ...</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt;  $ toolbox_name    : chr  &quot;Math and Stats Tools&quot; &quot;Math and Stats Tools&quot; &quot;Geomorphometric Analysis&quot; &quot;Geomorphometric Analysis&quot; ...</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt;  $ name            : chr  &quot;Input File&quot; &quot;Output File&quot; &quot;Input Raster DEM&quot; &quot;Output Raster Image&quot; ...</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt;  $ flags           : chr  &quot;-i,--input&quot; &quot;-o,--output&quot; &quot;-i,--dem&quot; &quot;-o,--output&quot; ...</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co">#&gt;  $ description     : chr  &quot;Input raster file.&quot; &quot;Output raster file.&quot; &quot;Name of the input raster DEM file.&quot; &quot;Name of the output raster image file.&quot; ...</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co">#&gt;  $ default_value   : chr  NA NA NA NA ...</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="co">#&gt;  $ optional        : logi  FALSE FALSE FALSE FALSE TRUE TRUE ...</span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="co">#&gt;  $ parameter_class : chr  &quot;ExistingFile&quot; &quot;NewFile&quot; &quot;ExistingFile&quot; &quot;NewFile&quot; ...</span></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co">#&gt;  $ parameter_detail: chr  &quot;Raster&quot; &quot;Raster&quot; &quot;Raster&quot; &quot;Raster&quot; ...</span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="co">#&gt;  $ is_input        : logi  TRUE FALSE TRUE FALSE FALSE FALSE ...</span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="co">#&gt;  $ is_output       : logi  FALSE TRUE FALSE TRUE FALSE FALSE ...</span></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="co">#&gt;  $ argument_name   : chr  &quot;input&quot; &quot;output&quot; &quot;dem&quot; &quot;output&quot; ...</span></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="co">#&gt;  - attr(*, &quot;version&quot;)= chr &quot;2.3.0&quot;</span></span></code></pre></div>
 <p>You will find that both <code>tool_name</code> and
 <code>function_name</code> are present, so you can look up by whatever
 is convenient.</p>
@@ -540,35 +540,35 @@ which are denoted with <code>function_name</code>.</p>
 <h3>Example: Finding Tools by Parameter Type</h3>
 <p>To find the tools that have an “ExistingFile” argument with file type
 “Raster” we can use <code>subset()</code>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">subset</span>(wbttoolparameters, <span class="fu">grepl</span>(<span class="st">&quot;ExistingFile&quot;</span>, parameter_class) <span class="sc">&amp;</span> <span class="fu">grepl</span>(<span class="st">&quot;Raster&quot;</span>, parameter_detail)))</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                tool_name              function_name             toolbox_name</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1          AbsoluteValue         wbt_absolute_value     Math and Stats Tools</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  AccumulationCurvature wbt_accumulation_curvature Geomorphometric Analysis</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7         AdaptiveFilter        wbt_adaptive_filter   Image Processing Tools</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12                   Add                    wbt_add     Math and Stats Tools</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13                   Add                    wbt_add     Math and Stats Tools</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16       AggregateRaster       wbt_aggregate_raster             GIS Analysis</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                            name      flags                          description</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1                    Input File -i,--input                   Input raster file.</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3              Input Raster DEM   -i,--dem   Name of the input raster DEM file.</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7                    Input File -i,--input                   Input raster file.</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12 Input File Or Constant Value   --input1 Input raster file or constant value.</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13 Input File Or Constant Value   --input2 Input raster file or constant value.</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16                   Input File -i,--input                   Input raster file.</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    default_value optional     parameter_class parameter_detail is_input</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1           &lt;NA&gt;    FALSE        ExistingFile           Raster     TRUE</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3           &lt;NA&gt;    FALSE        ExistingFile           Raster     TRUE</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7           &lt;NA&gt;    FALSE        ExistingFile           Raster     TRUE</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12          &lt;NA&gt;    FALSE ExistingFileOrFloat           Raster     TRUE</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13          &lt;NA&gt;    FALSE ExistingFileOrFloat           Raster     TRUE</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16          &lt;NA&gt;    FALSE        ExistingFile           Raster     TRUE</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    is_output argument_name</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1      FALSE         input</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3      FALSE           dem</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7      FALSE         input</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12     FALSE        input1</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13     FALSE        input2</span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16     FALSE         input</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">subset</span>(wbttoolparameters, <span class="fu">grepl</span>(<span class="st">&quot;ExistingFile&quot;</span>, parameter_class) <span class="sc">&amp;</span> <span class="fu">grepl</span>(<span class="st">&quot;Raster&quot;</span>, parameter_detail)))</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#&gt;                tool_name              function_name             toolbox_name</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt; 1          AbsoluteValue         wbt_absolute_value     Math and Stats Tools</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#&gt; 3  AccumulationCurvature wbt_accumulation_curvature Geomorphometric Analysis</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt; 7         AdaptiveFilter        wbt_adaptive_filter   Image Processing Tools</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt; 12                   Add                    wbt_add     Math and Stats Tools</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt; 13                   Add                    wbt_add     Math and Stats Tools</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt; 16       AggregateRaster       wbt_aggregate_raster             GIS Analysis</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#&gt;                            name      flags                          description</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#&gt; 1                    Input File -i,--input                   Input raster file.</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt; 3              Input Raster DEM   -i,--dem   Name of the input raster DEM file.</span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co">#&gt; 7                    Input File -i,--input                   Input raster file.</span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt; 12 Input File Or Constant Value   --input1 Input raster file or constant value.</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">#&gt; 13 Input File Or Constant Value   --input2 Input raster file or constant value.</span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="co">#&gt; 16                   Input File -i,--input                   Input raster file.</span></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co">#&gt;    default_value optional     parameter_class parameter_detail is_input</span></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="co">#&gt; 1           &lt;NA&gt;    FALSE        ExistingFile           Raster     TRUE</span></span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="co">#&gt; 3           &lt;NA&gt;    FALSE        ExistingFile           Raster     TRUE</span></span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="co">#&gt; 7           &lt;NA&gt;    FALSE        ExistingFile           Raster     TRUE</span></span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="co">#&gt; 12          &lt;NA&gt;    FALSE ExistingFileOrFloat           Raster     TRUE</span></span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="co">#&gt; 13          &lt;NA&gt;    FALSE ExistingFileOrFloat           Raster     TRUE</span></span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="co">#&gt; 16          &lt;NA&gt;    FALSE        ExistingFile           Raster     TRUE</span></span>
+<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a><span class="co">#&gt;    is_output argument_name</span></span>
+<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a><span class="co">#&gt; 1      FALSE         input</span></span>
+<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a><span class="co">#&gt; 3      FALSE           dem</span></span>
+<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a><span class="co">#&gt; 7      FALSE         input</span></span>
+<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a><span class="co">#&gt; 12     FALSE        input1</span></span>
+<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a><span class="co">#&gt; 13     FALSE        input2</span></span>
+<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a><span class="co">#&gt; 16     FALSE         input</span></span></code></pre></div>
 </div>
 </div>
 <div id="appendix-tables-of-function-names-by-toolbox" class="section level2">

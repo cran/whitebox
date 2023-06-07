@@ -40,6 +40,11 @@ wbt_init <- function(exe_path = wbt_exe_path(shell_quote = FALSE),
       !is.null(wd) ||
       !is.null(verbose) ||
       !is.null(compress_rasters)) {
+    
+    if (!is.null(wd) && length(wd) > 0 && (is.na(wd) || wd == "")) {
+      .wbt_wd_unset()
+    }
+    
     # set the path with wbt_options
     wbt_options(exe_path = exe_path, ...)
   }
@@ -218,6 +223,38 @@ wbt_exe_path <- function(exe_path = NULL, shell_quote = TRUE) {
   }
   res
 }
+
+#' @description `wbt_runner_path()`: Get the file path of the 'WhiteboxTools Runner' executable.
+#'
+#' @details `wbt_runner_path()`: Returns a path to 'WhiteboxTools Runner' including a platform-specific executable (with or without .exe extension)
+#' @export
+#' @keywords General
+#' @rdname wbt_init
+wbt_runner_path <- function(shell_quote = TRUE) {
+  bn <- "whitebox_runner"
+  os <- Sys.info()["sysname"]
+  if (os == "Windows") {
+    bn <- "whitebox_runner.exe"
+  }
+  res <- file.path(dirname(wbt_exe_path(shell_quote = FALSE)), bn)
+  if (shell_quote) {
+    return(shQuote(res))
+  }
+  res
+}
+
+#' @title Launch 'WhiteboxTools Runner' GUI
+#' @description `wbt_launch_runner()`: Launch the 'WhiteboxTools Runner' GUI at `wbt_runner_path()`
+#' @param clear_app_state Clear application state memory? Default: `FALSE`
+#' @details Opens the 'WhiteboxTools Runner' GUI included with WhiteboxTools Open Core v2.3.0 or higher.
+#' @seealso [wbt_runner_path()]
+#' @export
+#' @keywords General
+#' @rdname wbt_launch_runner
+wbt_launch_runner <- function(clear_app_state = FALSE) {
+  system(paste0(wbt_runner_path(), ifelse(clear_app_state, "--clear_app_state", "")))
+}
+
 #' @description `wbt_default_path()`: Get the default file path of the 'WhiteboxTools' executable.
 #'
 #' @details `wbt_default_path()`: Returns a path to 'WhiteboxTools' executable including a platform-specific executable (with or without .exe extension)
@@ -257,7 +294,7 @@ wbt_data_dir <- function() {
 #'
 #' @return `wbt_wd()`: character; when working directory is unset, will not add `--wd=` arguments to calls and should be the same as using `getwd()`. See Details.
 #'
-#' @details `wbt_wd()`: Before you set the working directory in a session the default output will be in your current R working directory unless otherwise specified. You can change working directory at any time by setting the `wd` argument to `wbt_wd()` and running a tool. Note that once you have set a working directory, the directory needs to be set somewhere to "replace" the old value; just dropping the flag will not change the working directory back to the R working directory. To "unset" the option in the R package you can use `wbt_wd("")` which is equivalent to `wbt_wd(getwd())`.
+#' @details `wbt_wd()`: Before you set the working directory in a session the default output will be in your current R working directory unless otherwise specified. You can change working directory at any time by setting the `wd` argument to `wbt_wd()` and running a tool. Note that once you have set a working directory, the directory needs to be set somewhere to "replace" the old value; just dropping the flag will not change the working directory back to the R working directory. To "unset" the option in the R package you can use `wbt_wd("")` which removes the `--wd` flag from commands and sets the `working_directory` value in the WhiteboxTools _settings.json_ to `""`.
 #' @rdname wbt_init
 #' @export
 #' @keywords General
@@ -265,28 +302,17 @@ wbt_data_dir <- function() {
 #' \dontrun{
 #'
 #' ## wbt_wd():
-#'
+#' 
+#' # no working directory set
+#' wbt_wd(wd = "")
+#' 
 #' # set WBT working directory to R working directory
 #' wbt_wd(wd = getwd())
 #' }
 wbt_wd <- function(wd = NULL) {
 
-  # system environment var takes precedence
-  syswd <- Sys.getenv("R_WHITEBOX_WD")
-  if (nchar(syswd) > 0 && dir.exists(syswd)) {
-    return(syswd)
-  }
-
   if (length(wd) > 0 && (is.na(wd) || wd == "")) {
-    curwd <- getwd()
-    if(wbt_verbose()) {
-      cat("Reset WhiteboxTools working directory to current R working directory:", curwd)
-    }
-    try(wbt_system_call(paste0("--wd=", curwd)), silent = TRUE)
-    if (wbt_verbose()) {
-      cat("Unset WhiteboxTools working directory flag `whitebox.wd` / `--wd`\n")
-    }
-    wd <- "" #structure(curwd, unset = TRUE)
+    .wbt_wd_unset()
   }
 
   if (is.character(wd)) {
@@ -294,6 +320,12 @@ wbt_wd <- function(wd = NULL) {
     wbt_options(wd = wd)
   }
 
+  # system environment var takes precedence
+  syswd <- Sys.getenv("R_WHITEBOX_WD")
+  if (nchar(syswd) > 0 && dir.exists(syswd)) {
+    return(syswd)
+  }
+  
   # package option checked next; if missing default is getwd() (unspecified should be same as getwd())
   res <- getOption("whitebox.wd")
 
@@ -302,11 +334,22 @@ wbt_wd <- function(wd = NULL) {
     res <- ""
   # otherwise, if the option is invalid directory message
   } else if (!is.null(res) && !dir.exists(res)) {
-    message("Invalid path for `whitebox.wd`: directory does not exist.\nDefaulting to current R working directory: ", getwd())
-    res <- getwd()
+    message("Invalid path for `whitebox.wd`: directory does not exist.\nDefaulting to \"\"")
+    res <- ""
   }
 
   invisible(res)
+}
+
+.wbt_wd_unset <- function() {
+  # this doesnt actually set the value ""
+  #  - try(wbt_system_call(paste0("--wd=", shQuote(""))), silent = TRUE)
+  try({
+    f <- file.path(dirname(wbt_exe_path(shell_quote = FALSE)), "settings.json")
+    x <- readLines(f, warn = FALSE)
+    x[grepl('^ *"working_directory": .*$', x)] <- '  "working_directory": "",'
+    writeLines(x, f)
+  })
 }
 
 #' @description `wbt_verbose()`: Check verbose options for 'WhiteboxTools'
@@ -471,7 +514,7 @@ wbt_max_procs <- function(max_procs = NULL) {
 #' @export
 #' @keywords General
 #' @rdname install_whitebox
-wbt_install <- function(pkg_dir = wbt_data_dir(), force = FALSE, remove = FALSE) {
+wbt_install <- function(pkg_dir = wbt_data_dir(), platform = NULL, force = FALSE, remove = FALSE) {
 
   stopifnot(is.logical(force))
   stopifnot(is.logical(remove))
@@ -504,15 +547,27 @@ wbt_install <- function(pkg_dir = wbt_data_dir(), force = FALSE, remove = FALSE)
     if (.Machine$sizeof.pointer != 8) {
       return(invisible(.unsupported()))
     }
-
-    if (os == "Linux") {
-      url <- "https://www.whiteboxgeo.com/WBT_Linux/WhiteboxTools_linux_amd64.zip"
-    } else if (os == "Windows") {
-      url <- "https://www.whiteboxgeo.com/WBT_Windows/WhiteboxTools_win_amd64.zip"
-    } else if (os == "Darwin") {
-      url <- "https://www.whiteboxgeo.com/WBT_Darwin/WhiteboxTools_darwin_amd64.zip"
+    
+    if (missing(platform) || is.null(platform)) {
+      if (os == "Linux") {
+        url <- "https://www.whiteboxgeo.com/WBT_Linux/WhiteboxTools_linux_amd64.zip"
+      } else if (os == "Windows") {
+        url <- "https://www.whiteboxgeo.com/WBT_Windows/WhiteboxTools_win_amd64.zip"
+      } else if (os == "Darwin") {
+        suffix <- "amd64"
+        if (Sys.info()["machine"] == "arm64") {
+          suffix <- "darwin_m_series"
+        }
+        url <- paste0("https://www.whiteboxgeo.com/WBT_Darwin/WhiteboxTools_darwin_", suffix , ".zip")
+      } else {
+        return(invisible(.unsupported()))
+      }
     } else {
-      return(invisible(.unsupported()))
+      # supports alternative platforms/filenames 
+      # e.g. linux_musl, darwin_m_series
+      url <- paste0("https://www.whiteboxgeo.com/WBT_",
+               os, "/WhiteboxTools_",
+               platform, ".zip") 
     }
 
     filename <- basename(url)
@@ -538,8 +593,9 @@ wbt_install <- function(pkg_dir = wbt_data_dir(), force = FALSE, remove = FALSE)
     }
     res <- -1
     for (method in c(if (os == "Windows") "internal", "libcurl", "auto")) {
-      if (!inherits(try(res <- utils::download.file(url, exe_zip, method = method), silent = TRUE),
-                    "try-error") && res == 0)
+      if (!inherits(try({
+        res <- utils::download.file(url, exe_zip, method = method)
+      }, silent = TRUE), "try-error") && res == 0)
         break
     }
 
@@ -554,6 +610,7 @@ wbt_install <- function(pkg_dir = wbt_data_dir(), force = FALSE, remove = FALSE)
     # subfolder WBT/whitebox_tools
     exe_path_out <- file.path(pkg_dir, "WBT", basename(exe_path))
     Sys.chmod(exe_path_out, '755')
+    Sys.chmod(file.path(dirname(exe_path_out), basename(wbt_runner_path(shell_quote = FALSE))), '755')
 
     # if (os == "Windows") {
     #   utils::unzip(exe_zip, exdir = pkg_dir)
@@ -569,7 +626,7 @@ wbt_install <- function(pkg_dir = wbt_data_dir(), force = FALSE, remove = FALSE)
       cat("    wbt_version()\n")
 
       # call wbt_init (sets package option)
-      wbt_init(exe_path = exe_path_out)
+      wbt_init(exe_path = exe_path_out, wd = "")
     }
 
   } else if (!force) {
@@ -587,11 +644,16 @@ wbt_install <- function(pkg_dir = wbt_data_dir(), force = FALSE, remove = FALSE)
 
 #' Download and Install 'WhiteboxTools'
 #' 
-#' This function downloads the 'WhiteboxTools' binary if needed. Pre-compiled binaries are only available for download for 64-bit Linux (Ubuntu 20.04), Windows and Mac OS (Intel) platforms. If you need WhiteboxTools for another platform follow the instructions here: \url{https://github.com/jblindsay/whitebox-tools}
+#' This function downloads the 'WhiteboxTools' binary if needed. Pre-compiled binaries are
+#' only available for download for 64-bit Linux (default compiled with glibc on Ubuntu 22.04;
+#' use `platform="linux_musl"` for musl/earlier versions of glibc), Windows and Mac OS (ARM and
+#' Intel) platforms. If you need WhiteboxTools for another platform follow the instructions to 
+#' build from source: \url{https://github.com/jblindsay/whitebox-tools}
 #'
 #' 'WhiteboxTools' and all of its extensions can be uninstalled by passing the `remove=TRUE` argument.
 #'
 #' @param pkg_dir default install path is to whitebox package "WBT" folder
+#' @param platform character. Optional: suffix used for alternate platform names. Options include: `"linux_musl"`
 #' @param force logical. Force install? Default `FALSE`. When `remove=TRUE` passed to `unlink()` to change permissions to allow removal of files/directories.
 #' @param remove logical. Remove contents of "WBT" folder from `pkg_dir`? Default: `FALSE`
 #' @return Prints out the location of the WhiteboxTools binary, if found. `NULL` otherwise.
@@ -602,8 +664,8 @@ wbt_install <- function(pkg_dir = wbt_data_dir(), force = FALSE, remove = FALSE)
 #' }
 #' @export
 #' @keywords General
-install_whitebox <- function(pkg_dir = wbt_data_dir(), force = FALSE, remove = FALSE) {
-  wbt_install(pkg_dir = pkg_dir, force = force, remove = remove)
+install_whitebox <- function(pkg_dir = wbt_data_dir(), platform = NULL, force = FALSE, remove = FALSE) {
+  wbt_install(pkg_dir = pkg_dir, platform = platform, force = force, remove = remove)
 }
 
 #' @param extension Extension name
@@ -618,6 +680,7 @@ wbt_install_extension <- function(extension = c(
                                   "DemAndSpatialHydrologyToolset",
                                   "LidarAndRemoteSensingToolset"
                                  ),
+                                  platform = NULL,
                                   destdir = dirname(wbt_exe_path(shell_quote = FALSE))) {
   extension <- match.arg(extension, c(
         "GeneralToolsetExtension",
@@ -628,10 +691,22 @@ wbt_install_extension <- function(extension = c(
 
   sn <- Sys.info()[["sysname"]]
   fn <- tempfile(extension, fileext = ".zip")
-  sufx <- switch(sn,
-                 "Windows" = "win",
-                 "Linux" = "linux",
-                 "Darwin" = "MacOS Intel")
+  if (missing(platform) || is.null(platform)) {
+    sufx <- switch(sn,
+                   "Windows" = "win",
+                   "Linux" = "linux",
+                   "Darwin" = switch(Sys.info()[["machine"]],
+                                     arm64 = "MacOS_ARM",
+                                     "MacOS_Intel"))
+  } else {
+    # non-default options include: linux_musl, MacOS_ARM
+    sufx <- platform 
+  }
+  
+  if (sn == "Darwin" && Sys.info()["machine"] == "arm64") {
+    suffix <- "MacOS_ARM"
+  }
+  
   # GTE
   if ("GeneralToolsetExtension" %in% extension) {
     url <- sprintf("https://www.whiteboxgeo.com/GTE_%s/%s_%s.zip", sn, "GeneralToolsetExtension", sufx)
@@ -1084,7 +1159,7 @@ sample_dem_data <- function(destfile = file.path(system.file('extdata', package=
     }
   }
   if (fp == "") {
-    try(download.file("https://github.com/giswqs/whiteboxR/raw/master/inst/extdata/DEM.tif",
+    try(download.file("https://github.com/opengeos/whiteboxR/raw/master/inst/extdata/DEM.tif",
                       destfile = destfile,
                       mode = "wb", ...))
     if (missing(destfile)) {

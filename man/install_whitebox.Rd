@@ -6,18 +6,31 @@
 \alias{wbt_install_extension}
 \title{Download and Install 'WhiteboxTools'}
 \usage{
-wbt_install(pkg_dir = wbt_data_dir(), force = FALSE, remove = FALSE)
+wbt_install(
+  pkg_dir = wbt_data_dir(),
+  platform = NULL,
+  force = FALSE,
+  remove = FALSE
+)
 
-install_whitebox(pkg_dir = wbt_data_dir(), force = FALSE, remove = FALSE)
+install_whitebox(
+  pkg_dir = wbt_data_dir(),
+  platform = NULL,
+  force = FALSE,
+  remove = FALSE
+)
 
 wbt_install_extension(
   extension = c("GeneralToolsetExtension", "AgricultureToolset",
     "DemAndSpatialHydrologyToolset", "LidarAndRemoteSensingToolset"),
+  platform = NULL,
   destdir = dirname(wbt_exe_path(shell_quote = FALSE))
 )
 }
 \arguments{
 \item{pkg_dir}{default install path is to whitebox package "WBT" folder}
+
+\item{platform}{character. Optional: suffix used for alternate platform names. Options include: \code{"linux_musl"}}
 
 \item{force}{logical. Force install? Default \code{FALSE}. When \code{remove=TRUE} passed to \code{unlink()} to change permissions to allow removal of files/directories.}
 
@@ -31,7 +44,11 @@ wbt_install_extension(
 Prints out the location of the WhiteboxTools binary, if found. \code{NULL} otherwise.
 }
 \description{
-This function downloads the 'WhiteboxTools' binary if needed. Pre-compiled binaries are only available for download for 64-bit Linux (Ubuntu 20.04), Windows and Mac OS (Intel) platforms. If you need WhiteboxTools for another platform follow the instructions here: \url{https://github.com/jblindsay/whitebox-tools}
+This function downloads the 'WhiteboxTools' binary if needed. Pre-compiled binaries are
+only available for download for 64-bit Linux (default compiled with glibc on Ubuntu 22.04;
+use \code{platform="linux_musl"} for musl/earlier versions of glibc), Windows and Mac OS (ARM and
+Intel) platforms. If you need WhiteboxTools for another platform follow the instructions to
+build from source: \url{https://github.com/jblindsay/whitebox-tools}
 }
 \details{
 'WhiteboxTools' and all of its extensions can be uninstalled by passing the \code{remove=TRUE} argument.
