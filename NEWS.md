@@ -1,3 +1,19 @@
+# whitebox 2.3.4
+
+ * Exported `wbt_file_path()`, a function previously used internally for creating safe, expanded, quoted, paths for building WhiteboxTools commands. This function also supports the input of `terra` objects that are backed by file sources supported by WhiteboxTools.
+
+# whitebox 2.3.3
+
+ * The default values for `compress_rasters` and `verbose_mode` have been set to `NULL` to better reflect that they are derived from the WhiteboxTools settings.json file.
+
+   * See `wbt_options()` for more details. If the user specifies these arguments in a `wbt_*()` function call then the flag will be passed in the command line call. Otherwise the default `NULL` value is ignored. Links to the corresponding option-setting functions have been added to the documentation for all `wbt_*()` tool functions.
+
+# whitebox 2.3.2
+
+ * Fix for file paths passed to optional `base` argument of `wbt_resample()`; thanks to @Pentaonia for reporting
+   
+   * Also fixed are: `wbt_vector_lines_to_raster()`, `wbt_vector_points_to_raster()`, `wbt_vector_polygons_to_raster()`, `wbt_block_maximum_gridding()`, `wbt_block_minimum_gridding()`, `wbt_heat_map()`, `wbt_idw_interpolation()`, `wbt_natural_neighbour_interpolation()`, `wbt_nearest_neighbour_gridding()`, `wbt_radial_basis_function_interpolation()`, `wbt_tin_gridding()`
+
 # whitebox 2.3.1
  
  * `wbt_install()` and `wbt_install_extension()` gain optional `platform` argument that is used as a suffix on ZIP file, allowing download of alternate binaries on Linux and macOS (Darwin).

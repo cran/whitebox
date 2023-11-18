@@ -101,9 +101,9 @@ wbt_init <- function(exe_path = wbt_exe_path(shell_quote = FALSE),
 #'
 #' - **`whitebox.wd`** - character. Path to WhiteboxTools working directory. Used as `--wd` argument for tools that support it when `wd` is not specified elsewhere.
 #'
-#' - **`whitebox.verbose`** - logical. Should standard output from calls to executable be `cat()` out for readability? Default is result of `interactive()`. Individual tools may have `verbose_mode` setting that produce only single-line output when `FALSE`. These argument values are left as the defaults defined in the package documentation for that function. When `whitebox.verbose=FALSE` no output is produced. Set the value of `whitebox.verbose` with `wbt_verbose()` `verbose` argument.
+#' - **`whitebox.verbose`** - logical. Should standard output from calls to executable be `cat()` out for readability? When `whitebox.verbose=FALSE` no output is produced. Set the value of `whitebox.verbose` with `wbt_verbose()` `verbose` argument. Default is result of `interactive()` if R package options are unset. 
 #'
-#' - **`whitebox.compress_rasters`** - logical. Should raster output from WhiteboxTools be compressed? Default: `FALSE`. Set the value of `whitebox.compress_rasters` with `wbt_compress_rasters()` `compress_rasters` argument.
+#' - **`whitebox.compress_rasters`** - logical. Should raster output from WhiteboxTools be compressed? Default: `NULL` uses existing WhiteboxTools settings. Set the value of `whitebox.compress_rasters` with `wbt_compress_rasters()` `compress_rasters` argument.
 #'
 #' - **`whitebox.max_procs`** - integer. Maximum number of processes for tools that run in parallel or partially parallelize. Default: `-1` uses all of the available cores.
 #'
@@ -172,7 +172,7 @@ wbt_options <- function(exe_path = NULL,
                                sysvrb),
     whitebox.compress_rasters = ifelse(nchar(syscpr) == 0,
                                        as.logical(getOption("whitebox.compress_rasters",
-                                                            default = FALSE)),
+                                                            default = NA)),
                                        syscpr),
     whitebox.max_proc = ifelse(nchar(sysmxp) == 0,
                                      as.integer(getOption("whitebox.max_proc",
@@ -354,9 +354,9 @@ wbt_wd <- function(wd = NULL) {
 
 #' @description `wbt_verbose()`: Check verbose options for 'WhiteboxTools'
 #'
-#' @param verbose Default: `NULL`; if logical, set the package option `whitebox.verbose` to specified value
+#' @param verbose logical. Default: `NULL`; if `TRUE` or `FALSE`, set the package option `whitebox.verbose` to specified value. Tool verbosity settings can be overridden in any `wbt_*()` function call by passing the `verbose_mode` argument directly.
 #'
-#' @return `wbt_verbose()`: logical; defaults to result of `interactive()`
+#' @return `wbt_verbose()`: logical; returns the result of option `"whitebox.verbose_mode"`, if unset defaults to result of `interactive()`.
 #' @rdname wbt_init
 #' @export
 #' @keywords General
@@ -411,11 +411,11 @@ wbt_verbose <- function(verbose = NULL) {
   invisible(res)
 }
 
-#' @description `wbt_compress_rasters()`: Check raster compression option for 'WhiteboxTools'. Default: `FALSE`
+#' @description `wbt_compress_rasters()`: Check raster compression option for 'WhiteboxTools'. Default behavior is based on WhiteboxTools settings.json, package options (if set). Raster compression settings can be overridden in any `wbt_*()` function call by passing the `compress_rasters` argument directly.
 #'
-#' @param compress_rasters Default: `NULL`; if logical, set the package option `whitebox.compress_rasters` to specified value
+#' @param compress_rasters logical. Default: `NULL`; if `TRUE` or `FALSE`, set the package option `whitebox.compress_rasters` to specified value.
 #'
-#' @return `wbt_compress_rasters()`: logical; defaults to `NA`
+#' @return `wbt_compress_rasters()`: logical; returns the result of option `"whitebox.compress_rasters"`, if unset defaults to `NA`.
 #' @rdname wbt_init
 #' @export
 #' @keywords General
@@ -556,7 +556,7 @@ wbt_install <- function(pkg_dir = wbt_data_dir(), platform = NULL, force = FALSE
       } else if (os == "Darwin") {
         suffix <- "amd64"
         if (Sys.info()["machine"] == "arm64") {
-          suffix <- "darwin_m_series"
+          suffix <- "m_series"
         }
         url <- paste0("https://www.whiteboxgeo.com/WBT_Darwin/WhiteboxTools_darwin_", suffix , ".zip")
       } else {
@@ -653,7 +653,7 @@ wbt_install <- function(pkg_dir = wbt_data_dir(), platform = NULL, force = FALSE
 #' 'WhiteboxTools' and all of its extensions can be uninstalled by passing the `remove=TRUE` argument.
 #'
 #' @param pkg_dir default install path is to whitebox package "WBT" folder
-#' @param platform character. Optional: suffix used for alternate platform names. Options include: `"linux_musl"`
+#' @param platform character. Optional: suffix used for alternate platform names. On Linux, you can choose `"linux_amd64"` (default; Linux) or `"linux_musl"` for older glibc versions. On macOS Darwin you can choose `"darwin_amd64"` (default; macOS) or `"darwin_m_series"` for Apple M series hardware. Note that for `wbt_install_extension()` on the Apple M series use `"MacOS_ARM"`. Only one Windows binary is available: `"win_amd64"` (default; Windows).
 #' @param force logical. Force install? Default `FALSE`. When `remove=TRUE` passed to `unlink()` to change permissions to allow removal of files/directories.
 #' @param remove logical. Remove contents of "WBT" folder from `pkg_dir`? Default: `FALSE`
 #' @return Prints out the location of the WhiteboxTools binary, if found. `NULL` otherwise.
@@ -991,7 +991,7 @@ wbt_run_tool <- function(tool_name, args, verbose_mode = FALSE, command_only = F
     # in "all" mode the full output is shown
     cat(ret, sep = "\n")
     ret <- paste(tool_name, "-", ret[length(ret)])
-  } else if (!verbose_mode) {
+  } else if (is.null(verbose_mode) || !verbose_mode) {
     ret <- paste(tool_name, "-", ret[length(ret)])
   }
 
@@ -1120,14 +1120,71 @@ wbt_system_call <- function(argstring,
 }
 
 # support for path expansion in input/output file arguments
-wbt_file_path <- function(x, shell_quote = TRUE) {
-  stopifnot(length(x) == 1)
-  .shQuote <- function(x) if (shell_quote) shQuote(x) else x
-  sapply(x, function(y){
-    if (is.character(y)) {
-      .shQuote(paste0(path.expand(strsplit(y, ";|,")[[1]]), collapse = ","))
-    } else y
-  })
+
+#' Prepare File Paths for WhiteboxTools Commands
+#' 
+#' Performs path expansion with `path.expand()` and shell quotes with `shQuote()` the input paths. 
+#' 
+#' @details If an input vector contains `";"` or `","` this is considered, path expansion is performed on the substrings. If the input vector has length greater than `1`, the vector is concatenated with `","` or `";"` to create a single output string. 
+#' 
+#' @param x character or `terra` object. Vector of file paths or strings of file paths for passing as arguments to WhiteboxTools. If the object is of class `SpatRaster`, `SpatRasterCollection`, `SpatVector` or `SpatVectorProxy` the sources are extracted with `terra::sources()`
+#' 
+#' @param shell_quote logical. Shell quotes around result? Default: `TRUE`
+#' @param delimiter character. Either `","` (default) or `";"` allowed by WhiteboxTools.
+#' @param check_exists logical. Check if file(s) in x exist? Useful for input values. Default: `FALSE`
+#'
+#' @return character. Length 1. A safe input string for use in WhiteboxTools commands, with paths expanded and concatenated, if necessary, and optionally shell quoted.
+#' @export
+#'
+#' @keywords General
+#'
+#' @examples
+#' 
+#' wbt_file_path("./abc.tif")
+#' 
+#' wbt_file_path("./abc.tif;./def.tif")
+#' 
+#' wbt_file_path("./abc.tif,./def.tif")
+#' 
+#' wbt_file_path(c("./abc.tif", "./def.tif"))
+#' 
+#' wbt_file_path("~/abc.tif", shell_quote = FALSE)
+#' 
+#' wbt_file_path(c("~/abc.tif", "~/def.tif"))
+#' 
+wbt_file_path <- function(x, shell_quote = TRUE, delimiter = ",", check_exists = FALSE) {
+  if (inherits(x, c("RasterLayer", "RasterStack"))) {
+    if (requireNamespace("terra")) {
+      x <- terra::rast(x)
+    }
+  }
+  
+  if (inherits(x, c('SpatRaster','SpatRasterCollection', 
+                    'SpatVector', 'SpatVectorProxy'))) {
+    if (requireNamespace("terra")) {
+      x2 <- paste0(terra::sources(x), collapse = delimiter)
+      if (nchar(x2) == 0) {
+        stop("The supplied 'terra' object for `", as.character(substitute(x)),"` is not backed by a file. Try loading the object directly from the source file with `terra::rast()` or `terra::vect()`. Various raster formats and ESRI Shapefile are supported. See <https://www.whiteboxgeo.com/manual/wbt_book/supported_formats.html> for details.", call. = FALSE)
+      }
+      x <- x2
+    }
+  }
+  
+  delimiter <- match.arg(trimws(delimiter), c(",", ";"))
+  x <- path.expand(strsplit(
+    paste0(as.character(x), collapse = ","), ";|,"
+  )[[1]])
+  if (check_exists) {
+    y <- !file.exists(x)
+    if (any(y)) {
+      stop(sprintf("File%s not found: %s", 
+                   ifelse(sum(y) > 1, "s",""),
+                   paste0(x[y], collapse = ", ")),
+           call. = FALSE)
+    }
+  }
+  x <- paste0(x, collapse = delimiter)
+  if (shell_quote) shQuote(x) else x
 }
 
 #' Convenience method for path to sample DEM

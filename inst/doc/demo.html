@@ -49,7 +49,7 @@ overflow: visible;
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -399,7 +399,7 @@ into an R spatial object.</p>
 <h4>Working with Raster Data</h4>
 <p>A demonstration employing the {terra} package follows:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co">#&gt; terra 1.7.33</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co">#&gt; terra 1.7.60</span></span>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="fu">library</span>(whitebox)</span>
 <span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a></span>
 <span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co"># DEMO: calculate slope with WhiteboxTools and raster</span></span>
@@ -450,7 +450,7 @@ If you are using a raster <code>RasterLayer</code> objects the
 equivalent method is <code>raster::filename()</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># the SpatRaster retains a reference to the input file name</span></span>
 <span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">sources</span>(outputras)</span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="co">#&gt; [1] &quot;/tmp/RtmpFF4UQQ/slope.tif&quot;</span></span></code></pre></div>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="co">#&gt; [1] &quot;/tmp/RtmpXIWsfy/slope.tif&quot;</span></span></code></pre></div>
 </div>
 </div>
 <div id="whiteboxtools-r-setup" class="section level3">
@@ -624,7 +624,7 @@ filling in most cases.</p>
 <span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a></span>
 <span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="co"># run breach_depressions tool</span></span>
 <span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="fu">wbt_breach_depressions</span>(<span class="at">dem =</span> input, <span class="at">output =</span> output)</span>
-<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a><span class="co">#&gt; breach_depressions - Elapsed Time (excluding I/O): 0.10s</span></span></code></pre></div>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a><span class="co">#&gt; breach_depressions - Elapsed Time (excluding I/O): 0.11s</span></span></code></pre></div>
 <p>For more info see: <code>?wbt_breach_depressions</code></p>
 <p>These <code>wbt_*_tool_name_*()</code> functions are wrappers around
 the <code>wbt_run_tool()</code> function that does the
@@ -723,7 +723,7 @@ analysis of stream networks.</p>
 <span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>  <span class="at">dem =</span> <span class="fu">file.path</span>(wd, <span class="st">&quot;toy_dem.tif&quot;</span>),</span>
 <span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a>  <span class="at">output =</span> <span class="fu">file.path</span>(wd, <span class="st">&quot;toy_dem_breached.tif&quot;</span>)</span>
 <span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a>)</span>
-<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a><span class="co">#&gt; breach_depressions - Elapsed Time (excluding I/O): 0.9s</span></span></code></pre></div>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a><span class="co">#&gt; breach_depressions - Elapsed Time (excluding I/O): 0.7s</span></span></code></pre></div>
 </div>
 <div id="wbt_d8_pointer-calculate-flow-direction" class="section level4">
 <h4><code>wbt_d8_pointer()</code> – Calculate Flow Direction</h4>
@@ -747,7 +747,7 @@ cumulative flow</p>
 <span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a>  <span class="at">output =</span> <span class="fu">file.path</span>(wd, <span class="st">&quot;toy_dem_breached_accum.tif&quot;</span>),</span>
 <span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a>  <span class="at">out_type =</span> <span class="st">&quot;cells&quot;</span></span>
 <span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a>)</span>
-<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a><span class="co">#&gt; d8_flow_accumulation - Elapsed Time (excluding I/O): 0.4s</span></span></code></pre></div>
+<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a><span class="co">#&gt; d8_flow_accumulation - Elapsed Time (excluding I/O): 0.5s</span></span></code></pre></div>
 <div id="additional-flow-direction-and-accumulation-tools" class="section level5">
 <h5>Additional Flow Direction and Accumulation Tools</h5>
 <p>In addition to D8 flow pointers (flow direction), there are several
@@ -787,10 +787,10 @@ word: <code>wbt_list_tools(keyword = &quot;flow pointer&quot;)</code></p>
 #&gt; Rho8Pointer: Calculates a stochastic Rho8 flow pointer raster from an input DEM.
 #&gt; SnapPourPoints: Moves outlet points used to specify points of interest in a watershedding operation to the cell with the highest flow accumulation in its neighbourhood.
 #&gt; TraceDownslopeFlowpaths: Traces downslope flowpaths from one or more target sites (i.e. seed points).
-#&gt; QuinnFlowAccumulation: Calculates Quinn et al. (1995) flow accumulation.
 #&gt; QinFlowAccumulation: Calculates Qin et al. (2007) flow accumulation.
+#&gt; Rho8FlowAccumulation: Calculates Fairfield and Leymarie (1991) flow accumulation.
 #&gt; MaxUpslopeValue: Calculates the maximum upslope value from an input values raster along flowpaths.
-#&gt; Rho8FlowAccumulation: Calculates Fairfield and Leymarie (1991) flow accumulation.</code></pre>
+#&gt; QuinnFlowAccumulation: Calculates Quinn et al. (1995) flow accumulation.</code></pre>
 <p>This is just an example of the wealth of tool options made available
 by the WhiteboxTools platform.</p>
 </div>
@@ -809,7 +809,7 @@ DEM.</p>
 <span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a>  <span class="at">output =</span> <span class="fu">file.path</span>(wd, <span class="st">&quot;toy_dem_streams.tif&quot;</span>),</span>
 <span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a>  <span class="at">threshold =</span> <span class="dv">100</span></span>
 <span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a>)</span>
-<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a><span class="co">#&gt; extract_streams - Elapsed Time (excluding I/O): 0.0s</span></span></code></pre></div>
+<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a><span class="co">#&gt; extract_streams - Elapsed Time (excluding I/O): 0.1s</span></span></code></pre></div>
 </div>
 <div id="wbt_tributary_identifier-identify-tributaries" class="section level4">
 <h4><code>wbt_tributary_identifier()</code> – Identify Tributaries</h4>
@@ -928,9 +928,9 @@ name or description.</p>
 <span id="cb31-5"><a href="#cb31-5" tabindex="-1"></a><span class="co">#&gt; FD8FlowAccumulation: Calculates an FD8 flow accumulation raster from an input DEM.</span></span>
 <span id="cb31-6"><a href="#cb31-6" tabindex="-1"></a><span class="co">#&gt; FlowAccumulationFullWorkflow: Resolves all of the depressions in a DEM, outputting a breached DEM, an aspect-aligned non-divergent flow pointer, and a flow accumulation raster.</span></span>
 <span id="cb31-7"><a href="#cb31-7" tabindex="-1"></a><span class="co">#&gt; MDInfFlowAccumulation: Calculates an FD8 flow accumulation raster from an input DEM.</span></span>
-<span id="cb31-8"><a href="#cb31-8" tabindex="-1"></a><span class="co">#&gt; QuinnFlowAccumulation: Calculates Quinn et al. (1995) flow accumulation.</span></span>
-<span id="cb31-9"><a href="#cb31-9" tabindex="-1"></a><span class="co">#&gt; Rho8FlowAccumulation: Calculates Fairfield and Leymarie (1991) flow accumulation.</span></span>
-<span id="cb31-10"><a href="#cb31-10" tabindex="-1"></a><span class="co">#&gt; QinFlowAccumulation: Calculates Qin et al. (2007) flow accumulation.</span></span></code></pre></div>
+<span id="cb31-8"><a href="#cb31-8" tabindex="-1"></a><span class="co">#&gt; Rho8FlowAccumulation: Calculates Fairfield and Leymarie (1991) flow accumulation.</span></span>
+<span id="cb31-9"><a href="#cb31-9" tabindex="-1"></a><span class="co">#&gt; QinFlowAccumulation: Calculates Qin et al. (2007) flow accumulation.</span></span>
+<span id="cb31-10"><a href="#cb31-10" tabindex="-1"></a><span class="co">#&gt; QuinnFlowAccumulation: Calculates Quinn et al. (1995) flow accumulation.</span></span></code></pre></div>
 </div>
 <div id="wbt_tool_help" class="section level3">
 <h3><code>wbt_tool_help()</code></h3>
