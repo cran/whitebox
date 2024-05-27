@@ -1,4 +1,4 @@
-## ---- include = FALSE---------------------------------------------------------
+## ----include = FALSE----------------------------------------------------------
 knitr::opts_chunk$set(
   eval = whitebox::check_whitebox_binary(),
   echo = TRUE,
@@ -8,7 +8,7 @@ knitr::opts_chunk$set(
   fig.height = 6 
 )
 
-## ---- include=FALSE, echo=FALSE, eval=TRUE------------------------------------
+## ----include=FALSE, echo=FALSE, eval=TRUE-------------------------------------
 # setup so inline stats on version/tools show up
 library(whitebox)
 data("wbttoolparameters", package="whitebox")
@@ -84,7 +84,7 @@ wbt_exe_path(shell_quote = FALSE)
 # FALSE when whitebox_tools does not exist at path
 wbt_init()
 
-## ---- eval=FALSE--------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  # set path manually to whitebox_tools executable, for instance:
 #  wbt_init(exe_path = '/home/andrew/workspace/whitebox-tools/target/release/whitebox_tools')
 
@@ -182,7 +182,7 @@ wbt_d8_flow_accumulation(
   out_type = "cells"
 )
 
-## ---- echo = FALSE------------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
 wbt_list_tools(keyword = "flow pointer")
 
 ## -----------------------------------------------------------------------------
@@ -226,7 +226,7 @@ wbt_license()
 ## -----------------------------------------------------------------------------
 wbt_version()
 
-## ---- eval=FALSE--------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  wbt_list_tools()
 
 ## -----------------------------------------------------------------------------
@@ -247,7 +247,7 @@ wbt_tool_parameters("slope")
 ## -----------------------------------------------------------------------------
 wbt_view_code("breach_depressions")
 
-## ---- echo=FALSE--------------------------------------------------------------
+## ----echo=FALSE---------------------------------------------------------------
 # cleanup temp files
 wd <- tempdir()
 unlink(file.path(wd, "slope.tif"))

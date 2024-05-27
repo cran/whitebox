@@ -1,4 +1,4 @@
-## ---- include = FALSE---------------------------------------------------------
+## ----include = FALSE----------------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -35,7 +35,7 @@ str(wbttoolparameters, max.level = 1)
 ## -----------------------------------------------------------------------------
 head(subset(wbttoolparameters, grepl("ExistingFile", parameter_class) & grepl("Raster", parameter_detail)))
 
-## ---- echo=FALSE, results='asis'----------------------------------------------
+## ----echo=FALSE, results='asis'-----------------------------------------------
 # hide this, we add the parentheses for the docs
 wbttoolsshow <- wbttools
 wbttoolsshow$function_name <- paste0("`", wbttoolsshow$function_name, "()`")

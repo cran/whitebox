@@ -1,4 +1,4 @@
-## ---- include = FALSE---------------------------------------------------------
+## ----include = FALSE----------------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -117,7 +117,7 @@ wbt("add",
     output = file.path(tempdir(), "foo.tif")
    )
 
-## ---- echo=FALSE--------------------------------------------------------------
+## ----echo=FALSE---------------------------------------------------------------
 # cleanup temp files
 unlink(list.files(".", pattern = "file.*tif$", full.names = TRUE))
 unlink(list.files(tempdir(), pattern = "file.*tif$", full.names = TRUE))
