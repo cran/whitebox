@@ -48,8 +48,9 @@ overflow: visible;
 }
 </style>
 <style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -376,14 +377,14 @@ checklist.</p>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>dem <span class="ot">&lt;-</span> <span class="fu">sample_dem_data</span>()</span>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="fu">wbt</span>(<span class="st">&quot;slope&quot;</span>, <span class="at">dem =</span> dem, <span class="at">output =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;slope.tif&quot;</span>))</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; Slope - Elapsed Time (excluding I/O): 0.13s</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; Slope - Elapsed Time (excluding I/O): 0.8s</span></span>
 <span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
 <span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (Slope) ---</span></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#&gt; dem  : &#39;/tmp/Rtmp5srhl0/Rinst1cbca81a9b21/whitebox/extdata/DEM.tif&#39;</span></span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/RtmpsDUR6u/slope.tif&#39; </span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#&gt; dem  : &#39;/tmp/Rtmpx4Se17/Rinst17ebf9d12535/whitebox/extdata/DEM.tif&#39;</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/Rtmp54CcYa/slope.tif&#39; </span></span>
 <span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co">#&gt; --- RESULT ---</span></span>
 <span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co">#&gt; $output</span></span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co">#&gt;   File result:  //tmp/RtmpsDUR6u/slope.tif exists (Last modified: 2024-05-26 17:10:48.209155)</span></span></code></pre></div>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co">#&gt;   File result:  //tmp/Rtmp54CcYa/slope.tif exists (Last modified: 2025-10-13 14:53:47.598276)</span></span></code></pre></div>
 <p>Whether a system call succeeds or fails the parameters that were
 passed to the WhiteboxTools executable and references to any output file
 paths that were specified are returned. If output files reference
@@ -400,8 +401,8 @@ R object providing information about the result.</p>
 <span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; - [ ] units -- Units of output raster; options include &#39;degrees&#39;, &#39;radians&#39;, &#39;percent&#39;</span></span>
 <span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
 <span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (Slope) ---</span></span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt; goof : &#39;/tmp/Rtmp5srhl0/Rinst1cbca81a9b21/whitebox/extdata/DEM.tif&#39;</span></span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/RtmpsDUR6u/slope.tif&#39; </span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt; goof : &#39;/tmp/Rtmpx4Se17/Rinst17ebf9d12535/whitebox/extdata/DEM.tif&#39;</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/Rtmp54CcYa/slope.tif&#39; </span></span>
 <span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#&gt;  Slope ERROR: &#39;goof&#39; invalid; &#39;dem&#39; required</span></span></code></pre></div>
 <p>When a call fails an informative error message issued, and the error
@@ -415,11 +416,11 @@ well for sequential tool runs; more on that below.</p>
 <code>&quot;result&quot;</code>, <code>&quot;history&quot;</code>) and the
 <code>&quot;class&quot;</code> attribute <code>&quot;wbt_result&quot;</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">wbt</span>(<span class="st">&quot;slope&quot;</span>, <span class="at">dem =</span> dem, <span class="at">output =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;slope.tif&quot;</span>)), <span class="at">max.level =</span> <span class="dv">1</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">#&gt; Slope - Elapsed Time (excluding I/O): 0.12s</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">#&gt; Slope - Elapsed Time (excluding I/O): 0.25s</span></span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt; List of 6</span></span>
 <span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt;  $ tool   : chr &quot;Slope&quot;</span></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt;  $ args   : chr &quot;--dem=/tmp/Rtmp5srhl0/Rinst1cbca81a9b21/whitebox/extdata/DEM.tif --output=/tmp/RtmpsDUR6u/slope.tif&quot;</span></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt;  $ stdout : chr &quot;Slope - Elapsed Time (excluding I/O): 0.12s&quot;</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt;  $ args   : chr &quot;--dem=/tmp/Rtmpx4Se17/Rinst17ebf9d12535/whitebox/extdata/DEM.tif --output=/tmp/Rtmp54CcYa/slope.tif&quot;</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt;  $ stdout : chr &quot;Slope - Elapsed Time (excluding I/O): 0.25s&quot;</span></span>
 <span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt;  $ crs    : chr &quot;&quot;</span></span>
 <span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co">#&gt;   ..- attr(*, &quot;package&quot;)= Named chr &quot;&quot;</span></span>
 <span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co">#&gt;   .. ..- attr(*, &quot;names&quot;)= chr &quot;dem&quot;</span></span>
@@ -442,11 +443,11 @@ error message is returned in lieu of a list in <code>$result</code></p>
 <span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt; Optional arguments:</span></span>
 <span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt; - [ ] zfactor -- Optional multiplier for when the vertical and horizontal units are not the same.</span></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#&gt; - [ ] units -- Units of output raster; options include &#39;degrees&#39;, &#39;radians&#39;, &#39;percent&#39;</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">inherits</span>(x<span class="sc">$</span>result, <span class="st">&#39;try-error&#39;</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">message</span>(x<span class="sc">$</span>result[<span class="dv">1</span>])</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="co">#&gt; ERROR: &#39;dem&#39;, &#39;output&#39; required</span></span></code></pre></div>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#&gt; - [ ] units -- Units of output raster; options include &#39;degrees&#39;, &#39;radians&#39;, &#39;percent&#39;</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="fu">inherits</span>(x<span class="sc">$</span>result, <span class="st">&#39;try-error&#39;</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="fu">message</span>(x<span class="sc">$</span>result[<span class="dv">1</span>])</span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt; ERROR: &#39;dem&#39;, &#39;output&#39; required</span></span></code></pre></div>
 </div>
 </div>
 <div id="vignette-topics" class="section level2">
@@ -474,42 +475,42 @@ associated with that R object.</p>
 <div id="compare-raster-and-terra-as-r-raster-object-frontends" class="section level3">
 <h3>Compare <code>raster</code> and <code>terra</code> as R raster
 object frontends</h3>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">requireNamespace</span>(<span class="st">&quot;raster&quot;</span>)) {</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>  rdem <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">raster</span>(dem)</span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>  <span class="co"># raster input; raster output</span></span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>  r1 <span class="ot">&lt;-</span> <span class="fu">wbt</span>(<span class="st">&quot;slope&quot;</span>, <span class="at">dem =</span> rdem, <span class="at">output =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;slope.tif&quot;</span>))</span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>  r1</span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>  <span class="fu">class</span>(r1<span class="sc">$</span>result<span class="sc">$</span>output)</span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>}</span>
-<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="co">#&gt; Loading required namespace: raster</span></span>
-<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="co">#&gt; Slope - Elapsed Time (excluding I/O): 0.14s</span></span>
-<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="co">#&gt; [1] &quot;RasterLayer&quot;</span></span>
-<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="co">#&gt; attr(,&quot;package&quot;)</span></span>
-<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="co">#&gt; [1] &quot;raster&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>tdem <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(dem)</span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="do">## terra input; terra output</span></span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">wbt</span>(<span class="st">&quot;slope&quot;</span>, <span class="at">dem =</span> tdem, <span class="at">output =</span>  <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;slope.tif&quot;</span>))</span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">#&gt; Slope - Elapsed Time (excluding I/O): 0.12s</span></span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>t1</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (Slope) ---</span></span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co">#&gt; dem  : &#39;/tmp/Rtmp5srhl0/Rbuild1cbcad2c685a/whitebox/vignettes/file1cc0c3e5c9f9c.tif&#39;</span></span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/RtmpsDUR6u/slope.tif&#39; </span></span>
-<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co">#&gt; --- RESULT ---</span></span>
-<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co">#&gt; $output</span></span>
-<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="co">#&gt; class       : SpatRaster </span></span>
-<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a><span class="co">#&gt; dimensions  : 188, 237, 1  (nrow, ncol, nlyr)</span></span>
-<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a><span class="co">#&gt; resolution  : 90, 90  (x, y)</span></span>
-<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a><span class="co">#&gt; extent      : 664692, 686022, 4878904, 4895824  (xmin, xmax, ymin, ymax)</span></span>
-<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a><span class="co">#&gt; coord. ref. : NAD83 / UTM zone 18N (EPSG:26918) </span></span>
-<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a><span class="co">#&gt; source      : slope.tif </span></span>
-<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a><span class="co">#&gt; name        : slope</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">class</span>(t1<span class="sc">$</span>result<span class="sc">$</span>output)</span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="co">#&gt; [1] &quot;SpatRaster&quot;</span></span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="co">#&gt; attr(,&quot;package&quot;)</span></span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co">#&gt; [1] &quot;terra&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">requireNamespace</span>(<span class="st">&quot;raster&quot;</span>)) {</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  rdem <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">raster</span>(dem)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>  <span class="co"># raster input; raster output</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>  r1 <span class="ot">&lt;-</span> <span class="fu">wbt</span>(<span class="st">&quot;slope&quot;</span>, <span class="at">dem =</span> rdem, <span class="at">output =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;slope.tif&quot;</span>))</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>  r1</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>  <span class="fu">class</span>(r1<span class="sc">$</span>result<span class="sc">$</span>output)</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>}</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co">#&gt; Loading required namespace: raster</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="co">#&gt; Slope - Elapsed Time (excluding I/O): 0.9s</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="co">#&gt; [1] &quot;RasterLayer&quot;</span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co">#&gt; attr(,&quot;package&quot;)</span></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="co">#&gt; [1] &quot;raster&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>tdem <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(dem)</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="do">## terra input; terra output</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">wbt</span>(<span class="st">&quot;slope&quot;</span>, <span class="at">dem =</span> tdem, <span class="at">output =</span>  <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;slope.tif&quot;</span>))</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#&gt; Slope - Elapsed Time (excluding I/O): 0.8s</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>t1</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (Slope) ---</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co">#&gt; dem  : &#39;/tmp/Rtmpx4Se17/Rinst17ebf9d12535/whitebox/extdata/DEM.tif&#39;</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/Rtmp54CcYa/slope.tif&#39; </span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="co">#&gt; --- RESULT ---</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="co">#&gt; $output</span></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="co">#&gt; class       : SpatRaster </span></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="co">#&gt; size        : 188, 237, 1  (nrow, ncol, nlyr)</span></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="co">#&gt; resolution  : 90, 90  (x, y)</span></span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a><span class="co">#&gt; extent      : 664692, 686022, 4878904, 4895824  (xmin, xmax, ymin, ymax)</span></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="co">#&gt; coord. ref. : NAD83 / UTM zone 18N (EPSG:26918) </span></span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a><span class="co">#&gt; source      : slope.tif </span></span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a><span class="co">#&gt; name        : slope</span></span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="fu">class</span>(t1<span class="sc">$</span>result<span class="sc">$</span>output)</span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="co">#&gt; [1] &quot;SpatRaster&quot;</span></span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a><span class="co">#&gt; attr(,&quot;package&quot;)</span></span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a><span class="co">#&gt; [1] &quot;terra&quot;</span></span></code></pre></div>
 <p>The user still needs to specify paths but <code>wbt()</code> eases
 the process of converting input objects to paths and reading output
 paths to R objects after the tool has run. In principle any R object
@@ -540,18 +541,18 @@ SpatVectorProxy use delayed read by default. Passing a file path to
 information for use with <code>wbt()</code>.</p>
 <p>For instance, we can create a reference for a sample ESRI Shapefile
 via <code>wbt_source()</code>. The result is a SpatVectorProxy.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>shp <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;ex/lux.shp&quot;</span>, <span class="at">package =</span> <span class="st">&quot;terra&quot;</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">wbt_source</span>(shp)</span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>x</span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="co">#&gt;  class       : SpatVectorProxy</span></span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="co">#&gt;  geometry    : polygons </span></span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="co">#&gt;  dimensions  : 12, 6  (geometries, attributes)</span></span>
-<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="co">#&gt;  extent      : 5.74414, 6.528252, 49.44781, 50.18162  (xmin, xmax, ymin, ymax)</span></span>
-<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a><span class="co">#&gt;  source      : lux.shp</span></span>
-<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="co">#&gt;  coord. ref. : lon/lat WGS 84 (EPSG:4326) </span></span>
-<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a><span class="co">#&gt;  names       :  ID_1 NAME_1  ID_2 NAME_2  AREA   POP</span></span>
-<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a><span class="co">#&gt;  type        : &lt;num&gt;  &lt;chr&gt; &lt;num&gt;  &lt;chr&gt; &lt;num&gt; &lt;int&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>shp <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;ex/lux.shp&quot;</span>, <span class="at">package =</span> <span class="st">&quot;terra&quot;</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">wbt_source</span>(shp)</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>x</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co">#&gt;  class       : SpatVectorProxy</span></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co">#&gt;  geometry    : polygons </span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co">#&gt;  dimensions  : 12, 6  (geometries, attributes)</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co">#&gt;  extent      : 5.74414, 6.528252, 49.44781, 50.18162  (xmin, xmax, ymin, ymax)</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="co">#&gt;  source      : lux.shp</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="co">#&gt;  coord. ref. : lon/lat WGS 84 (EPSG:4326) </span></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="co">#&gt;  names       :  ID_1 NAME_1  ID_2 NAME_2  AREA   POP</span></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="co">#&gt;  type        : &lt;num&gt;  &lt;chr&gt; &lt;num&gt;  &lt;chr&gt; &lt;num&gt; &lt;num&gt;</span></span></code></pre></div>
 <p>The SpatVectorProxy provides a light-weight means to create an R
 object reference to a large file; allowing the “heavy” lifting for that
 file to be done primarily by WhiteboxTools (or GDAL via {terra}).</p>
@@ -560,36 +561,33 @@ vector data inputs other than Shapefile. If we have, for example, a
 GeoPackage, <code>wbt_source()</code> will convert the input to a
 temporary shapefile and return a SpatVectorProxy that references that
 file. This object can then be used as input to <code>wbt()</code>.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># load the data</span></span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">query</span>(x)</span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="co"># remove area column</span></span>
-<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>x2<span class="sc">$</span>AREA <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="co"># create a GeoPackage</span></span>
-<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">writeVector</span>(x2, <span class="at">filename =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;lux.gpkg&quot;</span>), <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a><span class="co">#&gt; Warning in x@ptr$write(filename, layer, filetype, insert[1], overwrite[1], :</span></span>
-<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="co">#&gt; GDAL Message 6: dataset /tmp/RtmpsDUR6u/lux.gpkg does not support layer</span></span>
-<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a><span class="co">#&gt; creation option ENCODING</span></span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a></span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="co"># now the source is a temporary .shp</span></span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>x3 <span class="ot">&lt;-</span> <span class="fu">wbt_source</span>(<span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;lux.gpkg&quot;</span>))</span>
-<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="fu">wbt</span>(<span class="st">&quot;polygon_area&quot;</span>, <span class="at">input =</span> x3)</span>
-<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a><span class="co">#&gt; PolygonArea - Elapsed Time: 0.0s</span></span>
-<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
-<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (PolygonArea) ---</span></span>
-<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a><span class="co">#&gt; input    : &#39;/tmp/RtmpsDUR6u/lux.gpkg_file1cc0c690afdce.shp&#39; </span></span>
-<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a><span class="co">#&gt; --- RESULT ---</span></span>
-<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a><span class="co">#&gt; $output</span></span>
-<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a><span class="co">#&gt;  class       : SpatVectorProxy</span></span>
-<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a><span class="co">#&gt;  geometry    : polygons </span></span>
-<span id="cb15-14"><a href="#cb15-14" tabindex="-1"></a><span class="co">#&gt;  dimensions  : 12, 6  (geometries, attributes)</span></span>
-<span id="cb15-15"><a href="#cb15-15" tabindex="-1"></a><span class="co">#&gt;  extent      : 5.74414, 6.528252, 49.44781, 50.18162  (xmin, xmax, ymin, ymax)</span></span>
-<span id="cb15-16"><a href="#cb15-16" tabindex="-1"></a><span class="co">#&gt;  source      : lux.gpkg_file1cc0c690afdce.shp</span></span>
-<span id="cb15-17"><a href="#cb15-17" tabindex="-1"></a><span class="co">#&gt;  coord. ref. : lon/lat WGS 84 (EPSG:4326) </span></span>
-<span id="cb15-18"><a href="#cb15-18" tabindex="-1"></a><span class="co">#&gt;  names       :  ID_1 NAME_1  ID_2 NAME_2   POP  AREA</span></span>
-<span id="cb15-19"><a href="#cb15-19" tabindex="-1"></a><span class="co">#&gt;  type        : &lt;num&gt;  &lt;chr&gt; &lt;num&gt;  &lt;chr&gt; &lt;int&gt; &lt;num&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># load the data</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">query</span>(x)</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co"># remove area column</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>x2<span class="sc">$</span>AREA <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co"># create a GeoPackage</span></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">writeVector</span>(x2, <span class="at">filename =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;lux.gpkg&quot;</span>), <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="co"># now the source is a temporary .shp</span></span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>x3 <span class="ot">&lt;-</span> <span class="fu">wbt_source</span>(<span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;lux.gpkg&quot;</span>))</span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a><span class="fu">wbt</span>(<span class="st">&quot;polygon_area&quot;</span>, <span class="at">input =</span> x3)</span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a><span class="co">#&gt; PolygonArea - Elapsed Time: 0.0s</span></span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (PolygonArea) ---</span></span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a><span class="co">#&gt; input    : &#39;/tmp/Rtmp54CcYa/lux.gpkg_wbt17ff118591556.shp&#39; </span></span>
+<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a><span class="co">#&gt; --- RESULT ---</span></span>
+<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a><span class="co">#&gt; $output</span></span>
+<span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a><span class="co">#&gt;  class       : SpatVectorProxy</span></span>
+<span id="cb10-21"><a href="#cb10-21" tabindex="-1"></a><span class="co">#&gt;  geometry    : polygons </span></span>
+<span id="cb10-22"><a href="#cb10-22" tabindex="-1"></a><span class="co">#&gt;  dimensions  : 12, 6  (geometries, attributes)</span></span>
+<span id="cb10-23"><a href="#cb10-23" tabindex="-1"></a><span class="co">#&gt;  extent      : 5.74414, 6.528252, 49.44781, 50.18162  (xmin, xmax, ymin, ymax)</span></span>
+<span id="cb10-24"><a href="#cb10-24" tabindex="-1"></a><span class="co">#&gt;  source      : lux.gpkg_wbt17ff118591556.shp</span></span>
+<span id="cb10-25"><a href="#cb10-25" tabindex="-1"></a><span class="co">#&gt;  coord. ref. : lon/lat WGS 84 (EPSG:4326) </span></span>
+<span id="cb10-26"><a href="#cb10-26" tabindex="-1"></a><span class="co">#&gt;  names       :  ID_1 NAME_1  ID_2 NAME_2   POP  AREA</span></span>
+<span id="cb10-27"><a href="#cb10-27" tabindex="-1"></a><span class="co">#&gt;  type        : &lt;num&gt;  &lt;chr&gt; &lt;num&gt;  &lt;chr&gt; &lt;num&gt; &lt;num&gt;</span></span></code></pre></div>
 </div>
 <div id="running-sequences-of-tools" class="section level1">
 <h1>Running Sequences of Tools</h1>
@@ -606,10 +604,10 @@ sequence.</p>
 run.</p>
 <p>Here we run “Slope” on a DEM, then run “Slope” on it again to get a
 second derivative “curvature”.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">wbt</span>(<span class="st">&quot;slope&quot;</span>, <span class="at">dem =</span> dem, <span class="at">output =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;slope.tif&quot;</span>))</span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="co">#&gt; Slope - Elapsed Time (excluding I/O): 0.13s</span></span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">wbt</span>(x, <span class="at">tool_name =</span> <span class="st">&quot;slope&quot;</span>, <span class="at">output =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;curvature.tif&quot;</span>))</span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a><span class="co">#&gt; Slope - Elapsed Time (excluding I/O): 0.5s</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">wbt</span>(<span class="st">&quot;slope&quot;</span>, <span class="at">dem =</span> dem, <span class="at">output =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;slope.tif&quot;</span>))</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="co">#&gt; Slope - Elapsed Time (excluding I/O): 0.9s</span></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">wbt</span>(x, <span class="at">tool_name =</span> <span class="st">&quot;slope&quot;</span>, <span class="at">output =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;curvature.tif&quot;</span>))</span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co">#&gt; Slope - Elapsed Time (excluding I/O): 0.4s</span></span></code></pre></div>
 <div id="using-pipes" class="section level2">
 <h2>Using pipes</h2>
 <p>Nested chained operation syntax can be transformed to use pipe
@@ -618,62 +616,62 @@ operators ({base} R 4.1+ <code>|&gt;</code> or {magrittr}
 (fewer nested parentheses) and the first argument transfer behavior
 allows results from each step to be transferred to the input of the
 next.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="fu">wbt</span>(<span class="st">&quot;slope&quot;</span>, <span class="at">dem =</span> dem, <span class="at">output =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;slope.tif&quot;</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>  <span class="fu">wbt</span>(<span class="st">&quot;slope&quot;</span>, <span class="at">output =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;curvature.tif&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">wbt</span>(<span class="st">&quot;slope&quot;</span>, <span class="at">dem =</span> dem, <span class="at">output =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;slope.tif&quot;</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>  <span class="fu">wbt</span>(<span class="st">&quot;slope&quot;</span>, <span class="at">output =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;curvature.tif&quot;</span>))</span></code></pre></div>
 <p>The <code>wbt_result</code> output that prints to the console will
 reflect the input/output parameters of the most recent tool run in a
 tool chain.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>x2</span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
-<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (Slope) ---</span></span>
-<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a><span class="co">#&gt; dem  : &#39;//tmp/RtmpsDUR6u/slope.tif&#39;</span></span>
-<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/RtmpsDUR6u/curvature.tif&#39; </span></span>
-<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a><span class="co">#&gt; --- RESULT ---</span></span>
-<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a><span class="co">#&gt; $output</span></span>
-<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a><span class="co">#&gt;   File result:  //tmp/RtmpsDUR6u/curvature.tif exists (Last modified: 2024-05-26 17:10:50.929171)</span></span>
-<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a><span class="co">#&gt; --- HISTORY ---</span></span>
-<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a><span class="co">#&gt; Prior results (n=1) for: Slope </span></span>
-<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a><span class="co">#&gt;  - Slope (output&lt;character&gt;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>x2</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (Slope) ---</span></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="co">#&gt; dem  : &#39;//tmp/Rtmp54CcYa/slope.tif&#39;</span></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/Rtmp54CcYa/curvature.tif&#39; </span></span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="co">#&gt; --- RESULT ---</span></span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="co">#&gt; $output</span></span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="co">#&gt;   File result:  //tmp/Rtmp54CcYa/curvature.tif exists (Last modified: 2025-10-13 14:53:49.457304)</span></span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a><span class="co">#&gt; --- HISTORY ---</span></span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="co">#&gt; Prior results (n=1) for: Slope </span></span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a><span class="co">#&gt;  - Slope (output&lt;character&gt;)</span></span></code></pre></div>
 <p><code>wbt_result()</code> is the method to get <code>$result</code>
 for single runs or all <code>$result</code> in <code>$history</code> for
 chained runs from a <code>wbt_result</code> object.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">wbt_result</span>(x2), <span class="at">max.level =</span> <span class="dv">1</span>)</span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="co">#&gt;  chr [1:2] &quot;//tmp/RtmpsDUR6u/slope.tif&quot; &quot;//tmp/RtmpsDUR6u/curvature.tif&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">wbt_result</span>(x2), <span class="at">max.level =</span> <span class="dv">1</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="co">#&gt;  chr [1:2] &quot;//tmp/Rtmp54CcYa/slope.tif&quot; &quot;//tmp/Rtmp54CcYa/curvature.tif&quot;</span></span></code></pre></div>
 <p>The <code>$history</code> element is a list of the
 <code>wbt_result</code> from individual runs.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="fu">str</span>(x2<span class="sc">$</span>history, <span class="at">max.level =</span> <span class="dv">1</span>)</span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="co">#&gt; List of 2</span></span>
-<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a><span class="co">#&gt;  $ :List of 5</span></span>
-<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a><span class="co">#&gt;   ..- attr(*, &quot;class&quot;)= chr &quot;wbt_result&quot;</span></span>
-<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a><span class="co">#&gt;  $ :List of 5</span></span>
-<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a><span class="co">#&gt;   ..- attr(*, &quot;class&quot;)= chr &quot;wbt_result&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">str</span>(x2<span class="sc">$</span>history, <span class="at">max.level =</span> <span class="dv">1</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="co">#&gt; List of 2</span></span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="co">#&gt;  $ :List of 5</span></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="co">#&gt;   ..- attr(*, &quot;class&quot;)= chr &quot;wbt_result&quot;</span></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="co">#&gt;  $ :List of 5</span></span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a><span class="co">#&gt;   ..- attr(*, &quot;class&quot;)= chr &quot;wbt_result&quot;</span></span></code></pre></div>
 <p>If you pass invalid results from one step to the next, you get an
 informative error message.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">wbt</span>(<span class="st">&quot;slope&quot;</span>)</span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a><span class="co">#&gt; Required arguments:</span></span>
-<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a><span class="co">#&gt; - [ ] dem -- Input raster DEM file.</span></span>
-<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a><span class="co">#&gt; - [ ] output -- Output raster file.</span></span>
-<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a><span class="co">#&gt; Optional arguments:</span></span>
-<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a><span class="co">#&gt; - [ ] zfactor -- Optional multiplier for when the vertical and horizontal units are not the same.</span></span>
-<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a><span class="co">#&gt; - [ ] units -- Units of output raster; options include &#39;degrees&#39;, &#39;radians&#39;, &#39;percent&#39;</span></span></code></pre></div>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="fu">wbt</span>(x, <span class="st">&quot;slope&quot;</span>, <span class="at">output =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;foo.tif&quot;</span>))</span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="co">#&gt; </span><span class="al">NOTE</span><span class="co">: try-error result cannot be used as `dem`</span></span>
-<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a><span class="co">#&gt; Required arguments:</span></span>
-<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a><span class="co">#&gt; - [ ] dem -- Input raster DEM file.</span></span>
-<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a><span class="co">#&gt; - [*] output -- Output raster file.</span></span>
-<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a><span class="co">#&gt; Optional arguments:</span></span>
-<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a><span class="co">#&gt; - [ ] zfactor -- Optional multiplier for when the vertical and horizontal units are not the same.</span></span>
-<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a><span class="co">#&gt; - [ ] units -- Units of output raster; options include &#39;degrees&#39;, &#39;radians&#39;, &#39;percent&#39;</span></span>
-<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
-<span id="cb23-11"><a href="#cb23-11" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (Slope) ---</span></span>
-<span id="cb23-12"><a href="#cb23-12" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/RtmpsDUR6u/foo.tif&#39; </span></span>
-<span id="cb23-13"><a href="#cb23-13" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb23-14"><a href="#cb23-14" tabindex="-1"></a><span class="co">#&gt;  Slope ERROR: &#39;dem&#39; required </span></span>
-<span id="cb23-15"><a href="#cb23-15" tabindex="-1"></a><span class="co">#&gt; --- HISTORY ---</span></span>
-<span id="cb23-16"><a href="#cb23-16" tabindex="-1"></a><span class="co">#&gt; Prior results (n=1) for: Slope </span></span>
-<span id="cb23-17"><a href="#cb23-17" tabindex="-1"></a><span class="co">#&gt;  - Slope (&lt;character&gt;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">wbt</span>(<span class="st">&quot;slope&quot;</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="co">#&gt; Required arguments:</span></span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="co">#&gt; - [ ] dem -- Input raster DEM file.</span></span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a><span class="co">#&gt; - [ ] output -- Output raster file.</span></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a><span class="co">#&gt; Optional arguments:</span></span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a><span class="co">#&gt; - [ ] zfactor -- Optional multiplier for when the vertical and horizontal units are not the same.</span></span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a><span class="co">#&gt; - [ ] units -- Units of output raster; options include &#39;degrees&#39;, &#39;radians&#39;, &#39;percent&#39;</span></span>
+<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a><span class="fu">wbt</span>(x, <span class="st">&quot;slope&quot;</span>, <span class="at">output =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;foo.tif&quot;</span>))</span>
+<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a><span class="co">#&gt; </span><span class="al">NOTE</span><span class="co">: try-error result cannot be used as `dem`</span></span>
+<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a><span class="co">#&gt; Required arguments:</span></span>
+<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a><span class="co">#&gt; - [ ] dem -- Input raster DEM file.</span></span>
+<span id="cb16-13"><a href="#cb16-13" tabindex="-1"></a><span class="co">#&gt; - [*] output -- Output raster file.</span></span>
+<span id="cb16-14"><a href="#cb16-14" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb16-15"><a href="#cb16-15" tabindex="-1"></a><span class="co">#&gt; Optional arguments:</span></span>
+<span id="cb16-16"><a href="#cb16-16" tabindex="-1"></a><span class="co">#&gt; - [ ] zfactor -- Optional multiplier for when the vertical and horizontal units are not the same.</span></span>
+<span id="cb16-17"><a href="#cb16-17" tabindex="-1"></a><span class="co">#&gt; - [ ] units -- Units of output raster; options include &#39;degrees&#39;, &#39;radians&#39;, &#39;percent&#39;</span></span>
+<span id="cb16-18"><a href="#cb16-18" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
+<span id="cb16-19"><a href="#cb16-19" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (Slope) ---</span></span>
+<span id="cb16-20"><a href="#cb16-20" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/Rtmp54CcYa/foo.tif&#39; </span></span>
+<span id="cb16-21"><a href="#cb16-21" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb16-22"><a href="#cb16-22" tabindex="-1"></a><span class="co">#&gt;  Slope ERROR: &#39;dem&#39; required </span></span>
+<span id="cb16-23"><a href="#cb16-23" tabindex="-1"></a><span class="co">#&gt; --- HISTORY ---</span></span>
+<span id="cb16-24"><a href="#cb16-24" tabindex="-1"></a><span class="co">#&gt; Prior results (n=1) for: Slope </span></span>
+<span id="cb16-25"><a href="#cb16-25" tabindex="-1"></a><span class="co">#&gt;  - Slope (&lt;character&gt;)</span></span></code></pre></div>
 </div>
 </div>
 <div id="coordinate-reference-systems-crs" class="section level1">
@@ -701,10 +699,10 @@ or having CRS propagate from input.</p>
 substituted for file names and vice versa. User and workflow level
 attributes like CRS and working directory be handled at the same
 time.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>dem <span class="ot">&lt;-</span> <span class="fu">sample_dem_data</span>()</span>
-<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a><span class="do">## equivalent to:</span></span>
-<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a><span class="co"># dem &lt;- system.file(&quot;extdata/DEM.tif&quot;, package = &quot;whitebox&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>dem <span class="ot">&lt;-</span> <span class="fu">sample_dem_data</span>()</span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a><span class="do">## equivalent to:</span></span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a><span class="co"># dem &lt;- system.file(&quot;extdata/DEM.tif&quot;, package = &quot;whitebox&quot;)</span></span></code></pre></div>
 <p>In the process of reading/writing files that may contain CRS
 information, such as this sample DEM, the CRS can be inspected, modified
 and propagated to file or R objects.</p>
@@ -714,41 +712,41 @@ and propagated to file or R objects.</p>
 <code>wbt()</code> makes sure it is propagated to the R object result.
 <code>wbt()</code> does not alter or copy the source or output files
 which may or may not have CRS information.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>araster <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(dem)</span>
-<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="fu">wbt</span>(<span class="st">&quot;slope&quot;</span>, <span class="at">dem =</span> araster, <span class="at">output =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;foo.tif&quot;</span>))</span>
-<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a><span class="co">#&gt; Slope - Elapsed Time (excluding I/O): 0.15s</span></span>
-<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
-<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (Slope) ---</span></span>
-<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a><span class="co">#&gt; dem  : &#39;/tmp/Rtmp5srhl0/Rbuild1cbcad2c685a/whitebox/vignettes/file1cc0cf4d812c.tif&#39;</span></span>
-<span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/RtmpsDUR6u/foo.tif&#39; </span></span>
-<span id="cb25-8"><a href="#cb25-8" tabindex="-1"></a><span class="co">#&gt; --- RESULT ---</span></span>
-<span id="cb25-9"><a href="#cb25-9" tabindex="-1"></a><span class="co">#&gt; $output</span></span>
-<span id="cb25-10"><a href="#cb25-10" tabindex="-1"></a><span class="co">#&gt; class       : SpatRaster </span></span>
-<span id="cb25-11"><a href="#cb25-11" tabindex="-1"></a><span class="co">#&gt; dimensions  : 188, 237, 1  (nrow, ncol, nlyr)</span></span>
-<span id="cb25-12"><a href="#cb25-12" tabindex="-1"></a><span class="co">#&gt; resolution  : 90, 90  (x, y)</span></span>
-<span id="cb25-13"><a href="#cb25-13" tabindex="-1"></a><span class="co">#&gt; extent      : 664692, 686022, 4878904, 4895824  (xmin, xmax, ymin, ymax)</span></span>
-<span id="cb25-14"><a href="#cb25-14" tabindex="-1"></a><span class="co">#&gt; coord. ref. : NAD83 / UTM zone 18N (EPSG:26918) </span></span>
-<span id="cb25-15"><a href="#cb25-15" tabindex="-1"></a><span class="co">#&gt; source      : foo.tif </span></span>
-<span id="cb25-16"><a href="#cb25-16" tabindex="-1"></a><span class="co">#&gt; name        : foo</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>araster <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(dem)</span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="fu">wbt</span>(<span class="st">&quot;slope&quot;</span>, <span class="at">dem =</span> araster, <span class="at">output =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;foo.tif&quot;</span>))</span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a><span class="co">#&gt; Slope - Elapsed Time (excluding I/O): 0.8s</span></span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (Slope) ---</span></span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a><span class="co">#&gt; dem  : &#39;/tmp/Rtmpx4Se17/Rinst17ebf9d12535/whitebox/extdata/DEM.tif&#39;</span></span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/Rtmp54CcYa/foo.tif&#39; </span></span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a><span class="co">#&gt; --- RESULT ---</span></span>
+<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a><span class="co">#&gt; $output</span></span>
+<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a><span class="co">#&gt; class       : SpatRaster </span></span>
+<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a><span class="co">#&gt; size        : 188, 237, 1  (nrow, ncol, nlyr)</span></span>
+<span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a><span class="co">#&gt; resolution  : 90, 90  (x, y)</span></span>
+<span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a><span class="co">#&gt; extent      : 664692, 686022, 4878904, 4895824  (xmin, xmax, ymin, ymax)</span></span>
+<span id="cb18-14"><a href="#cb18-14" tabindex="-1"></a><span class="co">#&gt; coord. ref. : NAD83 / UTM zone 18N (EPSG:26918) </span></span>
+<span id="cb18-15"><a href="#cb18-15" tabindex="-1"></a><span class="co">#&gt; source      : foo.tif </span></span>
+<span id="cb18-16"><a href="#cb18-16" tabindex="-1"></a><span class="co">#&gt; name        : foo</span></span></code></pre></div>
 <p>Alternately you can specify the <code>crs</code> argument to
 <code>wbt()</code> instead of <code>rast()</code>. This will directly
 set the <code>crs</code> element of the <code>wbt_result</code> of your
 output.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="fu">wbt</span>(<span class="st">&quot;slope&quot;</span>, <span class="at">dem =</span> terra<span class="sc">::</span><span class="fu">rast</span>(dem), <span class="at">crs =</span> <span class="st">&quot;EPSG:26918&quot;</span>, <span class="at">output =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;foo.tif&quot;</span>))</span>
-<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a><span class="co">#&gt; Slope - Elapsed Time (excluding I/O): 0.12s</span></span>
-<span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
-<span id="cb26-4"><a href="#cb26-4" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (Slope) ---</span></span>
-<span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a><span class="co">#&gt; dem  : &#39;/tmp/Rtmp5srhl0/Rbuild1cbcad2c685a/whitebox/vignettes/file1cc0c552f49c7.tif&#39;</span></span>
-<span id="cb26-6"><a href="#cb26-6" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/RtmpsDUR6u/foo.tif&#39; </span></span>
-<span id="cb26-7"><a href="#cb26-7" tabindex="-1"></a><span class="co">#&gt; --- RESULT ---</span></span>
-<span id="cb26-8"><a href="#cb26-8" tabindex="-1"></a><span class="co">#&gt; $output</span></span>
-<span id="cb26-9"><a href="#cb26-9" tabindex="-1"></a><span class="co">#&gt; class       : SpatRaster </span></span>
-<span id="cb26-10"><a href="#cb26-10" tabindex="-1"></a><span class="co">#&gt; dimensions  : 188, 237, 1  (nrow, ncol, nlyr)</span></span>
-<span id="cb26-11"><a href="#cb26-11" tabindex="-1"></a><span class="co">#&gt; resolution  : 90, 90  (x, y)</span></span>
-<span id="cb26-12"><a href="#cb26-12" tabindex="-1"></a><span class="co">#&gt; extent      : 664692, 686022, 4878904, 4895824  (xmin, xmax, ymin, ymax)</span></span>
-<span id="cb26-13"><a href="#cb26-13" tabindex="-1"></a><span class="co">#&gt; coord. ref. : NAD83 / UTM zone 18N (EPSG:26918) </span></span>
-<span id="cb26-14"><a href="#cb26-14" tabindex="-1"></a><span class="co">#&gt; source      : foo.tif </span></span>
-<span id="cb26-15"><a href="#cb26-15" tabindex="-1"></a><span class="co">#&gt; name        : foo</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="fu">wbt</span>(<span class="st">&quot;slope&quot;</span>, <span class="at">dem =</span> terra<span class="sc">::</span><span class="fu">rast</span>(dem), <span class="at">crs =</span> <span class="st">&quot;EPSG:26918&quot;</span>, <span class="at">output =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;foo.tif&quot;</span>))</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="co">#&gt; Slope - Elapsed Time (excluding I/O): 0.8s</span></span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (Slope) ---</span></span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a><span class="co">#&gt; dem  : &#39;/tmp/Rtmpx4Se17/Rinst17ebf9d12535/whitebox/extdata/DEM.tif&#39;</span></span>
+<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/Rtmp54CcYa/foo.tif&#39; </span></span>
+<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a><span class="co">#&gt; --- RESULT ---</span></span>
+<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a><span class="co">#&gt; $output</span></span>
+<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a><span class="co">#&gt; class       : SpatRaster </span></span>
+<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a><span class="co">#&gt; size        : 188, 237, 1  (nrow, ncol, nlyr)</span></span>
+<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a><span class="co">#&gt; resolution  : 90, 90  (x, y)</span></span>
+<span id="cb19-12"><a href="#cb19-12" tabindex="-1"></a><span class="co">#&gt; extent      : 664692, 686022, 4878904, 4895824  (xmin, xmax, ymin, ymax)</span></span>
+<span id="cb19-13"><a href="#cb19-13" tabindex="-1"></a><span class="co">#&gt; coord. ref. : NAD83 / UTM zone 18N (EPSG:26918) </span></span>
+<span id="cb19-14"><a href="#cb19-14" tabindex="-1"></a><span class="co">#&gt; source      : foo.tif </span></span>
+<span id="cb19-15"><a href="#cb19-15" tabindex="-1"></a><span class="co">#&gt; name        : foo</span></span></code></pre></div>
 <p>In either case wherever you specify the <code>crs</code> argument the
 <code>crs</code> is stored in the <code>wbt_result</code> and propagated
 to the relevant output. Again, the source files are unchanged if they
@@ -756,55 +754,55 @@ had no CRS or invalid CRS (until you write that updated CRS to
 file).</p>
 <p>If two input R objects have different (or no) CRS then the
 <code>wbt()</code> method will provide a message to the user:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>r1 <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(dem) <span class="co"># default: EPSG:26918</span></span>
-<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>r2 <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">deepcopy</span>(r1)</span>
-<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a><span class="fu">crs</span>(r2) <span class="ot">&lt;-</span> <span class="st">&quot;EPSG:26917&quot;</span> <span class="co"># something else/wrong</span></span>
-<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a><span class="fu">wbt</span>(<span class="st">&quot;add&quot;</span>, </span>
-<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a>    <span class="at">input1 =</span> r1, </span>
-<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a>    <span class="at">input2 =</span> r2, </span>
-<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a>    <span class="at">output =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;foo.tif&quot;</span>)</span>
-<span id="cb27-8"><a href="#cb27-8" tabindex="-1"></a>   )</span>
-<span id="cb27-9"><a href="#cb27-9" tabindex="-1"></a><span class="co">#&gt; </span><span class="al">NOTE</span><span class="co">: Input CRS do not match.</span></span>
-<span id="cb27-10"><a href="#cb27-10" tabindex="-1"></a><span class="co">#&gt; Add - Elapsed Time (excluding I/O): 0.1s</span></span>
-<span id="cb27-11"><a href="#cb27-11" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
-<span id="cb27-12"><a href="#cb27-12" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (Add) ---</span></span>
-<span id="cb27-13"><a href="#cb27-13" tabindex="-1"></a><span class="co">#&gt; input1   : &#39;/tmp/Rtmp5srhl0/Rbuild1cbcad2c685a/whitebox/vignettes/file1cc0c6543aade.tif&#39;</span></span>
-<span id="cb27-14"><a href="#cb27-14" tabindex="-1"></a><span class="co">#&gt; input2   : &#39;/tmp/Rtmp5srhl0/Rbuild1cbcad2c685a/whitebox/vignettes/file1cc0c1cb97649.tif&#39;</span></span>
-<span id="cb27-15"><a href="#cb27-15" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/RtmpsDUR6u/foo.tif&#39; </span></span>
-<span id="cb27-16"><a href="#cb27-16" tabindex="-1"></a><span class="co">#&gt; --- RESULT ---</span></span>
-<span id="cb27-17"><a href="#cb27-17" tabindex="-1"></a><span class="co">#&gt; $output</span></span>
-<span id="cb27-18"><a href="#cb27-18" tabindex="-1"></a><span class="co">#&gt; class       : SpatRaster </span></span>
-<span id="cb27-19"><a href="#cb27-19" tabindex="-1"></a><span class="co">#&gt; dimensions  : 188, 237, 1  (nrow, ncol, nlyr)</span></span>
-<span id="cb27-20"><a href="#cb27-20" tabindex="-1"></a><span class="co">#&gt; resolution  : 90, 90  (x, y)</span></span>
-<span id="cb27-21"><a href="#cb27-21" tabindex="-1"></a><span class="co">#&gt; extent      : 664692, 686022, 4878904, 4895824  (xmin, xmax, ymin, ymax)</span></span>
-<span id="cb27-22"><a href="#cb27-22" tabindex="-1"></a><span class="co">#&gt; coord. ref. : NAD83 / UTM zone 18N (EPSG:26918) </span></span>
-<span id="cb27-23"><a href="#cb27-23" tabindex="-1"></a><span class="co">#&gt; source      : foo.tif </span></span>
-<span id="cb27-24"><a href="#cb27-24" tabindex="-1"></a><span class="co">#&gt; name        : foo</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>r1 <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(dem) <span class="co"># default: EPSG:26918</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>r2 <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">deepcopy</span>(r1)</span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a><span class="fu">crs</span>(r2) <span class="ot">&lt;-</span> <span class="st">&quot;EPSG:26917&quot;</span> <span class="co"># something else/wrong</span></span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a><span class="fu">wbt</span>(<span class="st">&quot;add&quot;</span>, </span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a>    <span class="at">input1 =</span> r1, </span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a>    <span class="at">input2 =</span> r2, </span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a>    <span class="at">output =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;foo.tif&quot;</span>)</span>
+<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a>   )</span>
+<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a><span class="co">#&gt; </span><span class="al">NOTE</span><span class="co">: Input CRS do not match.</span></span>
+<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a><span class="co">#&gt; Add - Elapsed Time (excluding I/O): 0.0s</span></span>
+<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
+<span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (Add) ---</span></span>
+<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a><span class="co">#&gt; input1   : &#39;/tmp/Rtmpx4Se17/Rinst17ebf9d12535/whitebox/extdata/DEM.tif&#39;</span></span>
+<span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a><span class="co">#&gt; input2   : &#39;/tmp/Rtmpx4Se17/Rinst17ebf9d12535/whitebox/extdata/DEM.tif&#39;</span></span>
+<span id="cb20-15"><a href="#cb20-15" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/Rtmp54CcYa/foo.tif&#39; </span></span>
+<span id="cb20-16"><a href="#cb20-16" tabindex="-1"></a><span class="co">#&gt; --- RESULT ---</span></span>
+<span id="cb20-17"><a href="#cb20-17" tabindex="-1"></a><span class="co">#&gt; $output</span></span>
+<span id="cb20-18"><a href="#cb20-18" tabindex="-1"></a><span class="co">#&gt; class       : SpatRaster </span></span>
+<span id="cb20-19"><a href="#cb20-19" tabindex="-1"></a><span class="co">#&gt; size        : 188, 237, 1  (nrow, ncol, nlyr)</span></span>
+<span id="cb20-20"><a href="#cb20-20" tabindex="-1"></a><span class="co">#&gt; resolution  : 90, 90  (x, y)</span></span>
+<span id="cb20-21"><a href="#cb20-21" tabindex="-1"></a><span class="co">#&gt; extent      : 664692, 686022, 4878904, 4895824  (xmin, xmax, ymin, ymax)</span></span>
+<span id="cb20-22"><a href="#cb20-22" tabindex="-1"></a><span class="co">#&gt; coord. ref. : NAD83 / UTM zone 18N (EPSG:26918) </span></span>
+<span id="cb20-23"><a href="#cb20-23" tabindex="-1"></a><span class="co">#&gt; source      : foo.tif </span></span>
+<span id="cb20-24"><a href="#cb20-24" tabindex="-1"></a><span class="co">#&gt; name        : foo</span></span></code></pre></div>
 <p>This message is suppressed and output CRS set accordingly if the
 <code>crs</code> argument is specified. This user set CRS is only in the
 SpatRaster object, and does not necessarily match that of the file used
 as input or returned as output.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="fu">wbt</span>(<span class="st">&quot;add&quot;</span>, </span>
-<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>    <span class="at">input1 =</span> r1,</span>
-<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a>    <span class="at">input2 =</span> r2, </span>
-<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a>    <span class="at">crs =</span> <span class="st">&quot;EPSG:26918&quot;</span>,</span>
-<span id="cb28-5"><a href="#cb28-5" tabindex="-1"></a>    <span class="at">output =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;foo.tif&quot;</span>)</span>
-<span id="cb28-6"><a href="#cb28-6" tabindex="-1"></a>   )</span>
-<span id="cb28-7"><a href="#cb28-7" tabindex="-1"></a><span class="co">#&gt; Add - Elapsed Time (excluding I/O): 0.1s</span></span>
-<span id="cb28-8"><a href="#cb28-8" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
-<span id="cb28-9"><a href="#cb28-9" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (Add) ---</span></span>
-<span id="cb28-10"><a href="#cb28-10" tabindex="-1"></a><span class="co">#&gt; input1   : &#39;/tmp/Rtmp5srhl0/Rbuild1cbcad2c685a/whitebox/vignettes/file1cc0c72c5d7da.tif&#39;</span></span>
-<span id="cb28-11"><a href="#cb28-11" tabindex="-1"></a><span class="co">#&gt; input2   : &#39;/tmp/Rtmp5srhl0/Rbuild1cbcad2c685a/whitebox/vignettes/file1cc0cc90771a.tif&#39;</span></span>
-<span id="cb28-12"><a href="#cb28-12" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/RtmpsDUR6u/foo.tif&#39; </span></span>
-<span id="cb28-13"><a href="#cb28-13" tabindex="-1"></a><span class="co">#&gt; --- RESULT ---</span></span>
-<span id="cb28-14"><a href="#cb28-14" tabindex="-1"></a><span class="co">#&gt; $output</span></span>
-<span id="cb28-15"><a href="#cb28-15" tabindex="-1"></a><span class="co">#&gt; class       : SpatRaster </span></span>
-<span id="cb28-16"><a href="#cb28-16" tabindex="-1"></a><span class="co">#&gt; dimensions  : 188, 237, 1  (nrow, ncol, nlyr)</span></span>
-<span id="cb28-17"><a href="#cb28-17" tabindex="-1"></a><span class="co">#&gt; resolution  : 90, 90  (x, y)</span></span>
-<span id="cb28-18"><a href="#cb28-18" tabindex="-1"></a><span class="co">#&gt; extent      : 664692, 686022, 4878904, 4895824  (xmin, xmax, ymin, ymax)</span></span>
-<span id="cb28-19"><a href="#cb28-19" tabindex="-1"></a><span class="co">#&gt; coord. ref. : NAD83 / UTM zone 18N (EPSG:26918) </span></span>
-<span id="cb28-20"><a href="#cb28-20" tabindex="-1"></a><span class="co">#&gt; source      : foo.tif </span></span>
-<span id="cb28-21"><a href="#cb28-21" tabindex="-1"></a><span class="co">#&gt; name        : foo</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="fu">wbt</span>(<span class="st">&quot;add&quot;</span>, </span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>    <span class="at">input1 =</span> r1,</span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>    <span class="at">input2 =</span> r2, </span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>    <span class="at">crs =</span> <span class="st">&quot;EPSG:26918&quot;</span>,</span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>    <span class="at">output =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;foo.tif&quot;</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a>   )</span>
+<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a><span class="co">#&gt; Add - Elapsed Time (excluding I/O): 0.0s</span></span>
+<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
+<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (Add) ---</span></span>
+<span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a><span class="co">#&gt; input1   : &#39;/tmp/Rtmpx4Se17/Rinst17ebf9d12535/whitebox/extdata/DEM.tif&#39;</span></span>
+<span id="cb21-11"><a href="#cb21-11" tabindex="-1"></a><span class="co">#&gt; input2   : &#39;/tmp/Rtmpx4Se17/Rinst17ebf9d12535/whitebox/extdata/DEM.tif&#39;</span></span>
+<span id="cb21-12"><a href="#cb21-12" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/Rtmp54CcYa/foo.tif&#39; </span></span>
+<span id="cb21-13"><a href="#cb21-13" tabindex="-1"></a><span class="co">#&gt; --- RESULT ---</span></span>
+<span id="cb21-14"><a href="#cb21-14" tabindex="-1"></a><span class="co">#&gt; $output</span></span>
+<span id="cb21-15"><a href="#cb21-15" tabindex="-1"></a><span class="co">#&gt; class       : SpatRaster </span></span>
+<span id="cb21-16"><a href="#cb21-16" tabindex="-1"></a><span class="co">#&gt; size        : 188, 237, 1  (nrow, ncol, nlyr)</span></span>
+<span id="cb21-17"><a href="#cb21-17" tabindex="-1"></a><span class="co">#&gt; resolution  : 90, 90  (x, y)</span></span>
+<span id="cb21-18"><a href="#cb21-18" tabindex="-1"></a><span class="co">#&gt; extent      : 664692, 686022, 4878904, 4895824  (xmin, xmax, ymin, ymax)</span></span>
+<span id="cb21-19"><a href="#cb21-19" tabindex="-1"></a><span class="co">#&gt; coord. ref. : NAD83 / UTM zone 18N (EPSG:26918) </span></span>
+<span id="cb21-20"><a href="#cb21-20" tabindex="-1"></a><span class="co">#&gt; source      : foo.tif </span></span>
+<span id="cb21-21"><a href="#cb21-21" tabindex="-1"></a><span class="co">#&gt; name        : foo</span></span></code></pre></div>
 <p><!--
 # Future Plans
 

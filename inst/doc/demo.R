@@ -85,8 +85,8 @@ wbt_exe_path(shell_quote = FALSE)
 wbt_init()
 
 ## ----eval=FALSE---------------------------------------------------------------
-#  # set path manually to whitebox_tools executable, for instance:
-#  wbt_init(exe_path = '/home/andrew/workspace/whitebox-tools/target/release/whitebox_tools')
+# # set path manually to whitebox_tools executable, for instance:
+# wbt_init(exe_path = '/home/andrew/workspace/whitebox-tools/target/release/whitebox_tools')
 
 ## -----------------------------------------------------------------------------
 # force output when run non-interactively (knitr)
@@ -227,7 +227,7 @@ wbt_license()
 wbt_version()
 
 ## ----eval=FALSE---------------------------------------------------------------
-#  wbt_list_tools()
+# wbt_list_tools()
 
 ## -----------------------------------------------------------------------------
 wbt_list_tools(keywords = "flowaccumulation")
