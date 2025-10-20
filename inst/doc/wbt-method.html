@@ -48,9 +48,8 @@ overflow: visible;
 }
 </style>
 <style type="text/css" data-origin="pandoc">
-html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -380,11 +379,11 @@ checklist.</p>
 <span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; Slope - Elapsed Time (excluding I/O): 0.8s</span></span>
 <span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
 <span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (Slope) ---</span></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#&gt; dem  : &#39;/tmp/Rtmpx4Se17/Rinst17ebf9d12535/whitebox/extdata/DEM.tif&#39;</span></span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/Rtmp54CcYa/slope.tif&#39; </span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#&gt; dem  : &#39;/tmp/RtmpMpihDT/Rinst2dc1fe52c1ed/whitebox/extdata/DEM.tif&#39;</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/RtmpL1Ccs3/slope.tif&#39; </span></span>
 <span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co">#&gt; --- RESULT ---</span></span>
 <span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co">#&gt; $output</span></span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co">#&gt;   File result:  //tmp/Rtmp54CcYa/slope.tif exists (Last modified: 2025-10-13 14:53:47.598276)</span></span></code></pre></div>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co">#&gt;   File result:  //tmp/RtmpL1Ccs3/slope.tif exists (Last modified: 2025-10-19 11:36:41.520767)</span></span></code></pre></div>
 <p>Whether a system call succeeds or fails the parameters that were
 passed to the WhiteboxTools executable and references to any output file
 paths that were specified are returned. If output files reference
@@ -401,8 +400,8 @@ R object providing information about the result.</p>
 <span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; - [ ] units -- Units of output raster; options include &#39;degrees&#39;, &#39;radians&#39;, &#39;percent&#39;</span></span>
 <span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
 <span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (Slope) ---</span></span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt; goof : &#39;/tmp/Rtmpx4Se17/Rinst17ebf9d12535/whitebox/extdata/DEM.tif&#39;</span></span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/Rtmp54CcYa/slope.tif&#39; </span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt; goof : &#39;/tmp/RtmpMpihDT/Rinst2dc1fe52c1ed/whitebox/extdata/DEM.tif&#39;</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/RtmpL1Ccs3/slope.tif&#39; </span></span>
 <span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#&gt;  Slope ERROR: &#39;goof&#39; invalid; &#39;dem&#39; required</span></span></code></pre></div>
 <p>When a call fails an informative error message issued, and the error
@@ -416,11 +415,11 @@ well for sequential tool runs; more on that below.</p>
 <code>&quot;result&quot;</code>, <code>&quot;history&quot;</code>) and the
 <code>&quot;class&quot;</code> attribute <code>&quot;wbt_result&quot;</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">wbt</span>(<span class="st">&quot;slope&quot;</span>, <span class="at">dem =</span> dem, <span class="at">output =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;slope.tif&quot;</span>)), <span class="at">max.level =</span> <span class="dv">1</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">#&gt; Slope - Elapsed Time (excluding I/O): 0.25s</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">#&gt; Slope - Elapsed Time (excluding I/O): 0.9s</span></span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt; List of 6</span></span>
 <span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt;  $ tool   : chr &quot;Slope&quot;</span></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt;  $ args   : chr &quot;--dem=/tmp/Rtmpx4Se17/Rinst17ebf9d12535/whitebox/extdata/DEM.tif --output=/tmp/Rtmp54CcYa/slope.tif&quot;</span></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt;  $ stdout : chr &quot;Slope - Elapsed Time (excluding I/O): 0.25s&quot;</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt;  $ args   : chr &quot;--dem=/tmp/RtmpMpihDT/Rinst2dc1fe52c1ed/whitebox/extdata/DEM.tif --output=/tmp/RtmpL1Ccs3/slope.tif&quot;</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt;  $ stdout : chr &quot;Slope - Elapsed Time (excluding I/O): 0.9s&quot;</span></span>
 <span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt;  $ crs    : chr &quot;&quot;</span></span>
 <span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co">#&gt;   ..- attr(*, &quot;package&quot;)= Named chr &quot;&quot;</span></span>
 <span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co">#&gt;   .. ..- attr(*, &quot;names&quot;)= chr &quot;dem&quot;</span></span>
@@ -492,12 +491,12 @@ object frontends</h3>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="do">## terra input; terra output</span></span>
 <span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">wbt</span>(<span class="st">&quot;slope&quot;</span>, <span class="at">dem =</span> tdem, <span class="at">output =</span>  <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;slope.tif&quot;</span>))</span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#&gt; Slope - Elapsed Time (excluding I/O): 0.8s</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#&gt; Slope - Elapsed Time (excluding I/O): 0.9s</span></span>
 <span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>t1</span>
 <span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
 <span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (Slope) ---</span></span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co">#&gt; dem  : &#39;/tmp/Rtmpx4Se17/Rinst17ebf9d12535/whitebox/extdata/DEM.tif&#39;</span></span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/Rtmp54CcYa/slope.tif&#39; </span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co">#&gt; dem  : &#39;/tmp/RtmpMpihDT/Rinst2dc1fe52c1ed/whitebox/extdata/DEM.tif&#39;</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/RtmpL1Ccs3/slope.tif&#39; </span></span>
 <span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="co">#&gt; --- RESULT ---</span></span>
 <span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="co">#&gt; $output</span></span>
 <span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="co">#&gt; class       : SpatRaster </span></span>
@@ -577,14 +576,14 @@ file. This object can then be used as input to <code>wbt()</code>.</p>
 <span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a><span class="co">#&gt; PolygonArea - Elapsed Time: 0.0s</span></span>
 <span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
 <span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (PolygonArea) ---</span></span>
-<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a><span class="co">#&gt; input    : &#39;/tmp/Rtmp54CcYa/lux.gpkg_wbt17ff118591556.shp&#39; </span></span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a><span class="co">#&gt; input    : &#39;/tmp/RtmpL1Ccs3/lux.gpkg_wbt2de1c455ab05b.shp&#39; </span></span>
 <span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a><span class="co">#&gt; --- RESULT ---</span></span>
 <span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a><span class="co">#&gt; $output</span></span>
 <span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a><span class="co">#&gt;  class       : SpatVectorProxy</span></span>
 <span id="cb10-21"><a href="#cb10-21" tabindex="-1"></a><span class="co">#&gt;  geometry    : polygons </span></span>
 <span id="cb10-22"><a href="#cb10-22" tabindex="-1"></a><span class="co">#&gt;  dimensions  : 12, 6  (geometries, attributes)</span></span>
 <span id="cb10-23"><a href="#cb10-23" tabindex="-1"></a><span class="co">#&gt;  extent      : 5.74414, 6.528252, 49.44781, 50.18162  (xmin, xmax, ymin, ymax)</span></span>
-<span id="cb10-24"><a href="#cb10-24" tabindex="-1"></a><span class="co">#&gt;  source      : lux.gpkg_wbt17ff118591556.shp</span></span>
+<span id="cb10-24"><a href="#cb10-24" tabindex="-1"></a><span class="co">#&gt;  source      : lux.gpkg_wbt2de1c455ab05b.shp</span></span>
 <span id="cb10-25"><a href="#cb10-25" tabindex="-1"></a><span class="co">#&gt;  coord. ref. : lon/lat WGS 84 (EPSG:4326) </span></span>
 <span id="cb10-26"><a href="#cb10-26" tabindex="-1"></a><span class="co">#&gt;  names       :  ID_1 NAME_1  ID_2 NAME_2   POP  AREA</span></span>
 <span id="cb10-27"><a href="#cb10-27" tabindex="-1"></a><span class="co">#&gt;  type        : &lt;num&gt;  &lt;chr&gt; &lt;num&gt;  &lt;chr&gt; &lt;num&gt; &lt;num&gt;</span></span></code></pre></div>
@@ -624,11 +623,11 @@ tool chain.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>x2</span>
 <span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
 <span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (Slope) ---</span></span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="co">#&gt; dem  : &#39;//tmp/Rtmp54CcYa/slope.tif&#39;</span></span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/Rtmp54CcYa/curvature.tif&#39; </span></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="co">#&gt; dem  : &#39;//tmp/RtmpL1Ccs3/slope.tif&#39;</span></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/RtmpL1Ccs3/curvature.tif&#39; </span></span>
 <span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="co">#&gt; --- RESULT ---</span></span>
 <span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="co">#&gt; $output</span></span>
-<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="co">#&gt;   File result:  //tmp/Rtmp54CcYa/curvature.tif exists (Last modified: 2025-10-13 14:53:49.457304)</span></span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="co">#&gt;   File result:  //tmp/RtmpL1Ccs3/curvature.tif exists (Last modified: 2025-10-19 11:36:43.308765)</span></span>
 <span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a><span class="co">#&gt; --- HISTORY ---</span></span>
 <span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="co">#&gt; Prior results (n=1) for: Slope </span></span>
 <span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a><span class="co">#&gt;  - Slope (output&lt;character&gt;)</span></span></code></pre></div>
@@ -636,7 +635,7 @@ tool chain.</p>
 for single runs or all <code>$result</code> in <code>$history</code> for
 chained runs from a <code>wbt_result</code> object.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">wbt_result</span>(x2), <span class="at">max.level =</span> <span class="dv">1</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="co">#&gt;  chr [1:2] &quot;//tmp/Rtmp54CcYa/slope.tif&quot; &quot;//tmp/Rtmp54CcYa/curvature.tif&quot;</span></span></code></pre></div>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="co">#&gt;  chr [1:2] &quot;//tmp/RtmpL1Ccs3/slope.tif&quot; &quot;//tmp/RtmpL1Ccs3/curvature.tif&quot;</span></span></code></pre></div>
 <p>The <code>$history</code> element is a list of the
 <code>wbt_result</code> from individual runs.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">str</span>(x2<span class="sc">$</span>history, <span class="at">max.level =</span> <span class="dv">1</span>)</span>
@@ -666,7 +665,7 @@ informative error message.</p>
 <span id="cb16-17"><a href="#cb16-17" tabindex="-1"></a><span class="co">#&gt; - [ ] units -- Units of output raster; options include &#39;degrees&#39;, &#39;radians&#39;, &#39;percent&#39;</span></span>
 <span id="cb16-18"><a href="#cb16-18" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
 <span id="cb16-19"><a href="#cb16-19" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (Slope) ---</span></span>
-<span id="cb16-20"><a href="#cb16-20" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/Rtmp54CcYa/foo.tif&#39; </span></span>
+<span id="cb16-20"><a href="#cb16-20" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/RtmpL1Ccs3/foo.tif&#39; </span></span>
 <span id="cb16-21"><a href="#cb16-21" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb16-22"><a href="#cb16-22" tabindex="-1"></a><span class="co">#&gt;  Slope ERROR: &#39;dem&#39; required </span></span>
 <span id="cb16-23"><a href="#cb16-23" tabindex="-1"></a><span class="co">#&gt; --- HISTORY ---</span></span>
@@ -717,8 +716,8 @@ which may or may not have CRS information.</p>
 <span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a><span class="co">#&gt; Slope - Elapsed Time (excluding I/O): 0.8s</span></span>
 <span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
 <span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (Slope) ---</span></span>
-<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a><span class="co">#&gt; dem  : &#39;/tmp/Rtmpx4Se17/Rinst17ebf9d12535/whitebox/extdata/DEM.tif&#39;</span></span>
-<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/Rtmp54CcYa/foo.tif&#39; </span></span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a><span class="co">#&gt; dem  : &#39;/tmp/RtmpMpihDT/Rinst2dc1fe52c1ed/whitebox/extdata/DEM.tif&#39;</span></span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/RtmpL1Ccs3/foo.tif&#39; </span></span>
 <span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a><span class="co">#&gt; --- RESULT ---</span></span>
 <span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a><span class="co">#&gt; $output</span></span>
 <span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a><span class="co">#&gt; class       : SpatRaster </span></span>
@@ -736,8 +735,8 @@ output.</p>
 <span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="co">#&gt; Slope - Elapsed Time (excluding I/O): 0.8s</span></span>
 <span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
 <span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (Slope) ---</span></span>
-<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a><span class="co">#&gt; dem  : &#39;/tmp/Rtmpx4Se17/Rinst17ebf9d12535/whitebox/extdata/DEM.tif&#39;</span></span>
-<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/Rtmp54CcYa/foo.tif&#39; </span></span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a><span class="co">#&gt; dem  : &#39;/tmp/RtmpMpihDT/Rinst2dc1fe52c1ed/whitebox/extdata/DEM.tif&#39;</span></span>
+<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/RtmpL1Ccs3/foo.tif&#39; </span></span>
 <span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a><span class="co">#&gt; --- RESULT ---</span></span>
 <span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a><span class="co">#&gt; $output</span></span>
 <span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a><span class="co">#&gt; class       : SpatRaster </span></span>
@@ -766,9 +765,9 @@ file).</p>
 <span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a><span class="co">#&gt; Add - Elapsed Time (excluding I/O): 0.0s</span></span>
 <span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
 <span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (Add) ---</span></span>
-<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a><span class="co">#&gt; input1   : &#39;/tmp/Rtmpx4Se17/Rinst17ebf9d12535/whitebox/extdata/DEM.tif&#39;</span></span>
-<span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a><span class="co">#&gt; input2   : &#39;/tmp/Rtmpx4Se17/Rinst17ebf9d12535/whitebox/extdata/DEM.tif&#39;</span></span>
-<span id="cb20-15"><a href="#cb20-15" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/Rtmp54CcYa/foo.tif&#39; </span></span>
+<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a><span class="co">#&gt; input1   : &#39;/tmp/RtmpMpihDT/Rinst2dc1fe52c1ed/whitebox/extdata/DEM.tif&#39;</span></span>
+<span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a><span class="co">#&gt; input2   : &#39;/tmp/RtmpMpihDT/Rinst2dc1fe52c1ed/whitebox/extdata/DEM.tif&#39;</span></span>
+<span id="cb20-15"><a href="#cb20-15" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/RtmpL1Ccs3/foo.tif&#39; </span></span>
 <span id="cb20-16"><a href="#cb20-16" tabindex="-1"></a><span class="co">#&gt; --- RESULT ---</span></span>
 <span id="cb20-17"><a href="#cb20-17" tabindex="-1"></a><span class="co">#&gt; $output</span></span>
 <span id="cb20-18"><a href="#cb20-18" tabindex="-1"></a><span class="co">#&gt; class       : SpatRaster </span></span>
@@ -791,9 +790,9 @@ as input or returned as output.</p>
 <span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a><span class="co">#&gt; Add - Elapsed Time (excluding I/O): 0.0s</span></span>
 <span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a><span class="co">#&gt; &lt;wbt_result&gt;</span></span>
 <span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a><span class="co">#&gt; --- PARAMETERS (Add) ---</span></span>
-<span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a><span class="co">#&gt; input1   : &#39;/tmp/Rtmpx4Se17/Rinst17ebf9d12535/whitebox/extdata/DEM.tif&#39;</span></span>
-<span id="cb21-11"><a href="#cb21-11" tabindex="-1"></a><span class="co">#&gt; input2   : &#39;/tmp/Rtmpx4Se17/Rinst17ebf9d12535/whitebox/extdata/DEM.tif&#39;</span></span>
-<span id="cb21-12"><a href="#cb21-12" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/Rtmp54CcYa/foo.tif&#39; </span></span>
+<span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a><span class="co">#&gt; input1   : &#39;/tmp/RtmpMpihDT/Rinst2dc1fe52c1ed/whitebox/extdata/DEM.tif&#39;</span></span>
+<span id="cb21-11"><a href="#cb21-11" tabindex="-1"></a><span class="co">#&gt; input2   : &#39;/tmp/RtmpMpihDT/Rinst2dc1fe52c1ed/whitebox/extdata/DEM.tif&#39;</span></span>
+<span id="cb21-12"><a href="#cb21-12" tabindex="-1"></a><span class="co">#&gt; output   : &#39;/tmp/RtmpL1Ccs3/foo.tif&#39; </span></span>
 <span id="cb21-13"><a href="#cb21-13" tabindex="-1"></a><span class="co">#&gt; --- RESULT ---</span></span>
 <span id="cb21-14"><a href="#cb21-14" tabindex="-1"></a><span class="co">#&gt; $output</span></span>
 <span id="cb21-15"><a href="#cb21-15" tabindex="-1"></a><span class="co">#&gt; class       : SpatRaster </span></span>
